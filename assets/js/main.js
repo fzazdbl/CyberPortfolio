@@ -1,77 +1,128 @@
-﻿/* main.js - Liquid Glass interactions
-   - page transitions, reveal, CTA ripple, custom cursor
-   - requestAnimationFrame driven, mobile/reduced-motion guards
+/* main.js — Interactions pour le thème Liquid Glass iOS26
+   - transitions de page et animations d'apparition
+   - gestion du menu glass et du ripple sur les boutons
+   - effets contextuels (pointage héro)
 */
 
-(function(){
-  const isMobile = window.matchMedia('(pointer: coarse)').matches;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(() => {
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // page enter class
-  document.documentElement.classList.add('page-enter');
-  window.addEventListener('DOMContentLoaded', ()=>{
-    requestAnimationFrame(()=> document.documentElement.classList.add('page-enter-ready'));
-    document.querySelectorAll('.header').forEach(h=>h.classList.add('in-view'));
+  // Transition d'entrée
+  root.classList.add('page-enter');
+  window.addEventListener('DOMContentLoaded', () => {
+    requestAnimationFrame(() => root.classList.add('page-enter-ready'));
+    const header = document.querySelector('.site-header');
+    if (header) {
+      requestAnimationFrame(() => header.classList.add('is-visible'));
+    }
   });
 
-  // intercept internal links with data-link -> fade then navigate
-  document.addEventListener('click', (ev)=>{
-    const a = ev.target.closest('a[data-link]');
-    if(!a) return;
-    if(ev.metaKey || ev.ctrlKey) return; // allow new tab
-    ev.preventDefault();
-    const href = a.getAttribute('href');
-    document.documentElement.classList.add('page-exit');
-    setTimeout(()=> window.location.href = href, 420);
+  // Navigation douce entre les pages internes
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-link]');
+    if (!link) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || link.target === '_blank') return;
+
+    event.preventDefault();
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    root.classList.add('page-exit');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 360);
   });
 
-  // reveal elements
-  if(!reduced){
-    const obs = new IntersectionObserver((entries, obsr)=>{
-      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in-view'); obsr.unobserve(en.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  // Activer l'état actif du menu selon la page
+  const currentPage = document.body?.dataset?.page;
+  if (currentPage) {
+    document.querySelectorAll('.nav-link[data-target]').forEach((navLink) => {
+      if (navLink.dataset.target === currentPage) {
+        navLink.classList.add('is-active');
+      }
+    });
+  }
+
+  // Animation reveal pour les sections
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  if (!reveals.length) return;
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    reveals.forEach((section) => observer.observe(section));
   } else {
-    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'));
+    reveals.forEach((section) => section.classList.add('is-visible'));
   }
-
-  // CTA ripple
-  document.addEventListener('pointerdown', (ev)=>{
-    const btn = ev.target.closest('.ripple'); if(!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const span = document.createElement('span'); span.className='ripple-el';
-    const size = Math.max(rect.width, rect.height) * 2;
-    Object.assign(span.style,{position:'absolute',width:size+'px',height:size+'px',left:(ev.clientX-rect.left-size/2)+'px',top:(ev.clientY-rect.top-size/2)+'px',borderRadius:'50%',background:'rgba(255,255,255,0.12)',transform:'scale(0)',pointerEvents:'none',transition:'transform 420ms cubic-bezier(.2,.9,.3,1),opacity 420ms ease'});
-    btn.appendChild(span);
-    requestAnimationFrame(()=>{ span.style.transform='scale(1)'; span.style.opacity='0'; });
-    setTimeout(()=> span.remove(), 520);
-  });
-
-  // custom cursor
-  if(!isMobile && !reduced){
-    const dot = document.createElement('div'); dot.className='cursor-dot';
-    Object.assign(dot.style,{position:'fixed',left:'0',top:'0',width:'12px',height:'12px',borderRadius:'50%',background:'rgba(255,255,255,0.95)',boxShadow:'0 6px 18px rgba(0,180,216,0.12), inset 0 0 6px rgba(255,255,255,0.6)',pointerEvents:'none',transform:'translate(-50%,-50%)'});
-    document.body.appendChild(dot);
-    let mx=window.innerWidth/2,my=window.innerHeight/2,cx=mx,cy=my;
-    document.addEventListener('mousemove', (e)=>{ mx=e.clientX; my=e.clientY; });
-    (function loop(){ cx += (mx-cx)*0.18; cy += (my-cy)*0.18; dot.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
-    document.addEventListener('mousedown', ()=>{ dot.style.transform += ' scale(0.85)'; setTimeout(()=> dot.style.transform = dot.style.transform.replace(' scale(0.85)',''), 120); });
-  }
-
-  // ensure bg canvas doesn't intercept pointer
-  const bg = document.getElementById('bg-canvas'); if(bg) bg.style.pointerEvents = 'none';
-
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
+// Ripple & interactions contextuelles
+(() => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
- // Add nav item click handler
-  const navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      navItems.forEach(navItem => navItem.classList.remove('active'));
-      this.classList.add('active');
+  document.addEventListener('pointerdown', (event) => {
+    const target = event.target.closest('.ripple, .button');
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const span = document.createElement('span');
+    span.className = 'ripple-effect';
+    const size = Math.max(rect.width, rect.height) * 1.6;
+
+    Object.assign(span.style, {
+      position: 'absolute',
+      width: `${size}px`,
+      height: `${size}px`,
+      left: `${event.clientX - rect.left - size / 2}px`,
+      top: `${event.clientY - rect.top - size / 2}px`,
+      borderRadius: '50%',
+      background: 'rgba(255, 255, 255, 0.18)',
+      transform: 'scale(0)',
+      pointerEvents: 'none',
+      opacity: '0.7',
+      transition: reducedMotion
+        ? 'opacity 220ms ease'
+        : 'transform 460ms cubic-bezier(.2,.9,.3,1), opacity 520ms ease'
+    });
+
+    target.style.position = target.style.position || 'relative';
+    target.appendChild(span);
+
+    requestAnimationFrame(() => {
+      if (!reducedMotion) span.style.transform = 'scale(1)';
+      span.style.opacity = '0';
+    });
+
+    setTimeout(() => span.remove(), reducedMotion ? 240 : 520);
+  });
+
+  if (reducedMotion) return;
+
+  // Highlight dynamique sur les sections "hero"
+  document.querySelectorAll('.hero').forEach((section) => {
+    let pointerX = 50;
+    let pointerY = 50;
+
+    const update = (event) => {
+      const rect = section.getBoundingClientRect();
+      pointerX = ((event.clientX - rect.left) / rect.width) * 100;
+      pointerY = ((event.clientY - rect.top) / rect.height) * 100;
+      section.style.setProperty('--pointer-x', `${pointerX}%`);
+      section.style.setProperty('--pointer-y', `${pointerY}%`);
+    };
+
+    section.addEventListener('pointermove', update);
+    section.addEventListener('pointerleave', () => {
+      section.style.setProperty('--pointer-x', '50%');
+      section.style.setProperty('--pointer-y', '50%');
     });
   });
-});
+})();
