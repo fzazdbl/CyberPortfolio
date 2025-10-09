@@ -2,10 +2,6 @@
    - transitions de page et animations d'apparition
    - gestion du menu glass et du ripple sur les boutons
    - effets contextuels (pointage héro) et formulaires
-/* main.js — Interactions pour le thème Liquid Glass iOS26
-   - transitions de page et animations d'apparition
-   - gestion du menu glass et du ripple sur les boutons
-   - effets contextuels (pointage héro)
 */
 
 (() => {
@@ -21,8 +17,13 @@
       manager.applyContent(document);
     }
 
+    const renderer = window.LiquidGlassRenderer;
+    if (renderer && typeof renderer.initAll === 'function') {
+      renderer.initAll();
+    }
+
     requestAnimationFrame(() => root.classList.add('page-enter-ready'));
-    const header = document.querySelector('.site-header');
+    const header = document.querySelector('.liquid-nav');
     if (header) {
       requestAnimationFrame(() => header.classList.add('is-visible'));
     }
@@ -48,10 +49,82 @@
   const currentPage = document.body?.dataset?.page;
   if (currentPage) {
     document.querySelectorAll('.nav-link[data-target]').forEach((navLink) => {
-      if (navLink.dataset.target === currentPage) {
-        navLink.classList.add('is-active');
+      const isActive = navLink.dataset.target === currentPage;
+      navLink.classList.toggle('is-active', isActive);
+      if (isActive) {
+        navLink.setAttribute('aria-current', 'page');
+      } else {
+        navLink.removeAttribute('aria-current');
       }
     });
+  }
+
+  const nav = document.querySelector('.liquid-nav');
+  if (nav) {
+    const toggle = nav.querySelector('.liquid-nav__toggle');
+    const menu = nav.querySelector('.liquid-nav__menu');
+    const overlay = nav.querySelector('.liquid-nav__overlay');
+    const closeMenu = () => {
+      if (!menu) return;
+      menu.classList.remove('is-open');
+      nav.classList.remove('is-expanded');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    const openMenu = () => {
+      if (!menu) return;
+      menu.classList.add('is-open');
+      nav.classList.add('is-expanded');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        if (menu.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
+
+    menu?.querySelectorAll('a').forEach((anchor) => {
+      anchor.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 960px)').matches) {
+          closeMenu();
+        }
+      });
+    });
+
+    document.addEventListener('keyup', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    if (!reducedMotion) {
+      const updatePointer = (event) => {
+        const rect = nav.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        nav.style.setProperty('--nav-pointer-x', `${x}%`);
+        nav.style.setProperty('--nav-pointer-y', `${y}%`);
+      };
+
+      nav.addEventListener('pointermove', updatePointer);
+      nav.addEventListener('pointerleave', () => {
+        nav.style.setProperty('--nav-pointer-x', '50%');
+        nav.style.setProperty('--nav-pointer-y', '50%');
+      });
+    }
   }
 
   // Animation reveal pour les sections
@@ -153,6 +226,30 @@
 
     const defaultButtonLabel = submitButton?.textContent?.trim() || 'Envoyer';
 
+    if (statusNode) {
+      statusNode.dataset.successText = successText;
+      statusNode.textContent = '';
+      statusNode.setAttribute('aria-hidden', 'true');
+      statusNode.classList.remove('is-visible', 'is-error');
+      statusNode.hidden = true;
+
+      const resetFeedback = () => {
+        if (!statusNode) return;
+        if (!statusNode.hidden || statusNode.textContent) {
+          statusNode.textContent = '';
+          statusNode.classList.remove('is-visible', 'is-error');
+          statusNode.setAttribute('aria-hidden', 'true');
+          statusNode.hidden = true;
+        }
+        if (submitButton && !submitButton.disabled) {
+          submitButton.classList.remove('button--success');
+          submitButton.textContent = defaultButtonLabel;
+        }
+      };
+
+      form.addEventListener('input', resetFeedback);
+    }
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (!submitButton) {
@@ -168,8 +265,11 @@
       submitButton.textContent = 'Envoi...';
 
       if (statusNode) {
-        statusNode.classList.remove('is-visible', 'is-error');
+        statusNode.classList.remove('is-error');
+        statusNode.classList.add('is-visible');
         statusNode.textContent = 'Envoi en cours...';
+        statusNode.setAttribute('aria-hidden', 'false');
+        statusNode.hidden = false;
       }
 
       try {
@@ -198,8 +298,11 @@
         submitButton.classList.add('button--success');
         submitButton.textContent = 'Envoyé';
         if (statusNode) {
-          statusNode.textContent = successText;
+          statusNode.textContent = statusNode.dataset.successText || successText;
           statusNode.classList.add('is-visible');
+          statusNode.classList.remove('is-error');
+          statusNode.setAttribute('aria-hidden', 'false');
+          statusNode.hidden = false;
         }
         setTimeout(() => {
           submitButton.disabled = false;
@@ -210,6 +313,8 @@
         if (statusNode) {
           statusNode.textContent = error.message || 'Impossible d\'envoyer le message. Contactez-moi par e-mail.';
           statusNode.classList.add('is-visible', 'is-error');
+          statusNode.setAttribute('aria-hidden', 'false');
+          statusNode.hidden = false;
         }
         submitButton.disabled = false;
         submitButton.textContent = defaultButtonLabel;

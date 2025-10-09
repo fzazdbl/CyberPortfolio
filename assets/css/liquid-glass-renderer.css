@@ -1,0 +1,113 @@
+:root {
+  --lg-surface: rgba(18, 20, 35, 0.78);
+  --lg-border: rgba(255, 255, 255, 0.08);
+  --lg-highlight: rgba(255, 255, 255, 0.65);
+  --lg-shadow: rgba(5, 8, 25, 0.65);
+  --lg-blue: #00b4d8;
+  --lg-violet: #7f5af0;
+}
+
+[data-liquid-renderer] {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -2;
+  overflow: hidden;
+  background: radial-gradient(circle at 20% 20%, rgba(0, 180, 216, 0.15), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(127, 90, 240, 0.18), transparent 58%),
+    radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.35), transparent 70%);
+}
+
+.liquid-glass-stage {
+  filter: url('#liquid-glass-distortion');
+  position: relative;
+  isolation: isolate;
+}
+
+.liquid-glass-stage::after {
+  content: '';
+  position: absolute;
+  inset: -40% -20%;
+  background: conic-gradient(from 120deg, rgba(0, 180, 216, 0.12), rgba(127, 90, 240, 0.18), rgba(0, 180, 216, 0.12));
+  opacity: 0.55;
+  filter: blur(120px);
+  transform: translate3d(0, 0, 0);
+}
+
+.liquid-glass-layer {
+  position: absolute;
+  inset: -25%;
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.15));
+  box-shadow: 0 40px 120px var(--lg-shadow);
+  mix-blend-mode: screen;
+  opacity: var(--lg-opacity, 0.4);
+  transform: translate3d(var(--lg-offset-x, 0), var(--lg-offset-y, 0), 0);
+  backdrop-filter: blur(var(--lg-blur, 14px));
+  -webkit-backdrop-filter: blur(var(--lg-blur, 14px));
+}
+
+.liquid-glass-layer--2 {
+  mix-blend-mode: lighten;
+  background: linear-gradient(140deg, rgba(127, 90, 240, 0.28), rgba(0, 180, 216, 0.25));
+}
+
+.liquid-glass-layer--3 {
+  mix-blend-mode: soft-light;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.24), rgba(0, 0, 0, 0.12));
+  filter: saturate(120%);
+}
+
+.liquid-glass-highlight {
+  position: absolute;
+  width: 46%;
+  height: 46%;
+  border-radius: 50%;
+  pointer-events: none;
+  top: var(--lg-highlight-y, 50%);
+  left: var(--lg-highlight-x, 50%);
+  transform: translate(-50%, -50%) scale(1.2);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 70%);
+  opacity: var(--lg-highlight-strength, 0.28);
+  mix-blend-mode: screen;
+  filter: blur(90px);
+}
+
+.liquid-glass-stage::before {
+  content: '';
+  position: absolute;
+  inset: -30% -10% 20%;
+  background: radial-gradient(circle at var(--lg-pointer-x, 50%) var(--lg-pointer-y, 50%), rgba(0, 180, 216, 0.3), rgba(127, 90, 240, 0.08) 60%, transparent 75%);
+  opacity: 0.7;
+  filter: blur(120px);
+  transition: opacity 0.6s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-liquid-renderer] {
+    background: radial-gradient(circle at 15% 20%, rgba(0, 180, 216, 0.14), transparent 55%),
+      radial-gradient(circle at 80% 30%, rgba(127, 90, 240, 0.14), transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.45), transparent 80%);
+  }
+
+  .liquid-glass-layer,
+  .liquid-glass-highlight,
+  .liquid-glass-stage::before,
+  .liquid-glass-stage::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px), (pointer: coarse) {
+  [data-liquid-renderer] {
+    background: radial-gradient(circle at 20% 20%, rgba(0, 180, 216, 0.2), transparent 55%),
+      radial-gradient(circle at 80% 30%, rgba(127, 90, 240, 0.16), transparent 60%),
+      linear-gradient(180deg, rgba(4, 6, 18, 0.95), rgba(12, 14, 30, 0.92));
+  }
+
+  .liquid-glass-layer {
+    opacity: 0.36;
+    transform: translate3d(0, 0, 0);
+  }
+}

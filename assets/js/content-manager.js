@@ -4,6 +4,15 @@
   const PASSWORD_KEY = 'portfolioAdminPassword';
   const DEFAULT_PASSWORD = 'admin123';
 
+  function mergeNavigation(base = {}, override = {}) {
+    const result = { ...base };
+    Object.entries(override || {}).forEach(([key, value]) => {
+      if (!value) return;
+      result[key] = { ...result[key], ...value };
+    });
+    return result;
+  }
+
   const DEFAULT_CONTENT = {
     fields: {
       'home.heroEyebrow': 'CyberPortfolio',
@@ -34,19 +43,28 @@
       'contact.heroSubtitle': "Décrivez votre projet, votre contexte ou vos contraintes : je vous réponds rapidement avec des pistes concrètes.",
       'contact.formTitle': 'Laissez-moi un message',
       'contact.formText': "Expliquez votre situation, vos objectifs et les échéances clés. Je reviens vers vous pour définir la suite.",
-      'contact.successMessage': '✅ Message envoyé !'
+      'contact.successMessage': '✅ Message envoyé !',
+
+      'footer.text': '© 2025 Mohamed — Tous droits réservés.'
     },
     links: {
       github: 'https://github.com/fzazdbl',
       linkedin: 'https://www.linkedin.com/in/',
       email: 'mailto:chahidm126@gmail.com'
+    },
+    navigation: {
+      accueil: { label: 'Accueil', href: 'index.html', target: 'accueil' },
+      competences: { label: 'Compétences', href: 'competences/index.html', target: 'competences' },
+      projets: { label: 'Mes projets', href: 'projets/index.html', target: 'projets' },
+      contact: { label: 'Contact', href: 'contact/contact.html', target: 'contact' },
+      admin: { label: 'Admin', href: 'admin.html', target: 'admin' }
     }
   };
 
   const DEFAULT_THEME = {
-    '--accent-blue': '#82a5ff',
-    '--accent-violet': '#b77bff',
-    '--accent-cyan': '#7df0ff'
+    '--accent-blue': '#00b4d8',
+    '--accent-violet': '#7f5af0',
+    '--accent-cyan': '#5de4ff'
   };
 
   function isStorageAvailable() {
@@ -83,7 +101,8 @@
     if (!override) return { ...base };
     return {
       fields: { ...base.fields, ...(override.fields || {}) },
-      links: { ...base.links, ...(override.links || {}) }
+      links: { ...base.links, ...(override.links || {}) },
+      navigation: mergeNavigation(base.navigation, override.navigation)
     };
   }
 
@@ -125,9 +144,32 @@
     return true;
   }
 
+  function applyNavigation(doc = document, navigation) {
+    if (!navigation) return;
+    doc.querySelectorAll('[data-nav-key]').forEach((node) => {
+      const key = node.getAttribute('data-nav-key');
+      if (!key) return;
+      const item = navigation[key];
+      if (!item) return;
+      if (item.label) {
+        node.textContent = item.label;
+      }
+      if (item.href) {
+        const rootContainer = node.closest('[data-nav-root]');
+        const base = rootContainer?.getAttribute('data-nav-root') || '';
+        const isAbsolute = /^(?:[a-z]+:|#)/i.test(item.href);
+        const hrefValue = isAbsolute ? item.href : `${base}${item.href}`;
+        node.setAttribute('href', hrefValue);
+      }
+      if (item.target && node.dataset) {
+        node.dataset.target = item.target;
+      }
+    });
+  }
+
   function applyContent(doc = document) {
     const content = getContent();
-    const { fields, links } = content;
+    const { fields, links, navigation } = content;
 
     doc.querySelectorAll('[data-content-key]').forEach((node) => {
       const key = node.getAttribute('data-content-key');
@@ -149,6 +191,8 @@
       if (!value) return;
       node.setAttribute('href', value);
     });
+
+    applyNavigation(doc, navigation);
   }
 
   function applyTheme(doc = document) {
@@ -171,6 +215,7 @@
     }),
     getContent,
     saveContent,
+    applyNavigation,
     applyContent,
     getTheme,
     saveTheme,

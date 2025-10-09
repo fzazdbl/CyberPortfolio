@@ -4,12 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Administration - CyberPortfolio</title>
+  <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/admin.css">
   <script src="assets/js/content-manager.js" defer></script>
+  <script src="assets/js/liquid-glass-renderer.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
   <script src="assets/js/admin.js" defer></script>
 </head>
-<body class="admin-body">
+<body class="admin-body" data-page="admin">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
+
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+      <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
+    </div>
+    <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+    </nav>
+  </header>
+
   <div class="admin-backdrop" aria-hidden="true"></div>
   <main class="admin-wrapper" role="main">
     <section class="admin-card" id="loginPanel">
@@ -130,6 +161,60 @@
         </fieldset>
 
         <fieldset>
+          <legend>Navigation</legend>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navAccueilLabel">Label Accueil</label>
+              <input id="navAccueilLabel" data-nav-label="accueil" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navAccueilHref">Lien Accueil</label>
+              <input id="navAccueilHref" data-nav-href="accueil" type="text" placeholder="index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navCompetencesLabel">Label Compétences</label>
+              <input id="navCompetencesLabel" data-nav-label="competences" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navCompetencesHref">Lien Compétences</label>
+              <input id="navCompetencesHref" data-nav-href="competences" type="text" placeholder="competences/index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navProjetsLabel">Label Projets</label>
+              <input id="navProjetsLabel" data-nav-label="projets" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navProjetsHref">Lien Projets</label>
+              <input id="navProjetsHref" data-nav-href="projets" type="text" placeholder="projets/index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navContactLabel">Label Contact</label>
+              <input id="navContactLabel" data-nav-label="contact" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navContactHref">Lien Contact</label>
+              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/contact.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navAdminLabel">Label Admin</label>
+              <input id="navAdminLabel" data-nav-label="admin" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navAdminHref">Lien Admin</label>
+              <input id="navAdminHref" data-nav-href="admin" type="text" placeholder="admin.html">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
           <legend>Réseaux sociaux</legend>
           <label for="linkGithub">GitHub</label>
           <input id="linkGithub" data-link-key="github" type="url" placeholder="https://github.com/">
@@ -139,6 +224,12 @@
 
           <label for="linkEmail">E-mail</label>
           <input id="linkEmail" data-link-key="email" type="email" placeholder="mailto:nom@example.com">
+        </fieldset>
+
+        <fieldset>
+          <legend>Pied de page</legend>
+          <label for="footerText">Texte du footer</label>
+          <input id="footerText" data-field-key="footer.text" type="text">
         </fieldset>
 
         <fieldset>

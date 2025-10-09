@@ -17,6 +17,7 @@
     if (!manager) return;
     const content = manager.getContent();
     const theme = manager.getTheme();
+    const navigation = content.navigation || {};
 
     document.querySelectorAll('[data-field-key]').forEach((input) => {
       const key = input.getAttribute('data-field-key');
@@ -43,12 +44,29 @@
       if (!value) return;
       input.value = value;
     });
+
+    document.querySelectorAll('[data-nav-label]').forEach((input) => {
+      const key = input.getAttribute('data-nav-label');
+      if (!key) return;
+      const item = navigation[key];
+      if (!item || typeof item.label === 'undefined') return;
+      input.value = item.label;
+    });
+
+    document.querySelectorAll('[data-nav-href]').forEach((input) => {
+      const key = input.getAttribute('data-nav-href');
+      if (!key) return;
+      const item = navigation[key];
+      if (!item || typeof item.href === 'undefined') return;
+      input.value = item.href;
+    });
   }
 
   function collectFormData() {
     const fields = {};
     const links = {};
     const theme = {};
+    const navigation = {};
 
     document.querySelectorAll('[data-field-key]').forEach((input) => {
       const key = input.getAttribute('data-field-key');
@@ -77,7 +95,27 @@
       }
     });
 
-    return { fields, links, theme };
+    document.querySelectorAll('[data-nav-label]').forEach((input) => {
+      const key = input.getAttribute('data-nav-label');
+      if (!key) return;
+      const value = input.value.trim();
+      if (!navigation[key]) navigation[key] = {};
+      if (value.length) {
+        navigation[key].label = value;
+      }
+    });
+
+    document.querySelectorAll('[data-nav-href]').forEach((input) => {
+      const key = input.getAttribute('data-nav-href');
+      if (!key) return;
+      const value = input.value.trim();
+      if (!navigation[key]) navigation[key] = {};
+      if (value.length) {
+        navigation[key].href = value;
+      }
+    });
+
+    return { fields, links, theme, navigation };
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -148,10 +186,10 @@
       contentForm.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!manager) return;
-        const { fields, links, theme } = collectFormData();
+        const { fields, links, theme, navigation } = collectFormData();
 
         try {
-          manager.saveContent({ fields, links });
+          manager.saveContent({ fields, links, navigation });
           manager.saveTheme(theme);
           manager.applyTheme(document);
           setStatus(contentStatus, 'Modifications enregistrées.');

@@ -4,41 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Contact - Mohamed</title>
+  <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script src="../assets/js/content-manager.js" defer></script>
+  <script src="../assets/js/liquid-glass-renderer.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/particles.js" defer></script>
 </head>
 <body data-page="contact">
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
-  <div class="bg-layers" aria-hidden="true">
-    <div class="orb orb--cyan"></div>
-    <div class="orb orb--violet"></div>
-    <div class="orb orb--pink"></div>
-    <div class="glow-line glow-line--top"></div>
-    <div class="glow-line glow-line--bottom"></div>
-  </div>
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
 
-  <header class="site-header" role="banner">
-    <div class="site-header__inner">
-      <div class="brand">
-        <span class="brand__badge">BTS SIO · SISR</span>
-        <p class="brand__title">CyberPortfolio de Mohamed</p>
-      </div>
-      <nav class="site-nav" aria-label="Navigation principale">
-        <a class="nav-link" data-target="accueil" data-link href="../index.html">Accueil</a>
-        <a class="nav-link" data-target="competences" data-link href="../competences/cv.html">Compétences</a>
-        <a class="nav-link" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
-        <a class="nav-link" data-target="contact" data-link href="contact.html">Contact</a>
-      </nav>
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+      <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
     </div>
+    <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+    </nav>
   </header>
 
   <main class="page-main">
     <div class="contact-backdrop" aria-hidden="true">
-      <div class="contact-backdrop__blur"></div>
       <div class="contact-backdrop__gradient"></div>
-      <div class="contact-particles">
+      <div class="contact-backdrop__particles">
         <span></span>
         <span></span>
         <span></span>
@@ -77,7 +81,7 @@
             <label for="message">Message</label>
             <textarea id="message" class="input-glow" name="message" rows="5" required></textarea>
           </div>
-          <p class="form-status" role="status" aria-live="polite" data-content-key="contact.successMessage">✅ Message envoyé !</p>
+      <p class="form-status" role="status" aria-live="polite" data-content-key="contact.successMessage" hidden>✅ Message envoyé !</p>
           <div class="form-actions">
             <button class="button button--primary ripple" type="submit">Envoyer</button>
           </div>
@@ -88,7 +92,7 @@
 
   <footer>
     <div class="footer-inner">
-      <p>© 2025 Mohamed — Tous droits réservés.</p>
+      <p data-content-key="footer.text">© 2025 Mohamed — Tous droits réservés.</p>
       <div class="footer-social">
         <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">GitHub</a>
         <a data-social-link="linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
