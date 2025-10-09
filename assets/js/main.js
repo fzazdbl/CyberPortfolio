@@ -232,6 +232,22 @@
       statusNode.setAttribute('aria-hidden', 'true');
       statusNode.classList.remove('is-visible', 'is-error');
       statusNode.hidden = true;
+
+      const resetFeedback = () => {
+        if (!statusNode) return;
+        if (!statusNode.hidden || statusNode.textContent) {
+          statusNode.textContent = '';
+          statusNode.classList.remove('is-visible', 'is-error');
+          statusNode.setAttribute('aria-hidden', 'true');
+          statusNode.hidden = true;
+        }
+        if (submitButton && !submitButton.disabled) {
+          submitButton.classList.remove('button--success');
+          submitButton.textContent = defaultButtonLabel;
+        }
+      };
+
+      form.addEventListener('input', resetFeedback);
     }
 
     form.addEventListener('submit', async (event) => {
