@@ -1,40 +1,110 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CV - Mohamed</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/particles.js" defer></script>
 </head>
-<body>
-<header><h1 class="glow">Mon CV</h1></header>
-<main>
-  <section class="cv-grid">
-    <article class="card scroll-reveal">
-      <h3>Profil</h3>
-      <p>Étudiant en BTS SIO, option SISR — motivé, rigoureux et passionné d'informatique. Curiosité pour la cybersécurité et l'administration système.</p>
-    </article>
-
-    <article class="card scroll-reveal">
-      <h3>Compétences techniques</h3>
-      <ul>
-        <li>🔹 HTML / CSS / JavaScript</li>
-        <li>🔹 PHP / SQL / Linux</li>
-        <li>🔹 Cybersécurité & Réseaux</li>
-      </ul>
-    </article>
-
-    <article class="card scroll-reveal">
-      <h3>Formations</h3>
-      <p>BTS SIO - Lycée Jean Moulin Béziers</p>
-      <p>Projets scolaires et personnels en développement web et sécurité.</p>
-    </article>
-  </section>
-
-  <div style="text-align:center; margin:28px 0;" class="scroll-reveal">
-    <a class="btn btn-primary" href="../assets/pdf/cv.pdf" target="_blank">Télécharger mon CV (PDF)</a>
+<body data-page="competences">
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-layers" aria-hidden="true">
+    <div class="orb orb--cyan"></div>
+    <div class="orb orb--violet"></div>
+    <div class="orb orb--pink"></div>
+    <div class="glow-line glow-line--top"></div>
+    <div class="glow-line glow-line--bottom"></div>
   </div>
-</main>
-<footer><p>© 2025 Mohamed</p></footer>
+
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <div class="brand">
+        <span class="brand__badge">BTS SIO · SISR</span>
+        <p class="brand__title">CyberPortfolio de Mohamed</p>
+      </div>
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a class="nav-link" data-target="accueil" data-link href="../index.html">Accueil</a>
+        <a class="nav-link" data-target="competences" data-link href="cv.html">Compétences</a>
+        <a class="nav-link" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
+        <a class="nav-link" data-target="contact" data-link href="../contact/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <section class="hero reveal" aria-labelledby="cv-title">
+      <span class="hero-eyebrow">Curriculum Vitae</span>
+      <h1 id="cv-title" class="hero-title">Un parcours orienté sécurité et fiabilité</h1>
+      <p class="hero-subtitle">Je suis Mohamed, apprenant du BTS SIO option SISR. J'aime transformer les environnements complexes en solutions stables et sécurisées, tout en soignant l'expérience utilisateur.</p>
+      <div class="hero-actions">
+        <a class="button button--primary ripple" href="../assets/pdf/cv.pdf" target="_blank" rel="noopener">Télécharger le CV (PDF)</a>
+        <a class="button button--ghost" data-link href="../projets/index.html">Voir mes projets</a>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="profil-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Profil</span>
+        <h2 id="profil-title" class="section-title">Compétences essentielles</h2>
+        <p class="section-text">Une vision transversale entre infrastructure, cybersécurité et développement pour répondre aux enjeux numériques actuels.</p>
+      </div>
+      <div class="cv-grid">
+        <article class="glass-card">
+          <h3>Profil</h3>
+          <p>Étudiant rigoureux, motivé, curieux des nouvelles pratiques DevSecOps. Je capitalise sur l'automatisation et la documentation pour fluidifier les déploiements.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🚀</span><span>Esprit d'équipe & communication claire</span></li>
+            <li><span class="feature-icon">🧭</span><span>Organisation des projets & veille technologique</span></li>
+            <li><span class="feature-icon">🧩</span><span>Résolution de problèmes complexes</span></li>
+          </ul>
+        </article>
+        <article class="glass-card">
+          <h3>Compétences techniques</h3>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🌐</span><span>HTML · CSS · JavaScript moderne</span></li>
+            <li><span class="feature-icon">🐧</span><span>Linux, virtualisation, scripts Bash</span></li>
+            <li><span class="feature-icon">🛠️</span><span>PHP · SQL · Admin réseaux</span></li>
+            <li><span class="feature-icon">🔐</span><span>Analyse de vulnérabilités · outils de pentest</span></li>
+          </ul>
+        </article>
+        <article class="glass-card">
+          <h3>Formation</h3>
+          <p>BTS SIO - Lycée Jean Moulin, Béziers.</p>
+          <p>Projets académiques : réseaux sécurisés, outils de supervision, mini-sites vitrines et API sécurisées.</p>
+          <p>Projets personnels : labs de cybersécurité, scripts d'automatisation, veille hebdomadaire.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="objectif-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Objectifs</span>
+        <h2 id="objectif-title" class="section-title">Ce que je recherche</h2>
+        <p class="section-text">Consolider mes compétences au sein d'une équipe cyber ou infrastructure, et contribuer à des interfaces fiables et agréables.</p>
+      </div>
+      <div class="info-grid">
+        <article class="glass-card">
+          <h3>Stage & alternance</h3>
+          <p>Opportunités orientées sécurité des systèmes, SOC ou ingénierie réseau.</p>
+        </article>
+        <article class="glass-card">
+          <h3>Contributions</h3>
+          <p>Documentation, support technique, déploiements sécurisés, amélioration continue.</p>
+        </article>
+        <article class="glass-card">
+          <h3>Ambitions</h3>
+          <p>Évoluer vers des missions de sécurité offensive (pentest) et d'architecture sécurisée.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2025 Mohamed — Tous droits réservés.</p>
+    </div>
+  </footer>
 </body>
 </html>
