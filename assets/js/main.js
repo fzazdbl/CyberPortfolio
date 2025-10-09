@@ -1,3 +1,7 @@
+/* main.js — Interactions pour le thème glass sombre
+   - transitions de page et animations d'apparition
+   - gestion du menu glass et du ripple sur les boutons
+   - effets contextuels (pointage héro) et formulaires
 /* main.js — Interactions pour le thème Liquid Glass iOS26
    - transitions de page et animations d'apparition
    - gestion du menu glass et du ripple sur les boutons
@@ -11,6 +15,12 @@
   // Transition d'entrée
   root.classList.add('page-enter');
   window.addEventListener('DOMContentLoaded', () => {
+    const manager = window.PortfolioContentManager;
+    if (manager) {
+      manager.applyTheme(document);
+      manager.applyContent(document);
+    }
+
     requestAnimationFrame(() => root.classList.add('page-enter-ready'));
     const header = document.querySelector('.site-header');
     if (header) {
@@ -123,6 +133,96 @@
     section.addEventListener('pointerleave', () => {
       section.style.setProperty('--pointer-x', '50%');
       section.style.setProperty('--pointer-y', '50%');
+    });
+  });
+})();
+
+// Formulaire de contact avec retour visuel
+(() => {
+  const manager = window.PortfolioContentManager;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const statusNode = form.querySelector('.form-status');
+    const successText = statusNode?.textContent?.trim() ||
+      manager?.getContent().fields['contact.successMessage'] ||
+      '✅ Message envoyé !';
+
+    const defaultButtonLabel = submitButton?.textContent?.trim() || 'Envoyer';
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!submitButton) {
+        form.submit();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const endpoint = form.getAttribute('action') || form.dataset.endpoint || 'contact.php';
+
+      submitButton.disabled = true;
+      submitButton.classList.remove('button--success');
+      submitButton.textContent = 'Envoi...';
+
+      if (statusNode) {
+        statusNode.classList.remove('is-visible', 'is-error');
+        statusNode.textContent = 'Envoi en cours...';
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+
+        if (!response.ok) {
+          throw new Error('Une erreur est survenue.');
+        }
+
+        let payload = null;
+        try {
+          payload = await response.json();
+        } catch (error) {
+          // PHP peut renvoyer un JSON simple, sinon on considère le succès.
+        }
+
+        if (payload && payload.success === false) {
+          throw new Error(payload.message || 'Échec de l\'envoi.');
+        }
+
+        form.reset();
+        submitButton.classList.add('button--success');
+        submitButton.textContent = 'Envoyé';
+        if (statusNode) {
+          statusNode.textContent = successText;
+          statusNode.classList.add('is-visible');
+        }
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultButtonLabel;
+          submitButton.classList.remove('button--success');
+        }, 2400);
+      } catch (error) {
+        if (statusNode) {
+          statusNode.textContent = error.message || 'Impossible d\'envoyer le message. Contactez-moi par e-mail.';
+          statusNode.classList.add('is-visible', 'is-error');
+        }
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonLabel;
+
+        const fallbackMail = manager?.getContent().links.email || form.dataset.mailto;
+        if (fallbackMail) {
+          const params = new URLSearchParams({
+            subject: `Message de ${formData.get('nom') || 'Portfolio'}`,
+            body: `Email: ${formData.get('email') || 'non fourni'}\n\n${formData.get('message') || ''}`
+          });
+          window.open(`${fallbackMail}?${params.toString()}`, '_blank');
+        }
+      }
     });
   });
 })();

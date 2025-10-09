@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CV - Mohamed</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/content-manager.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
   <script src="../assets/js/particles.js" defer></script>
 </head>
@@ -35,9 +36,9 @@
 
   <main class="page-main">
     <section class="hero reveal" aria-labelledby="cv-title">
-      <span class="hero-eyebrow">Curriculum Vitae</span>
-      <h1 id="cv-title" class="hero-title">Un parcours orienté sécurité et fiabilité</h1>
-      <p class="hero-subtitle">Je suis Mohamed, apprenant du BTS SIO option SISR. J'aime transformer les environnements complexes en solutions stables et sécurisées, tout en soignant l'expérience utilisateur.</p>
+      <span class="hero-eyebrow" data-content-key="cv.heroEyebrow">Curriculum Vitae</span>
+      <h1 id="cv-title" class="hero-title" data-content-key="cv.heroTitle">Un parcours orienté sécurité et fiabilité</h1>
+      <p class="hero-subtitle" data-content-key="cv.heroSubtitle">Je suis Mohamed, apprenant du BTS SIO option SISR. J'aime transformer les environnements complexes en solutions stables et sécurisées, tout en soignant l'expérience utilisateur.</p>
       <div class="hero-actions">
         <a class="button button--primary ripple" href="../assets/pdf/cv.pdf" target="_blank" rel="noopener">Télécharger le CV (PDF)</a>
         <a class="button button--ghost" data-link href="../projets/index.html">Voir mes projets</a>
@@ -47,8 +48,8 @@
     <section class="section reveal" aria-labelledby="profil-title">
       <div class="section-header">
         <span class="section-eyebrow">Profil</span>
-        <h2 id="profil-title" class="section-title">Compétences essentielles</h2>
-        <p class="section-text">Une vision transversale entre infrastructure, cybersécurité et développement pour répondre aux enjeux numériques actuels.</p>
+        <h2 id="profil-title" class="section-title" data-content-key="cv.profileTitle">Compétences essentielles</h2>
+        <p class="section-text" data-content-key="cv.profileText">Une vision transversale entre infrastructure, cybersécurité et développement pour répondre aux enjeux numériques actuels.</p>
       </div>
       <div class="cv-grid">
         <article class="glass-card">
@@ -81,8 +82,8 @@
     <section class="section reveal" aria-labelledby="objectif-title">
       <div class="section-header">
         <span class="section-eyebrow">Objectifs</span>
-        <h2 id="objectif-title" class="section-title">Ce que je recherche</h2>
-        <p class="section-text">Consolider mes compétences au sein d'une équipe cyber ou infrastructure, et contribuer à des interfaces fiables et agréables.</p>
+        <h2 id="objectif-title" class="section-title" data-content-key="cv.goalsTitle">Ce que je recherche</h2>
+        <p class="section-text" data-content-key="cv.goalsText">Consolider mes compétences au sein d'une équipe cyber ou infrastructure, et contribuer à des interfaces fiables et agréables.</p>
       </div>
       <div class="info-grid">
         <article class="glass-card">
@@ -104,6 +105,11 @@
   <footer>
     <div class="footer-inner">
       <p>© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">GitHub</a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">E-mail</a>
+      </div>
     </div>
   </footer>
 </body>

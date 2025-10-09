@@ -158,6 +158,7 @@ a:focus-visible {
   width: min(var(--max-width), calc(100% - 48px));
   margin: 0 auto;
   padding: 160px 0 120px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -587,18 +588,160 @@ body[data-page='contact'] .nav-link[data-target='contact']::after {
 }
 
 .form-card {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.contact-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.contact-backdrop__blur,
+.contact-backdrop__gradient {
+  position: absolute;
+  inset: 0;
+  border-radius: clamp(34px, 6vw, 48px);
+  filter: blur(48px);
+}
+
+.contact-backdrop__blur {
+  background: rgba(6, 12, 28, 0.68);
+  mix-blend-mode: screen;
+}
+
+.contact-backdrop__gradient {
+  background: radial-gradient(circle at 20% 30%, rgba(125, 240, 255, 0.22), transparent 65%),
+    radial-gradient(circle at 80% 70%, rgba(183, 123, 255, 0.28), transparent 70%),
+    linear-gradient(160deg, rgba(6, 11, 26, 0.92) 0%, rgba(10, 16, 34, 0.76) 100%);
+  opacity: 0.7;
+  animation: contactGlow 18s ease-in-out infinite alternate;
+}
+
+.contact-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  filter: blur(0.6px);
+}
+
+.contact-particles span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(130, 165, 255, 0.65);
+  box-shadow: 0 0 12px rgba(130, 165, 255, 0.8);
+  animation: particleFloat 18s linear infinite;
+}
+
+.contact-particles span:nth-child(1) {
+  top: 82%;
+  left: 10%;
+}
+
+.contact-particles span:nth-child(2) {
+  background: rgba(183, 123, 255, 0.65);
+  animation-duration: 22s;
+  animation-delay: -4s;
+  top: 12%;
+  left: 24%;
+}
+
+.contact-particles span:nth-child(3) {
+  background: rgba(125, 240, 255, 0.65);
+  animation-duration: 26s;
+  animation-delay: -8s;
+  top: 48%;
+  left: 80%;
+}
+
+.contact-particles span:nth-child(4) {
+  width: 8px;
+  height: 8px;
+  animation-duration: 32s;
+  animation-delay: -12s;
+  top: 70%;
+  left: 64%;
+}
+
+.contact-particles span:nth-child(5) {
+  width: 10px;
+  height: 10px;
+  animation-duration: 28s;
+  animation-delay: -16s;
+  top: 30%;
+  left: 6%;
+}
+
+.contact-form {
+  position: relative;
   display: grid;
   gap: 18px;
 }
 
-.form-submitted {
-  animation: formSuccess 820ms ease forwards;
+.form-row {
+  display: grid;
+  gap: 8px;
 }
 
-@keyframes formSuccess {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.015); }
-  100% { transform: scale(1); }
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(125, 240, 255, 0.76);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 280ms ease, transform 280ms ease;
+}
+
+.form-status.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.form-status.is-error {
+  color: rgba(255, 141, 214, 0.76);
+}
+
+.button--success {
+  background: linear-gradient(120deg, rgba(72, 209, 141, 0.85), rgba(124, 255, 198, 0.8));
+  color: #041011;
+  box-shadow: 0 16px 42px rgba(72, 209, 141, 0.35);
+}
+
+@keyframes contactGlow {
+  0% {
+    transform: translate3d(-12px, -12px, 0) scale(0.98);
+  }
+  100% {
+    transform: translate3d(12px, 12px, 0) scale(1.02);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate3d(-10%, 100%, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(110%, -10%, 0);
+    opacity: 0;
+  }
 }
 
 label {
@@ -653,6 +796,25 @@ footer {
   padding: 26px 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
+}
+
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.footer-social a {
+  color: rgba(244, 249, 255, 0.76);
+  transition: color 220ms ease;
+}
+
+.footer-social a:hover,
+.footer-social a:focus-visible {
+  color: var(--accent-cyan);
 }
 
 .reveal {

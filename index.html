@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CyberPortfolio - Mohamed</title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/content-manager.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/particles.js" defer></script>
 </head>
@@ -35,9 +36,9 @@
 
   <main class="page-main">
     <section class="hero reveal" role="region" aria-labelledby="hero-title">
-      <span class="hero-eyebrow">Liquid Glass · iOS 26</span>
-      <h1 id="hero-title" class="hero-title">Une expérience <span>cyber</span> immersive et futuriste</h1>
-      <p class="hero-subtitle">Bienvenue sur mon espace numérique. Je suis Mohamed, étudiant en BTS SIO (option SISR) passionné par la sécurité des systèmes, le réseau et les interfaces soignées.</p>
+      <span class="hero-eyebrow" data-content-key="home.heroEyebrow">CyberPortfolio</span>
+      <h1 id="hero-title" class="hero-title" data-content-key="home.heroTitle">Sécurité et design au service de vos projets</h1>
+      <p class="hero-subtitle" data-content-key="home.heroSubtitle">Mohamed, étudiant BTS SIO (SISR), conçoit des environnements fiables, sécurisés et lumineux pour vos plateformes digitales.</p>
       <div class="hero-actions">
         <a class="button button--primary ripple" data-link href="projets/index.html">Découvrir mes projets</a>
         <a class="button button--ghost" data-link href="competences/cv.html">Consulter mon CV</a>
@@ -67,11 +68,11 @@
     <section class="section reveal" aria-labelledby="vision-title">
       <div class="section-header">
         <span class="section-eyebrow">Vision</span>
-        <h2 id="vision-title" class="section-title">Sécuriser, automatiser et sublimer chaque interface</h2>
-        <p class="section-text">Je combine cybersécurité, scripting et design d'expérience pour créer des solutions robustes et élégantes. Chaque projet est pensé comme un produit complet : architecture, défense, performance et émotion visuelle.</p>
+        <h2 id="vision-title" class="section-title" data-content-key="home.visionTitle">Sécuriser, automatiser et sublimer chaque interface</h2>
+        <p class="section-text" data-content-key="home.visionText">J'assemble cybersécurité, scripting et design pour créer des solutions robustes, performantes et élégantes, toujours alignées sur les besoins métier.</p>
       </div>
       <div class="text-columns">
-        <p>Mon approche s'inspire de l'univers iOS : transitions fluides, matériaux translucides, typographie précise. J'analyse les besoins métiers pour proposer des interfaces sur-mesure, avec une défense active contre les risques cyber.</p>
+        <p>Mon approche privilégie les transitions fluides, les matériaux translucides et une typographie précise. J'analyse les besoins métiers pour proposer des interfaces sur-mesure, avec une défense active contre les risques cyber.</p>
         <p>De la configuration réseau à l'intégration front-end, j'aime orchestrer l'ensemble de la chaîne technique. Ce portfolio illustre les piliers de mon parcours et mon envie d'évoluer dans la sécurité offensive et la conception de plateformes modernes.</p>
       </div>
     </section>
@@ -79,7 +80,7 @@
     <section class="section reveal" aria-labelledby="focus-title">
       <div class="section-header">
         <span class="section-eyebrow">Focus</span>
-        <h2 id="focus-title" class="section-title">Mes domaines clés en liquid glass</h2>
+        <h2 id="focus-title" class="section-title" data-content-key="home.focusTitle">Mes domaines clés</h2>
       </div>
       <div class="info-grid">
         <article class="glass-card">
@@ -102,7 +103,7 @@
         </article>
         <article class="glass-card">
           <h3>Expérience & design</h3>
-          <p>Interfaces immersives inspirées d'iOS : effets de profondeur, reflets subtils et interactions confortables.</p>
+          <p>Interfaces immersives travaillées autour de la profondeur, des reflets subtils et d'interactions confortables.</p>
           <ul class="feature-list">
             <li><span class="feature-icon">🎨</span><span>Systèmes de design cohérents multi-pages</span></li>
             <li><span class="feature-icon">🌫️</span><span>Effets glassmorphism (blur, refraction, glow)</span></li>
@@ -115,8 +116,8 @@
     <section class="section reveal" aria-labelledby="cta-title">
       <div class="section-header">
         <span class="section-eyebrow">Prochaine étape</span>
-        <h2 id="cta-title" class="section-title">Prêt à collaborer&nbsp;?</h2>
-        <p class="section-text">Contactez-moi pour imaginer ensemble des solutions sécurisées et élégantes, ou explorez mon CV pour en savoir plus sur mon parcours.</p>
+        <h2 id="cta-title" class="section-title" data-content-key="home.ctaTitle">Prêt à collaborer&nbsp;?</h2>
+        <p class="section-text" data-content-key="home.ctaText">Contactez-moi pour imaginer des solutions sécurisées ou parcourez mon CV pour découvrir mon parcours.</p>
       </div>
       <div class="hero-actions">
         <a class="button button--primary ripple" data-link href="contact/contact.html">Échanger autour d'un projet</a>
@@ -128,6 +129,11 @@
   <footer>
     <div class="footer-inner">
       <p>© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">GitHub</a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">E-mail</a>
+      </div>
     </div>
   </footer>
 </body>
