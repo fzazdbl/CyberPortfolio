@@ -1,77 +1,309 @@
-﻿/* main.js - Liquid Glass interactions
-   - page transitions, reveal, CTA ripple, custom cursor
-   - requestAnimationFrame driven, mobile/reduced-motion guards
+/* main.js — Interactions pour le thème glass sombre
+   - transitions de page et animations d'apparition
+   - gestion du menu glass et du ripple sur les boutons
+   - effets contextuels (pointage héro) et formulaires
 */
 
-(function(){
-  const isMobile = window.matchMedia('(pointer: coarse)').matches;
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(() => {
+  const root = document.documentElement;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // page enter class
-  document.documentElement.classList.add('page-enter');
-  window.addEventListener('DOMContentLoaded', ()=>{
-    requestAnimationFrame(()=> document.documentElement.classList.add('page-enter-ready'));
-    document.querySelectorAll('.header').forEach(h=>h.classList.add('in-view'));
+  // Transition d'entrée
+  root.classList.add('page-enter');
+  window.addEventListener('DOMContentLoaded', () => {
+    const manager = window.PortfolioContentManager;
+    if (manager) {
+      manager.applyTheme(document);
+      manager.applyContent(document);
+    }
+
+    const renderer = window.LiquidGlassRenderer;
+    if (renderer && typeof renderer.initAll === 'function') {
+      renderer.initAll();
+    }
+
+    requestAnimationFrame(() => root.classList.add('page-enter-ready'));
+    const header = document.querySelector('.liquid-nav');
+    if (header) {
+      requestAnimationFrame(() => header.classList.add('is-visible'));
+    }
   });
 
-  // intercept internal links with data-link -> fade then navigate
-  document.addEventListener('click', (ev)=>{
-    const a = ev.target.closest('a[data-link]');
-    if(!a) return;
-    if(ev.metaKey || ev.ctrlKey) return; // allow new tab
-    ev.preventDefault();
-    const href = a.getAttribute('href');
-    document.documentElement.classList.add('page-exit');
-    setTimeout(()=> window.location.href = href, 420);
+  // Navigation douce entre les pages internes
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[data-link]');
+    if (!link) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || link.target === '_blank') return;
+
+    event.preventDefault();
+    const href = link.getAttribute('href');
+    if (!href) return;
+
+    root.classList.add('page-exit');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 360);
   });
 
-  // reveal elements
-  if(!reduced){
-    const obs = new IntersectionObserver((entries, obsr)=>{
-      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in-view'); obsr.unobserve(en.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  // Activer l'état actif du menu selon la page
+  const currentPage = document.body?.dataset?.page;
+  if (currentPage) {
+  document.querySelectorAll('.nav-link[data-target]').forEach((navLink) => {
+    if (navLink.dataset.target === currentPage) {
+      navLink.classList.add('is-active');
+    }
+  });
+  }
+
+  const nav = document.querySelector('.liquid-nav');
+  if (nav) {
+    const toggle = nav.querySelector('.liquid-nav__toggle');
+    const menu = nav.querySelector('.liquid-nav__menu');
+    const overlay = nav.querySelector('.liquid-nav__overlay');
+    const closeMenu = () => {
+      if (!menu) return;
+      menu.classList.remove('is-open');
+      nav.classList.remove('is-expanded');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    };
+
+    const openMenu = () => {
+      if (!menu) return;
+      menu.classList.add('is-open');
+      nav.classList.add('is-expanded');
+      if (toggle) {
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    };
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        if (menu.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
+
+    menu?.querySelectorAll('a').forEach((anchor) => {
+      anchor.addEventListener('click', () => {
+        if (window.matchMedia('(max-width: 960px)').matches) {
+          closeMenu();
+        }
+      });
+    });
+
+    document.addEventListener('keyup', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    if (!reducedMotion) {
+      const updatePointer = (event) => {
+        const rect = nav.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        nav.style.setProperty('--nav-pointer-x', `${x}%`);
+        nav.style.setProperty('--nav-pointer-y', `${y}%`);
+      };
+
+      nav.addEventListener('pointermove', updatePointer);
+      nav.addEventListener('pointerleave', () => {
+        nav.style.setProperty('--nav-pointer-x', '50%');
+        nav.style.setProperty('--nav-pointer-y', '50%');
+      });
+    }
+  }
+
+  // Animation reveal pour les sections
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  if (!reveals.length) return;
+
+  if (!reducedMotion && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    reveals.forEach((section) => observer.observe(section));
   } else {
-    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'));
+    reveals.forEach((section) => section.classList.add('is-visible'));
   }
-
-  // CTA ripple
-  document.addEventListener('pointerdown', (ev)=>{
-    const btn = ev.target.closest('.ripple'); if(!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const span = document.createElement('span'); span.className='ripple-el';
-    const size = Math.max(rect.width, rect.height) * 2;
-    Object.assign(span.style,{position:'absolute',width:size+'px',height:size+'px',left:(ev.clientX-rect.left-size/2)+'px',top:(ev.clientY-rect.top-size/2)+'px',borderRadius:'50%',background:'rgba(255,255,255,0.12)',transform:'scale(0)',pointerEvents:'none',transition:'transform 420ms cubic-bezier(.2,.9,.3,1),opacity 420ms ease'});
-    btn.appendChild(span);
-    requestAnimationFrame(()=>{ span.style.transform='scale(1)'; span.style.opacity='0'; });
-    setTimeout(()=> span.remove(), 520);
-  });
-
-  // custom cursor
-  if(!isMobile && !reduced){
-    const dot = document.createElement('div'); dot.className='cursor-dot';
-    Object.assign(dot.style,{position:'fixed',left:'0',top:'0',width:'12px',height:'12px',borderRadius:'50%',background:'rgba(255,255,255,0.95)',boxShadow:'0 6px 18px rgba(0,180,216,0.12), inset 0 0 6px rgba(255,255,255,0.6)',pointerEvents:'none',transform:'translate(-50%,-50%)'});
-    document.body.appendChild(dot);
-    let mx=window.innerWidth/2,my=window.innerHeight/2,cx=mx,cy=my;
-    document.addEventListener('mousemove', (e)=>{ mx=e.clientX; my=e.clientY; });
-    (function loop(){ cx += (mx-cx)*0.18; cy += (my-cy)*0.18; dot.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
-    document.addEventListener('mousedown', ()=>{ dot.style.transform += ' scale(0.85)'; setTimeout(()=> dot.style.transform = dot.style.transform.replace(' scale(0.85)',''), 120); });
-  }
-
-  // ensure bg canvas doesn't intercept pointer
-  const bg = document.getElementById('bg-canvas'); if(bg) bg.style.pointerEvents = 'none';
-
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
+// Ripple & interactions contextuelles
+(() => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
- // Add nav item click handler
-  const navItems = document.querySelectorAll('.nav-item');
-  navItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-      e.preventDefault();
-      navItems.forEach(navItem => navItem.classList.remove('active'));
-      this.classList.add('active');
+  document.addEventListener('pointerdown', (event) => {
+    const target = event.target.closest('.ripple, .button');
+    if (!target) return;
+
+    const rect = target.getBoundingClientRect();
+    const span = document.createElement('span');
+    span.className = 'ripple-effect';
+    const size = Math.max(rect.width, rect.height) * 1.6;
+
+    Object.assign(span.style, {
+      position: 'absolute',
+      width: `${size}px`,
+      height: `${size}px`,
+      left: `${event.clientX - rect.left - size / 2}px`,
+      top: `${event.clientY - rect.top - size / 2}px`,
+      borderRadius: '50%',
+      background: 'rgba(255, 255, 255, 0.18)',
+      transform: 'scale(0)',
+      pointerEvents: 'none',
+      opacity: '0.7',
+      transition: reducedMotion
+        ? 'opacity 220ms ease'
+        : 'transform 460ms cubic-bezier(.2,.9,.3,1), opacity 520ms ease'
+    });
+
+    target.style.position = target.style.position || 'relative';
+    target.appendChild(span);
+
+    requestAnimationFrame(() => {
+      if (!reducedMotion) span.style.transform = 'scale(1)';
+      span.style.opacity = '0';
+    });
+
+    setTimeout(() => span.remove(), reducedMotion ? 240 : 520);
+  });
+
+  if (reducedMotion) return;
+
+  // Highlight dynamique sur les sections "hero"
+  document.querySelectorAll('.hero').forEach((section) => {
+    let pointerX = 50;
+    let pointerY = 50;
+
+    const update = (event) => {
+      const rect = section.getBoundingClientRect();
+      pointerX = ((event.clientX - rect.left) / rect.width) * 100;
+      pointerY = ((event.clientY - rect.top) / rect.height) * 100;
+      section.style.setProperty('--pointer-x', `${pointerX}%`);
+      section.style.setProperty('--pointer-y', `${pointerY}%`);
+    };
+
+    section.addEventListener('pointermove', update);
+    section.addEventListener('pointerleave', () => {
+      section.style.setProperty('--pointer-x', '50%');
+      section.style.setProperty('--pointer-y', '50%');
     });
   });
-});
+})();
+
+// Formulaire de contact avec retour visuel
+(() => {
+  const manager = window.PortfolioContentManager;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const statusNode = form.querySelector('.form-status');
+    const successText = statusNode?.textContent?.trim() ||
+      manager?.getContent().fields['contact.successMessage'] ||
+      '✅ Message envoyé !';
+
+    const defaultButtonLabel = submitButton?.textContent?.trim() || 'Envoyer';
+
+    if (statusNode) {
+      statusNode.dataset.successText = successText;
+      statusNode.textContent = '';
+      statusNode.setAttribute('aria-hidden', 'true');
+      statusNode.classList.remove('is-visible', 'is-error');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!submitButton) {
+        form.submit();
+        return;
+      }
+
+      const formData = new FormData(form);
+      const endpoint = form.getAttribute('action') || form.dataset.endpoint || 'contact.php';
+
+      submitButton.disabled = true;
+      submitButton.classList.remove('button--success');
+      submitButton.textContent = 'Envoi...';
+
+      if (statusNode) {
+        statusNode.classList.remove('is-error');
+        statusNode.classList.add('is-visible');
+        statusNode.textContent = 'Envoi en cours...';
+        statusNode.setAttribute('aria-hidden', 'false');
+      }
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: formData,
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        });
+
+        if (!response.ok) {
+          throw new Error('Une erreur est survenue.');
+        }
+
+        let payload = null;
+        try {
+          payload = await response.json();
+        } catch (error) {
+          // PHP peut renvoyer un JSON simple, sinon on considère le succès.
+        }
+
+        if (payload && payload.success === false) {
+          throw new Error(payload.message || 'Échec de l\'envoi.');
+        }
+
+        form.reset();
+        submitButton.classList.add('button--success');
+        submitButton.textContent = 'Envoyé';
+        if (statusNode) {
+          statusNode.textContent = statusNode.dataset.successText || successText;
+          statusNode.classList.add('is-visible');
+          statusNode.classList.remove('is-error');
+          statusNode.setAttribute('aria-hidden', 'false');
+        }
+        setTimeout(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultButtonLabel;
+          submitButton.classList.remove('button--success');
+        }, 2400);
+      } catch (error) {
+        if (statusNode) {
+          statusNode.textContent = error.message || 'Impossible d\'envoyer le message. Contactez-moi par e-mail.';
+          statusNode.classList.add('is-visible', 'is-error');
+          statusNode.setAttribute('aria-hidden', 'false');
+        }
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonLabel;
+
+        const fallbackMail = manager?.getContent().links.email || form.dataset.mailto;
+        if (fallbackMail) {
+          const params = new URLSearchParams({
+            subject: `Message de ${formData.get('nom') || 'Portfolio'}`,
+            body: `Email: ${formData.get('email') || 'non fourni'}\n\n${formData.get('message') || ''}`
+          });
+          window.open(`${fallbackMail}?${params.toString()}`, '_blank');
+        }
+      }
+    });
+  });
+})();
