@@ -1,51 +1,102 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mes projets - Mohamed</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/content-manager.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/particles.js" defer></script>
 </head>
-<body>
-<header><h1 class="glow">Mes Projets</h1></header>
-<main>
-  <section>
-    <h2 class="scroll-reveal">Projets récents</h2>
-    <div class="project-grid">
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Site vitrine</h3>
-        <p>Création d’un site web complet en HTML, CSS et JavaScript.</p>
-      </article>
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Application PHP</h3>
-        <p>Développement d’un espace utilisateur sécurisé avec PHP et MySQL.</p>
-      </article>
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Automatisation Python</h3>
-        <p>Scripts d'automatisation pour administration système sous Linux.</p>
-      </article>
-    </div>
-  </section>
+<body data-page="projets">
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="bg-layers" aria-hidden="true">
+    <div class="orb orb--cyan"></div>
+    <div class="orb orb--violet"></div>
+    <div class="orb orb--pink"></div>
+    <div class="glow-line glow-line--top"></div>
+    <div class="glow-line glow-line--bottom"></div>
+  </div>
 
-  <section style="margin-top:28px;">
-    <h2 class="scroll-reveal">En développement</h2>
-    <div class="project-grid">
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Outil interne (dev)</h3>
-        <p>Prototype en cours — intégration API et sécurité renforcée.</p>
-      </article>
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Extension Chrome (dev)</h3>
-        <p>Extension pour faciliter certaines tâches d'analyse réseau.</p>
-      </article>
-      <article class="card scroll-reveal">
-        <h3 class="project-title">Projet mobile (dev)</h3>
-        <p>Concept d'application mobile pour suivi de notes et projets.</p>
-      </article>
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <div class="brand">
+        <span class="brand__badge">BTS SIO · SISR</span>
+        <p class="brand__title">CyberPortfolio de Mohamed</p>
+      </div>
+      <nav class="site-nav" aria-label="Navigation principale">
+        <a class="nav-link" data-target="accueil" data-link href="../index.html">Accueil</a>
+        <a class="nav-link" data-target="competences" data-link href="../competences/cv.html">Compétences</a>
+        <a class="nav-link" data-target="projets" data-link href="index.html">Mes projets</a>
+        <a class="nav-link" data-target="contact" data-link href="../contact/contact.html">Contact</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-</main>
-<footer><p>© 2025 Mohamed</p></footer>
+  <main class="page-main">
+    <section class="hero reveal" aria-labelledby="projects-title">
+      <span class="hero-eyebrow" data-content-key="projects.heroEyebrow">Mes réalisations</span>
+      <h1 id="projects-title" class="hero-title" data-content-key="projects.heroTitle">Des projets qui fusionnent sécurité et esthétique</h1>
+      <p class="hero-subtitle" data-content-key="projects.heroSubtitle">Chaque mission combine méthodes cyber, automatisation et interfaces raffinées pour délivrer une expérience cohérente.</p>
+      <div class="hero-actions">
+        <a class="button button--primary ripple" data-link href="../contact/contact.html">Proposer un projet</a>
+        <a class="button button--ghost" data-link href="../competences/cv.html">Consulter mes compétences</a>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="recent-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Récent</span>
+        <h2 id="recent-title" class="section-title" data-content-key="projects.recentTitle">Projets marquants</h2>
+      </div>
+      <div class="project-grid">
+        <article class="glass-card">
+          <h3 class="project-title">Site vitrine immersif</h3>
+          <p>Création d'un site vitrine responsif en HTML, CSS et JavaScript avec effets glassmorphism et intégration SEO.</p>
+        </article>
+        <article class="glass-card">
+          <h3 class="project-title">Portail PHP sécurisé</h3>
+          <p>Mise en place d'un espace utilisateur sécurisé (PHP / MySQL) avec authentification forte et journalisation.</p>
+        </article>
+        <article class="glass-card">
+          <h3 class="project-title">Automation Python</h3>
+          <p>Scripts Python pour automatiser la sauvegarde de configurations réseau et l'analyse de journaux de sécurité.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="dev-title">
+      <div class="section-header">
+        <span class="section-eyebrow">En développement</span>
+        <h2 id="dev-title" class="section-title" data-content-key="projects.devTitle">Prototypes & idées en cours</h2>
+      </div>
+      <div class="project-grid">
+        <article class="glass-card">
+          <h3 class="project-title">Outil interne</h3>
+          <p>Tableau de bord cyber pour centraliser alertes, patchs et documentation opérationnelle.</p>
+        </article>
+        <article class="glass-card">
+          <h3 class="project-title">Extension navigateur</h3>
+          <p>Extension Chrome visant à accélérer la collecte d'informations lors des analyses réseau.</p>
+        </article>
+        <article class="glass-card">
+          <h3 class="project-title">App mobile de suivi</h3>
+          <p>Prototype d'application mobile pour suivre l'évolution des projets, incidents et priorités cybersécurité.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p>© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">GitHub</a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">E-mail</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
