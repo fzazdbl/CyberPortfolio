@@ -2,6 +2,10 @@
    - transitions de page et animations d'apparition
    - gestion du menu glass et du ripple sur les boutons
    - effets contextuels (pointage héro) et formulaires
+/* main.js — Interactions pour le thème Liquid Glass iOS26
+   - transitions de page et animations d'apparition
+   - gestion du menu glass et du ripple sur les boutons
+   - effets contextuels (pointage héro)
 */
 
 (() => {
