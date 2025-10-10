@@ -6,11 +6,12 @@
   <title>Administration - CyberPortfolio</title>
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/gpu-style.css">
   <link rel="stylesheet" href="assets/css/admin.css">
-  <script src="assets/js/content-manager.js" defer></script>
-  <script src="assets/js/liquid-renderer.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/admin.js" defer></script>
+  <script type="module" src="assets/js/content-manager.js"></script>
+  <script type="module" src="assets/js/liquid-renderer.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/admin.js"></script>
 </head>
 <body class="admin-body" data-page="admin">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
@@ -33,11 +34,11 @@
     </div>
     <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
     <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
-      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
     </nav>
   </header>
 
@@ -263,6 +264,40 @@
           <p class="admin-status" id="passwordStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
+
+      <section class="admin-gpu-panel" id="gpuPanel">
+        <div class="admin-gpu-header">
+          <p class="admin-eyebrow">Liquid Glass 3D</p>
+          <h3>Réglages temps réel</h3>
+        </div>
+        <div class="admin-gpu-controls">
+          <div class="admin-gpu-control">
+            <label for="gpuBlur">Intensité du blur</label>
+            <input id="gpuBlur" type="range" min="0.5" max="2" step="0.05" data-gpu-setting="bloomIntensity">
+            <span class="admin-gpu-value" data-gpu-value></span>
+          </div>
+          <div class="admin-gpu-control">
+            <label for="gpuRefract">Indice de réfraction</label>
+            <input id="gpuRefract" type="range" min="1.0" max="1.8" step="0.01" data-gpu-setting="refractIndex">
+            <span class="admin-gpu-value" data-gpu-value></span>
+          </div>
+          <div class="admin-gpu-control">
+            <label for="gpuAmbient">Luminosité ambiante</label>
+            <input id="gpuAmbient" type="range" min="0.2" max="1.5" step="0.05" data-gpu-setting="ambientStrength">
+            <span class="admin-gpu-value" data-gpu-value></span>
+          </div>
+          <div class="admin-gpu-control">
+            <label for="gpuWave">Vitesse des ondes</label>
+            <input id="gpuWave" type="range" min="0.2" max="1.2" step="0.02" data-gpu-setting="waveSpeed">
+            <span class="admin-gpu-value" data-gpu-value></span>
+          </div>
+          <div class="admin-gpu-control admin-gpu-preview">
+            <label for="gpuColor">Couleur dominante</label>
+            <input id="gpuColor" type="color" data-gpu-setting="glowColor">
+            <div class="admin-gpu-color" data-gpu-color-preview></div>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
 </body>
