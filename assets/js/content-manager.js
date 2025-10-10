@@ -2,6 +2,7 @@
   const STORAGE_KEY = 'portfolioContent';
   const THEME_KEY = 'portfolioTheme';
   const PASSWORD_KEY = 'portfolioAdminPassword';
+  const GPU_KEY = 'portfolioGpuSettings';
   const DEFAULT_PASSWORD = 'admin123';
 
   function mergeNavigation(base = {}, override = {}) {
@@ -67,6 +68,19 @@
     '--accent-cyan': '#5de4ff'
   };
 
+  const DEFAULT_GPU_SETTINGS = {
+    thickness: 0.38,
+    refractIndex: 1.32,
+    reflectivity: 0.42,
+    ambientStrength: 0.72,
+    glowColor: '#6bd7ff',
+    distortion: 0.85,
+    waveAmplitude: 1.2,
+    waveSpeed: 0.45,
+    causticIntensity: 1.25,
+    bloomIntensity: 1.1
+  };
+
   function isStorageAvailable() {
     try {
       const testKey = '__storage_test__';
@@ -130,6 +144,20 @@
   function saveTheme(theme) {
     const merged = mergeTheme(DEFAULT_THEME, theme);
     setStoredValue(THEME_KEY, merged);
+    return merged;
+  }
+
+  function getGpuSettings() {
+    const stored = getStoredValue(GPU_KEY);
+    return { ...DEFAULT_GPU_SETTINGS, ...(stored || {}) };
+  }
+
+  function saveGpuSettings(settings) {
+    const merged = { ...DEFAULT_GPU_SETTINGS, ...(settings || {}) };
+    setStoredValue(GPU_KEY, merged);
+    if (window.LiquidRenderer) {
+      window.LiquidRenderer.configure(merged);
+    }
     return merged;
   }
 
@@ -204,8 +232,7 @@
 
     const renderer = window.LiquidRenderer;
     if (renderer && typeof renderer.configure === 'function') {
-      const accent = theme['--accent-blue'] || theme['--accent-cyan'] || '#19304d';
-      renderer.configure({ ambientColor: accent });
+      renderer.configure(getGpuSettings());
     }
   }
 
@@ -217,7 +244,8 @@
     getDefaults: () => ({
       content: clone(DEFAULT_CONTENT),
       theme: clone(DEFAULT_THEME),
-      password: DEFAULT_PASSWORD
+      password: DEFAULT_PASSWORD,
+      gpu: { ...DEFAULT_GPU_SETTINGS }
     }),
     getContent,
     saveContent,
@@ -226,6 +254,8 @@
     getTheme,
     saveTheme,
     applyTheme,
+    getGpuSettings,
+    saveGpuSettings,
     getPassword,
     setPassword,
     isStorageEnabled: () => storageEnabled

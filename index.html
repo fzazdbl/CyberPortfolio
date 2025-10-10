@@ -6,9 +6,10 @@
   <title>CyberPortfolio - Mohamed</title>
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/content-manager.js" defer></script>
-  <script src="assets/js/liquid-renderer.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="assets/css/gpu-style.css">
+  <script type="module" src="assets/js/content-manager.js"></script>
+  <script type="module" src="assets/js/liquid-renderer.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
 </head>
 <body data-page="accueil">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.1" data-liquid-speed="0.4"></div>
@@ -31,22 +32,22 @@
     </div>
     <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
     <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
-      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
     </nav>
   </header>
 
   <main class="page-main">
-    <section class="hero reveal" role="region" aria-labelledby="hero-title">
+    <section class="hero reveal liquid-glass" role="region" aria-labelledby="hero-title">
       <span class="hero-eyebrow" data-content-key="home.heroEyebrow">CyberPortfolio</span>
       <h1 id="hero-title" class="hero-title" data-content-key="home.heroTitle">Sécurité et design au service de vos projets</h1>
       <p class="hero-subtitle" data-content-key="home.heroSubtitle">Mohamed, étudiant BTS SIO (SISR), conçoit des environnements fiables, sécurisés et lumineux pour vos plateformes digitales.</p>
       <div class="hero-actions">
-        <a class="button button--primary ripple" data-link href="projets/index.html">Découvrir mes projets</a>
-        <a class="button button--ghost" data-link href="competences/index.html">Consulter mon CV</a>
+        <a class="button button--primary ripple liquid-glass" data-link href="projets/index.html">Découvrir mes projets</a>
+        <a class="button button--ghost liquid-glass" data-link href="competences/index.html">Consulter mon CV</a>
       </div>
       <ul class="hero-tags" aria-label="Domaines d'expertise">
         <li class="chip">Cybersécurité</li>
@@ -88,7 +89,7 @@
         <h2 id="focus-title" class="section-title" data-content-key="home.focusTitle">Mes domaines clés</h2>
       </div>
       <div class="info-grid">
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Cybersécurité défensive & offensive</h3>
           <p>Tests d'intrusion, analyse de logs, veille CVE et renforcement des accès pour des infrastructures scolaires et personnelles.</p>
           <ul class="feature-list">
@@ -97,7 +98,7 @@
             <li><span class="feature-icon">🧠</span><span>Veille continue sur les menaces émergentes</span></li>
           </ul>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Développement & automatisation</h3>
           <p>Création d'outils web et scripts Python / Bash pour accélérer le déploiement et la supervision des services.</p>
           <ul class="feature-list">
@@ -106,7 +107,7 @@
             <li><span class="feature-icon">📡</span><span>Intégration API et monitoring réseau</span></li>
           </ul>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Expérience & design</h3>
           <p>Interfaces immersives travaillées autour de la profondeur, des reflets subtils et d'interactions confortables.</p>
           <ul class="feature-list">

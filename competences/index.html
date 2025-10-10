@@ -6,9 +6,10 @@
   <title>Compétences - Mohamed</title>
   <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/content-manager.js" defer></script>
-  <script src="../assets/js/liquid-renderer.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/gpu-style.css">
+  <script type="module" src="../assets/js/content-manager.js"></script>
+  <script type="module" src="../assets/js/liquid-renderer.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
 </head>
 <body data-page="competences">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.05" data-liquid-speed="0.34"></div>
@@ -31,22 +32,22 @@
     </div>
     <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
     <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
-      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="index.html">Compétences</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
     </nav>
   </header>
 
   <main class="page-main">
-    <section class="hero reveal" aria-labelledby="cv-title">
+    <section class="hero reveal liquid-glass" aria-labelledby="cv-title">
       <span class="hero-eyebrow" data-content-key="cv.heroEyebrow">Curriculum Vitae</span>
       <h1 id="cv-title" class="hero-title" data-content-key="cv.heroTitle">Un parcours orienté sécurité et fiabilité</h1>
       <p class="hero-subtitle" data-content-key="cv.heroSubtitle">Je suis Mohamed, apprenant du BTS SIO option SISR. J'aime transformer les environnements complexes en solutions stables et sécurisées, tout en soignant l'expérience utilisateur.</p>
       <div class="hero-actions">
-        <a class="button button--primary ripple" href="../assets/pdf/cv.pdf" target="_blank" rel="noopener">Télécharger le CV (PDF)</a>
-        <a class="button button--ghost" data-link href="../projets/index.html">Voir mes projets</a>
+        <a class="button button--primary ripple liquid-glass" href="../assets/pdf/cv.pdf" target="_blank" rel="noopener">Télécharger le CV (PDF)</a>
+        <a class="button button--ghost liquid-glass" data-link href="../projets/index.html">Voir mes projets</a>
       </div>
     </section>
 
@@ -57,7 +58,7 @@
         <p class="section-text" data-content-key="cv.profileText">Une vision transversale entre infrastructure, cybersécurité et développement pour répondre aux enjeux numériques actuels.</p>
       </div>
       <div class="cv-grid">
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Profil</h3>
           <p>Étudiant rigoureux, motivé, curieux des nouvelles pratiques DevSecOps. Je capitalise sur l'automatisation et la documentation pour fluidifier les déploiements.</p>
           <ul class="feature-list">
@@ -66,7 +67,7 @@
             <li><span class="feature-icon">🧩</span><span>Résolution de problèmes complexes</span></li>
           </ul>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Compétences techniques</h3>
           <ul class="feature-list">
             <li><span class="feature-icon">🌐</span><span>HTML · CSS · JavaScript moderne</span></li>
@@ -75,7 +76,7 @@
             <li><span class="feature-icon">🔐</span><span>Analyse de vulnérabilités · outils de pentest</span></li>
           </ul>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Formation</h3>
           <p>BTS SIO - Lycée Jean Moulin, Béziers.</p>
           <p>Projets académiques : réseaux sécurisés, outils de supervision, mini-sites vitrines et API sécurisées.</p>
@@ -91,15 +92,15 @@
         <p class="section-text" data-content-key="cv.goalsText">Consolider mes compétences au sein d'une équipe cyber ou infrastructure, et contribuer à des interfaces fiables et agréables.</p>
       </div>
       <div class="info-grid">
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Stage & alternance</h3>
           <p>Opportunités orientées sécurité des systèmes, SOC ou ingénierie réseau.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Contributions</h3>
           <p>Documentation, support technique, déploiements sécurisés, amélioration continue.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3>Ambitions</h3>
           <p>Évoluer vers des missions de sécurité offensive (pentest) et d'architecture sécurisée.</p>
         </article>

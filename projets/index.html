@@ -6,9 +6,10 @@
   <title>Mes projets - Mohamed</title>
   <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/content-manager.js" defer></script>
-  <script src="../assets/js/liquid-renderer.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/gpu-style.css">
+  <script type="module" src="../assets/js/content-manager.js"></script>
+  <script type="module" src="../assets/js/liquid-renderer.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
 </head>
 <body data-page="projets">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.36"></div>
@@ -31,22 +32,22 @@
     </div>
     <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
     <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
-      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">Compétences</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="index.html">Mes projets</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
     </nav>
   </header>
 
   <main class="page-main">
-    <section class="hero reveal" aria-labelledby="projects-title">
+    <section class="hero reveal liquid-glass" aria-labelledby="projects-title">
       <span class="hero-eyebrow" data-content-key="projects.heroEyebrow">Mes réalisations</span>
       <h1 id="projects-title" class="hero-title" data-content-key="projects.heroTitle">Des projets qui fusionnent sécurité et esthétique</h1>
       <p class="hero-subtitle" data-content-key="projects.heroSubtitle">Chaque mission combine méthodes cyber, automatisation et interfaces raffinées pour délivrer une expérience cohérente.</p>
       <div class="hero-actions">
-        <a class="button button--primary ripple" data-link href="../contact/contact.html">Proposer un projet</a>
-        <a class="button button--ghost" data-link href="../competences/index.html">Consulter mes compétences</a>
+        <a class="button button--primary ripple liquid-glass" data-link href="../contact/contact.html">Proposer un projet</a>
+        <a class="button button--ghost liquid-glass" data-link href="../competences/index.html">Consulter mes compétences</a>
       </div>
     </section>
 
@@ -56,15 +57,15 @@
         <h2 id="recent-title" class="section-title" data-content-key="projects.recentTitle">Projets marquants</h2>
       </div>
       <div class="project-grid">
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">Site vitrine immersif</h3>
           <p>Création d'un site vitrine responsif en HTML, CSS et JavaScript avec effets glassmorphism et intégration SEO.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">Portail PHP sécurisé</h3>
           <p>Mise en place d'un espace utilisateur sécurisé (PHP / MySQL) avec authentification forte et journalisation.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">Automation Python</h3>
           <p>Scripts Python pour automatiser la sauvegarde de configurations réseau et l'analyse de journaux de sécurité.</p>
         </article>
@@ -77,15 +78,15 @@
         <h2 id="dev-title" class="section-title" data-content-key="projects.devTitle">Prototypes & idées en cours</h2>
       </div>
       <div class="project-grid">
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">Outil interne</h3>
           <p>Tableau de bord cyber pour centraliser alertes, patchs et documentation opérationnelle.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">Extension navigateur</h3>
           <p>Extension Chrome visant à accélérer la collecte d'informations lors des analyses réseau.</p>
         </article>
-        <article class="glass-card">
+        <article class="glass-card liquid-glass">
           <h3 class="project-title">App mobile de suivi</h3>
           <p>Prototype d'application mobile pour suivre l'évolution des projets, incidents et priorités cybersécurité.</p>
         </article>

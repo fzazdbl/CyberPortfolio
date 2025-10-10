@@ -1,71 +1,150 @@
 precision highp float;
 
 uniform float u_time;
-uniform float u_distortionScale;
+uniform float u_distortion;
+uniform float u_waveAmplitude;
+uniform float u_waveSpeed;
+uniform vec2 u_mouse;
+uniform float u_mouseStrength;
+uniform float u_clickTime;
+uniform float u_audioLevel;
+uniform float u_scroll;
+uniform vec2 u_resolution;
 
-attribute vec3 position;
-attribute vec3 normal;
-attribute vec2 uv;
+in vec3 position;
+in vec3 normal;
+in vec2 uv;
 
-varying vec3 vWorldPosition;
-varying vec3 vNormal;
-varying vec2 vUv;
-varying vec3 vViewDir;
+out vec3 vWorldPosition;
+out vec3 vNormal;
+out vec3 vViewDir;
+out vec2 vUv;
+out float vWaveStrength;
+out vec3 vNoiseVector;
 
-mat3 rotationZ(float angle) {
-  float s = sin(angle);
-  float c = cos(angle);
-  return mat3(
-    c, -s, 0.0,
-    s,  c, 0.0,
-    0.0, 0.0, 1.0
-  );
+/* Ashima 3D simplex noise */
+vec3 mod289(vec3 x) {
+  return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
 
-float hash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+vec4 mod289(vec4 x) {
+  return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
 
-float noise(vec2 p) {
-  vec2 i = floor(p);
-  vec2 f = fract(p);
-
-  float a = hash(i);
-  float b = hash(i + vec2(1.0, 0.0));
-  float c = hash(i + vec2(0.0, 1.0));
-  float d = hash(i + vec2(1.0, 1.0));
-
-  vec2 u = f * f * (3.0 - 2.0 * f);
-
-  return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+vec4 permute(vec4 x) {
+  return mod289(((x * 34.0) + 1.0) * x);
 }
 
-vec3 animatedNormal(vec3 baseNormal, vec3 worldPos, float t) {
-  vec2 offset = worldPos.xy * 0.35;
-  float n1 = noise(offset + vec2(t * 0.6, t * -0.4));
-  float n2 = noise(offset * 1.7 + vec2(t * 0.25, t * 0.5));
-  float n3 = noise(offset * 3.2 + vec2(t * -0.35, t * 0.2));
+vec4 taylorInvSqrt(vec4 r) {
+  return 1.79284291400159 - 0.85373472095314 * r;
+}
 
-  vec3 distortion = vec3(n1 - 0.5, n2 - 0.5, n3 - 0.5) * (u_distortionScale * 1.8);
-  mat3 bend = rotationZ((n1 - n2) * 0.65);
+float snoise(vec3 v) {
+  const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
+  const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
 
-  return normalize(bend * (baseNormal + distortion));
+  vec3 i = floor(v + dot(v, C.yyy));
+  vec3 x0 = v - i + dot(i, C.xxx);
+
+  vec3 g = step(x0.yzx, x0.xyz);
+  vec3 l = 1.0 - g;
+  vec3 i1 = min(g.xyz, l.zxy);
+  vec3 i2 = max(g.xyz, l.zxy);
+
+  vec3 x1 = x0 - i1 + C.xxx;
+  vec3 x2 = x0 - i2 + C.yyy;
+  vec3 x3 = x0 - D.yyy;
+
+  i = mod289(i);
+  vec4 p = permute(permute(permute(
+    i.z + vec4(0.0, i1.z, i2.z, 1.0)
+  ) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+
+  float n_ = 0.142857142857;
+  vec3 ns = n_ * D.wyz - D.xzx;
+
+  vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+
+  vec4 x_ = floor(j * ns.z);
+  vec4 y_ = floor(j - 7.0 * x_);
+
+  vec4 x = x_ * ns.x + ns.yyyy;
+  vec4 y = y_ * ns.x + ns.yyyy;
+  vec4 h = 1.0 - abs(x) - abs(y);
+
+  vec4 b0 = vec4(x.xy, y.xy);
+  vec4 b1 = vec4(x.zw, y.zw);
+
+  vec4 s0 = floor(b0) * 2.0 + 1.0;
+  vec4 s1 = floor(b1) * 2.0 + 1.0;
+  vec4 sh = -step(h, vec4(0.0));
+
+  vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
+  vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
+
+  vec3 g0 = vec3(a0.xy, h.x);
+  vec3 g1 = vec3(a0.zw, h.y);
+  vec3 g2 = vec3(a1.xy, h.z);
+  vec3 g3 = vec3(a1.zw, h.w);
+
+  vec4 norm = taylorInvSqrt(vec4(dot(g0, g0), dot(g1, g1), dot(g2, g2), dot(g3, g3)));
+  g0 *= norm.x;
+  g1 *= norm.y;
+  g2 *= norm.z;
+  g3 *= norm.w;
+
+  vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
+  m = m * m;
+  return 42.0 * dot(m * m, vec4(dot(g0, x0), dot(g1, x1), dot(g2, x2), dot(g3, x3)));
+}
+
+float computeRipple(vec2 uvCoord, float time) {
+  float base = sin((uvCoord.x * 6.0 + uvCoord.y * 4.0) + time * u_waveSpeed);
+  float n1 = snoise(vec3(uvCoord * 3.5, time * 0.35));
+  float n2 = snoise(vec3(uvCoord * 7.5, -time * 0.25));
+  return base * 0.55 + n1 * 0.35 + n2 * 0.22;
+}
+
+float pointerInfluence(vec2 uvCoord, float time) {
+  float dist = distance(uvCoord, u_mouse);
+  float pointer = exp(-dist * 10.0) * u_mouseStrength;
+  float clickLife = clamp(1.0 - (time - u_clickTime) * 1.4, 0.0, 1.0);
+  float clickWave = exp(-dist * 14.0) * clickLife;
+  return pointer + clickWave;
 }
 
 void main() {
-  vec3 displaced = position;
-  float distortion = noise(position.xy * 1.4 + vec2(u_time * 0.4, u_time * -0.3));
-  displaced.z += (distortion - 0.5) * u_distortionScale * 2.4;
-
-  vec4 world = modelMatrix * vec4(displaced, 1.0);
-  vWorldPosition = world.xyz;
   vUv = uv;
 
-  vec3 transformedNormal = normalMatrix * animatedNormal(normal, world.xyz, u_time);
-  vNormal = normalize(transformedNormal);
+  vec2 uvShifted = uv + vec2(sin(u_time * 0.2) * 0.01, cos(u_time * 0.18) * 0.01);
+  float ripple = computeRipple(uvShifted, u_time);
+  float pointer = pointerInfluence(uv, u_time);
+  float audioPulse = u_audioLevel * 0.5;
 
-  vec4 view = viewMatrix * world;
-  vViewDir = normalize(cameraPosition - world.xyz);
+  float elevation = (ripple + pointer) * u_waveAmplitude + audioPulse * 0.12;
+  elevation += snoise(vec3(position.xy * 0.65, u_time * 0.6)) * u_distortion * 0.45;
+  elevation += sin(uv.y * 8.0 + u_time * (u_waveSpeed * 0.5)) * 0.08 * u_waveAmplitude;
 
-  gl_Position = projectionMatrix * view;
+  float scrollWarp = u_scroll * 0.2;
+  vec3 displaced = position + normal * (elevation + scrollWarp);
+
+  vec4 worldPosition = modelMatrix * vec4(displaced, 1.0);
+  vWorldPosition = worldPosition.xyz;
+
+  vec3 transformedNormal = normalize(normalMatrix * normal);
+  vec3 noiseNormal = normalize(normalMatrix * vec3(
+    snoise(vec3(uv * 6.0, u_time * 0.9)),
+    snoise(vec3(uv * 5.0 + 12.0, -u_time * 0.6)),
+    1.0
+  ));
+
+  vNormal = normalize(mix(transformedNormal, noiseNormal, 0.45 + u_audioLevel * 0.1));
+  vNoiseVector = vec3(ripple, pointer, audioPulse);
+  vWaveStrength = elevation;
+
+  vec4 mvPosition = viewMatrix * worldPosition;
+  vec3 cameraToVertex = cameraPosition - worldPosition.xyz;
+  vViewDir = normalize(cameraToVertex);
+
+  gl_Position = projectionMatrix * mvPosition;
 }
