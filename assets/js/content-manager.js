@@ -201,6 +201,12 @@
     Object.entries(theme).forEach(([variable, value]) => {
       root.style.setProperty(variable, value);
     });
+
+    const renderer = window.LiquidRenderer;
+    if (renderer && typeof renderer.configure === 'function') {
+      const accent = theme['--accent-blue'] || theme['--accent-cyan'] || '#19304d';
+      renderer.configure({ ambientColor: accent });
+    }
   }
 
   function clone(value) {
