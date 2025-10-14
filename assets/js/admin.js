@@ -159,6 +159,7 @@
           dashboard.removeAttribute('hidden');
         }
         populateForms();
+        populateGpuControls(gpuPanel, gpuSettings);
         setStatus(contentStatus, storageEnabled ? '' : 'Le stockage local est indisponible : les modifications seront temporaires.', !storageEnabled);
         if (passwordInput) {
           passwordInput.value = '';
@@ -196,6 +197,33 @@
         } catch (error) {
           setStatus(contentStatus, 'Impossible d\'enregistrer les modifications.', true);
         }
+      });
+    }
+
+    if (gpuPanel) {
+      populateGpuControls(gpuPanel, gpuSettings);
+      const updateGpuSetting = (event) => {
+        const target = event.currentTarget;
+        const key = target.getAttribute('data-gpu-setting');
+        if (!key) return;
+        let value = target.value;
+        if (target.type === 'range' || target.type === 'number') {
+          value = parseFloat(value);
+          if (Number.isNaN(value)) return;
+          const display = target.parentElement?.querySelector('[data-gpu-value]');
+          if (display) display.textContent = value.toFixed(2);
+        } else if (target.type === 'color') {
+          const preview = gpuPanel.querySelector('[data-gpu-color-preview]');
+          if (preview) preview.style.background = value;
+        }
+        gpuSettings[key] = value;
+        const merged = manager.saveGpuSettings(gpuSettings);
+        Object.assign(gpuSettings, merged);
+      };
+
+      gpuPanel.querySelectorAll('[data-gpu-setting]').forEach((input) => {
+        input.addEventListener('input', updateGpuSetting);
+        input.addEventListener('change', updateGpuSetting);
       });
     }
 

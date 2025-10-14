@@ -9,6 +9,10 @@
   <script src="assets/js/content-manager.js" defer></script>
   <script src="assets/js/liquid-glass-renderer.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="assets/css/gpu-style.css">
+  <script type="module" src="assets/js/content-manager.js"></script>
+  <script type="module" src="assets/js/liquid-renderer.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
 </head>
 <body data-page="accueil">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.1" data-liquid-speed="0.4"></div>
@@ -36,50 +40,41 @@
       <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
     </nav>
   </header>
 
   <main class="page-main">
-    <section class="hero hero--immersive reveal" role="region" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-grid__content">
-          <div class="hero-header">
-            <span class="hero-eyebrow" data-content-key="home.heroEyebrow">CyberPortfolio · BTS SIO SISR</span>
-            <h1 id="hero-title" class="hero-title" data-content-key="home.heroTitle">Une expérience cyber immersive et futuriste</h1>
-            <p class="hero-subtitle" data-content-key="home.heroSubtitle">Pensé pour les environnements numériques critiques, ce portfolio met en lumière mon approche sécurisée, créative et opérationnelle de la cybersécurité.</p>
-          </div>
-          <ul class="hero-highlights" aria-label="Points clés du profil">
-            <li>Architectures Zero Trust, supervision réseau et réponse aux incidents.</li>
-            <li>Développement front & scripting pour automatiser la sécurité opérationnelle.</li>
-            <li>Design immersif en verre numérique pour une expérience claire et rassurante.</li>
-          </ul>
-          <div class="hero-actions">
-            <a class="button button--primary ripple" data-link href="projets/index.html">Découvrir mes projets</a>
-            <a class="button button--ghost" data-link href="competences/index.html">Consulter mon CV</a>
-          </div>
-          <div class="hero-stats" aria-label="Indicateurs clés">
-            <div class="stat">
-              <span class="stat__value">+12</span>
-              <span class="stat__label">Projets et labs cybersécurité</span>
-            </div>
-            <div class="stat">
-              <span class="stat__value">24/7</span>
-              <span class="stat__label">Veille & analyse de menaces</span>
-            </div>
-            <div class="stat">
-              <span class="stat__value">100%</span>
-              <span class="stat__label">Design responsive & accessible</span>
-            </div>
-          </div>
+    <section class="hero reveal liquid-glass" role="region" aria-labelledby="hero-title">
+      <span class="hero-eyebrow" data-content-key="home.heroEyebrow">CyberPortfolio</span>
+      <h1 id="hero-title" class="hero-title" data-content-key="home.heroTitle">Sécurité et design au service de vos projets</h1>
+      <p class="hero-subtitle" data-content-key="home.heroSubtitle">Mohamed, étudiant BTS SIO (SISR), conçoit des environnements fiables, sécurisés et lumineux pour vos plateformes digitales.</p>
+      <div class="hero-actions">
+        <a class="button button--primary ripple liquid-glass" data-link href="projets/index.html">Découvrir mes projets</a>
+        <a class="button button--ghost liquid-glass" data-link href="competences/index.html">Consulter mon CV</a>
+      </div>
+      <ul class="hero-tags" aria-label="Domaines d'expertise">
+        <li class="chip">Cybersécurité</li>
+        <li class="chip">Développement Web</li>
+        <li class="chip">Infrastructure</li>
+        <li class="chip">Veille technologique</li>
+      </ul>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat__value">+12</span>
+          <span class="stat__label">Projets et labs cybersécurité</span>
         </div>
-        <div class="hero-grid__visuals" aria-hidden="true">
-          <figure class="hero-media hero-media--primary">
-            <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367b?auto=format&fit=crop&w=980&q=80" alt="Visualisation 3D d'une interface cyber sécurisée" loading="lazy">
-          </figure>
-          <div class="hero-media hero-media--secondary">
-            <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=540&q=80" alt="Développeur travaillant sur du code et des interfaces immersives" loading="lazy">
-            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=540&q=80" alt="Serveurs et lumière bleutée représentant la cybersécurité" loading="lazy">
-          </div>
+        <div class="stat">
+          <span class="stat__value">24/7</span>
+          <span class="stat__label">Veille & analyse de menaces</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">100%</span>
+          <span class="stat__label">Design responsive & accessible</span>
         </div>
       </div>
     </section>
@@ -102,10 +97,7 @@
         <h2 id="focus-title" class="section-title" data-content-key="home.focusTitle">Mes domaines clés</h2>
       </div>
       <div class="info-grid">
-        <article class="glass-card">
-          <figure class="glass-card__media">
-            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Analyste cybersécurité travaillant sur un tableau de surveillance" loading="lazy">
-          </figure>
+        <article class="glass-card liquid-glass">
           <h3>Cybersécurité défensive & offensive</h3>
           <p>Tests d'intrusion, analyse de logs, veille CVE et renforcement des accès pour des infrastructures scolaires et personnelles.</p>
           <ul class="feature-list">
@@ -114,10 +106,7 @@
             <li><span class="feature-icon">🧠</span><span>Veille continue sur les menaces émergentes</span></li>
           </ul>
         </article>
-        <article class="glass-card">
-          <figure class="glass-card__media">
-            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Équipe de développement travaillant avec des interfaces futuristes" loading="lazy">
-          </figure>
+        <article class="glass-card liquid-glass">
           <h3>Développement & automatisation</h3>
           <p>Création d'outils web et scripts Python / Bash pour accélérer le déploiement et la supervision des services.</p>
           <ul class="feature-list">
@@ -126,10 +115,7 @@
             <li><span class="feature-icon">📡</span><span>Intégration API et monitoring réseau</span></li>
           </ul>
         </article>
-        <article class="glass-card">
-          <figure class="glass-card__media">
-            <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80" alt="Interface immersive avec reflets lumineux et design futuriste" loading="lazy">
-          </figure>
+        <article class="glass-card liquid-glass">
           <h3>Expérience & design</h3>
           <p>Interfaces immersives travaillées autour de la profondeur, des reflets subtils et d'interactions confortables.</p>
           <ul class="feature-list">
@@ -137,37 +123,6 @@
             <li><span class="feature-icon">🌫️</span><span>Effets glassmorphism (blur, refraction, glow)</span></li>
             <li><span class="feature-icon">♿</span><span>Accessibilité et respect des préférences utilisateur</span></li>
           </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section--cases reveal" aria-labelledby="cases-title">
-      <div class="section-header">
-        <span class="section-eyebrow">Immersion</span>
-        <h2 id="cases-title" class="section-title">Des environnements visuels et techniques inspirés du réel</h2>
-        <p class="section-text">Chaque projet transpose l'univers cyber dans une ambiance tangible : reflets contrôlés, profondeur maîtrisée et expériences rassurantes pour l'utilisateur.</p>
-      </div>
-      <div class="case-grid" role="list">
-        <article class="case-card" role="listitem">
-          <img class="case-card__image" src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=900&q=80" alt="Tableau de bord cyber avec visualisations de données" loading="lazy">
-          <div class="case-card__body">
-            <h3 class="case-card__title">Dashboards tactiques</h3>
-            <p class="case-card__text">Visualisations en temps réel pour comprendre menaces et performances en un regard, optimisées pour écrans larges et tablettes.</p>
-          </div>
-        </article>
-        <article class="case-card" role="listitem">
-          <img class="case-card__image" src="https://images.unsplash.com/photo-1559136656-1bed2d092c96?auto=format&fit=crop&w=900&q=80" alt="Salle de serveurs moderne éclairée par une lumière bleue" loading="lazy">
-          <div class="case-card__body">
-            <h3 class="case-card__title">Infrastructure résiliente</h3>
-            <p class="case-card__text">Maquettes d'architectures sécurisées avec supervision centralisée, mises en avant par des atmosphères lumineuses contrôlées.</p>
-          </div>
-        </article>
-        <article class="case-card" role="listitem">
-          <img class="case-card__image" src="https://images.unsplash.com/photo-1545239351-4991401a281d?auto=format&fit=crop&w=900&q=80" alt="Interface 3D stylisée avec reflets violets" loading="lazy">
-          <div class="case-card__body">
-            <h3 class="case-card__title">Interfaces émotionnelles</h3>
-            <p class="case-card__text">Expériences dynamiques avec refraction simulée, animations douces et retours utilisateurs lisibles sur mobile comme sur desktop.</p>
-          </div>
         </article>
       </div>
     </section>

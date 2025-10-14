@@ -9,6 +9,10 @@
   <script src="../assets/js/content-manager.js" defer></script>
   <script src="../assets/js/liquid-glass-renderer.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/gpu-style.css">
+  <script type="module" src="../assets/js/content-manager.js"></script>
+  <script type="module" src="../assets/js/liquid-renderer.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
 </head>
 <body data-page="competences">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.05" data-liquid-speed="0.34"></div>
@@ -36,6 +40,11 @@
       <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
     </nav>
   </header>
 
@@ -103,6 +112,147 @@
           <h3>Ambitions</h3>
           <p>Évoluer vers des missions de sécurité offensive (pentest) et d'architecture sécurisée.</p>
         </article>
+    <section aria-label="Compétences" class="section reveal mt-12">
+      <div class="relative mx-auto max-w-6xl px-6 text-white/80 lg:px-8">
+        <h1 class="sr-only">Compétences — Mohamed Chahid, BTS SIO (SISR)</h1>
+        <div class="section-header">
+          <span class="section-eyebrow">Profil</span>
+          <h2 class="section-title text-3xl font-semibold md:text-4xl">Compétences clés</h2>
+        </div>
+        <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <article class="group rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur transition-all duration-200 hover:translate-y-[1px] hover:ring-white/20 focus-within:ring-white/20">
+            <h3 class="text-xl font-semibold text-white">Développement Web</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>HTML5 sémantique pour structurer pages, formulaires et tableaux accessibles.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Intégration simple&nbsp;: liens, images et bases CSS sans surenchère.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Python (bases) pour scripts courts avec variables, conditions et boucles.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Code clair&nbsp;: indentation suivie, commentaires et respect HTML5.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/70">
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">HTML</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Python (bases)</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">CSS (notions)</span>
+            </div>
+          </article>
+          <article class="group rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur transition-all duration-200 hover:translate-y-[1px] hover:ring-white/20 focus-within:ring-white/20">
+            <h3 class="text-xl font-semibold text-white">Systèmes &amp; Réseaux</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Windows&nbsp;: installation, paramètres essentiels et comptes locaux.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Debian (découverte)&nbsp;: navigation, paquets et commandes de base.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Notions IP&nbsp;: adressage, ping et configuration réseau simple.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>VirtualBox pour créer des VM de test et isoler les scénarios.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/70">
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Windows</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Debian</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">VirtualBox</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Adressage IP</span>
+            </div>
+          </article>
+          <article class="group rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur transition-all duration-200 hover:translate-y-[1px] hover:ring-white/20 focus-within:ring-white/20">
+            <h3 class="text-xl font-semibold text-white">Cybersécurité (débutant)</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Bonnes pratiques&nbsp;: mots de passe robustes, mises à jour et sauvegardes.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Premiers réglages pfSense/Ipfire en VM pour filtrer le trafic.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Sensibilisation phishing et malwares auprès de l'entourage.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Snapshots réguliers pour revenir à un état sain de laboratoire.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/70">
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">pfSense</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Ipfire</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Snapshots</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Bonnes pratiques</span>
+            </div>
+          </article>
+        </div>
+        <div class="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+          <article class="group rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur transition-all duration-200 hover:translate-y-[1px] hover:ring-white/20 focus-within:ring-white/20">
+            <h3 class="text-xl font-semibold text-white">Bases de données</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>SQL (notions)&nbsp;: SELECT simples avec filtres et tri.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Compréhension des tables, champs et clé primaire.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Manipulation via un outil graphique type phpMyAdmin en cours.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/70">
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">SQL (notions)</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Modélisation</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">phpMyAdmin</span>
+            </div>
+          </article>
+          <article class="group rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur transition-all duration-200 hover:translate-y-[1px] hover:ring-white/20 focus-within:ring-white/20">
+            <h3 class="text-xl font-semibold text-white">Outils du quotidien</h3>
+            <ul class="mt-4 space-y-3 text-sm leading-relaxed">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Notepad++ et FileZilla pour éditer et transférer les fichiers.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Suite bureautique Word/LibreOffice et créations rapides sous Canva.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300/80"></span>
+                <span>Organisation personnelle&nbsp;: notes claires, checklists et sauvegardes.</span>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/70">
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Notepad++</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">FileZilla</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">Canva</span>
+              <span class="rounded-full bg-white/10 px-3 py-1 ring-1 ring-white/20">LibreOffice</span>
+            </div>
+          </article>
+        </div>
+        <div class="mt-6">
+          <div class="rounded-3xl bg-white/5 p-6 text-white/80 shadow-xl ring-1 ring-white/10 backdrop-blur">
+            <p class="text-sm md:text-base">Je progresse chaque semaine et je documente mes tests pour gagner en fiabilité et en sécurité.</p>
+          </div>
+        </div>
       </div>
     </section>
   </main>

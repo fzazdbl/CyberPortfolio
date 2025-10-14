@@ -18,6 +18,7 @@
     }
 
     const renderer = window.LiquidGlassRenderer;
+    const renderer = window.LiquidRenderer;
     if (renderer && typeof renderer.initAll === 'function') {
       renderer.initAll();
     }
@@ -297,6 +298,9 @@
         form.reset();
         submitButton.classList.add('button--success');
         submitButton.textContent = 'Envoyé';
+        if (window.LiquidRenderer && typeof window.LiquidRenderer.triggerWave === 'function') {
+          window.LiquidRenderer.triggerWave(1.4);
+        }
         if (statusNode) {
           statusNode.textContent = statusNode.dataset.successText || successText;
           statusNode.classList.add('is-visible');
@@ -318,6 +322,9 @@
         }
         submitButton.disabled = false;
         submitButton.textContent = defaultButtonLabel;
+        if (window.LiquidRenderer && typeof window.LiquidRenderer.triggerWave === 'function') {
+          window.LiquidRenderer.triggerWave(0.6);
+        }
 
         const fallbackMail = manager?.getContent().links.email || form.dataset.mailto;
         if (fallbackMail) {

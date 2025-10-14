@@ -9,6 +9,10 @@
   <script src="../assets/js/content-manager.js" defer></script>
   <script src="../assets/js/liquid-glass-renderer.js" defer></script>
   <script src="../assets/js/main.js" defer></script>
+  <link rel="stylesheet" href="../assets/css/gpu-style.css">
+  <script type="module" src="../assets/js/content-manager.js"></script>
+  <script type="module" src="../assets/js/liquid-renderer.js"></script>
+  <script type="module" src="../assets/js/main.js"></script>
 </head>
 <body data-page="contact">
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
@@ -36,6 +40,11 @@
       <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact.html">Contact</a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
     </nav>
   </header>
 
@@ -52,12 +61,15 @@
     </div>
 
     <section class="hero reveal" aria-labelledby="contact-title">
+    <section class="hero reveal liquid-glass" aria-labelledby="contact-title">
       <span class="hero-eyebrow" data-content-key="contact.heroEyebrow">Contact</span>
       <h1 id="contact-title" class="hero-title" data-content-key="contact.heroTitle">Échangeons autour de vos besoins numériques</h1>
       <p class="hero-subtitle" data-content-key="contact.heroSubtitle">Décrivez votre projet, votre contexte ou vos contraintes : je vous réponds rapidement avec des pistes concrètes.</p>
       <div class="hero-actions">
         <a class="button button--primary ripple" href="#contactForm">Remplir le formulaire</a>
         <a class="button button--ghost" data-link href="../projets/index.html">Voir mes réalisations</a>
+        <a class="button button--primary ripple liquid-glass" href="#contactForm">Remplir le formulaire</a>
+        <a class="button button--ghost liquid-glass" data-link href="../projets/index.html">Voir mes réalisations</a>
       </div>
     </section>
 
@@ -68,6 +80,7 @@
         <p class="section-text" data-content-key="contact.formText">Expliquez votre situation, vos objectifs et les échéances clés. Je reviens vers vous pour définir la suite.</p>
       </div>
       <div class="glass-card form-card">
+      <div class="contact-form-panel liquid-glass" data-liquid-surface>
         <form id="contactForm" class="contact-form" action="contact.php" method="post" data-mailto="mailto:chahidm126@gmail.com">
           <div class="form-row">
             <label for="nom">Nom</label>
@@ -84,6 +97,9 @@
       <p class="form-status" role="status" aria-live="polite" data-content-key="contact.successMessage" hidden>✅ Message envoyé !</p>
           <div class="form-actions">
             <button class="button button--primary ripple" type="submit">Envoyer</button>
+          <p class="form-status" role="status" aria-live="polite" data-content-key="contact.successMessage" hidden>✅ Message envoyé !</p>
+          <div class="form-actions">
+            <button class="button button--primary ripple liquid-glass" type="submit">Envoyer</button>
           </div>
         </form>
       </div>

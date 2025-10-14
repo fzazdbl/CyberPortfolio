@@ -18,6 +18,103 @@
     radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.35), transparent 70%);
 }
 
+.liquid-renderer-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+
+[data-liquid-renderer].fake-glass {
+  background: radial-gradient(circle at 16% 18%, rgba(0, 180, 216, 0.22), transparent 58%),
+    radial-gradient(circle at 78% 32%, rgba(127, 90, 240, 0.24), transparent 60%),
+    linear-gradient(180deg, rgba(8, 12, 28, 0.92), rgba(6, 10, 24, 0.88));
+  filter: saturate(115%);
+  animation: fakeGlassDrift 18s ease-in-out infinite alternate;
+}
+
+[data-liquid-renderer].fake-glass::before {
+  content: '';
+  position: absolute;
+  inset: -12% -16%;
+  background: radial-gradient(circle at 35% 25%, rgba(0, 180, 216, 0.28), transparent 65%),
+    radial-gradient(circle at 72% 68%, rgba(127, 90, 240, 0.2), transparent 70%),
+    conic-gradient(from 120deg, rgba(255, 255, 255, 0.04), rgba(127, 90, 240, 0.08), rgba(0, 180, 216, 0.05), rgba(255, 255, 255, 0.02));
+  opacity: 0.65;
+  filter: blur(120px) saturate(130%);
+  mix-blend-mode: screen;
+  animation: fakeGlassPulse 12s ease-in-out infinite alternate;
+}
+
+[data-liquid-renderer].fake-glass::after {
+  content: '';
+  position: absolute;
+  inset: -30% -20% 10%;
+  background: linear-gradient(130deg, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.28));
+  opacity: 0.35;
+  transform: rotate(6deg);
+  filter: blur(80px);
+}
+
+.fake-glass-halo {
+  position: absolute;
+  inset: -30%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.28), rgba(127, 90, 240, 0.1) 38%, transparent 72%);
+  mix-blend-mode: screen;
+  filter: blur(140px);
+  opacity: 0.7;
+  animation: fakeGlassHalo 16s ease-in-out infinite;
+}
+
+@keyframes fakeGlassDrift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(1%, 2%, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(-1%, 1%, 0) scale(1.01);
+  }
+}
+
+@keyframes fakeGlassPulse {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.72;
+  }
+  100% {
+    opacity: 0.58;
+  }
+}
+
+@keyframes fakeGlassHalo {
+  0% {
+    transform: rotate(0deg) scale(1.05);
+    opacity: 0.62;
+  }
+  50% {
+    transform: rotate(12deg) scale(1.12);
+    opacity: 0.78;
+  }
+  100% {
+    transform: rotate(-8deg) scale(1.08);
+    opacity: 0.68;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-liquid-renderer].fake-glass,
+  [data-liquid-renderer].fake-glass::before,
+  .fake-glass-halo {
+    animation: none !important;
+  }
+}
+
 .liquid-glass-stage {
   filter: url('#liquid-glass-distortion');
   position: relative;
