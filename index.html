@@ -1,75 +1,199 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CyberPortfolio - Mohamed</title>
+  <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/content-manager.js" defer></script>
+  <script src="assets/js/liquid-glass-renderer.js" defer></script>
   <script src="assets/js/main.js" defer></script>
-  <script src="assets/js/particles.js" defer></script>
 </head>
-<body class="fade-page">
-  <!-- Background canvas / layers (pointer-events: none) -->
-  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+<body data-page="accueil">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.1" data-liquid-speed="0.4"></div>
 
-  <header class="header liquid" role="banner">
-    <div class="container">
-      <div class="brand">
-        <h1 class="brand-title">CyberPortfolio de Mohamed</h1>
-      </div>
-      <nav class="nav" role="navigation" aria-label="Menu principal">
-        <ul class="nav-list">
-          <li><a data-link href="index.html">Accueil</a></li>
-          <li><a data-link href="competences/cv.html">Compétences</a></li>
-          <li><a data-link href="projets/index.html">Mes Projets</a></li>
-          <li><a data-link href="contact/contact.html">Contact</a></li>
-        </ul>
-      </nav>
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+      <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
     </div>
+    <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="hero liquid" role="region" aria-labelledby="hero-title">
-      <div class="container hero-inner reveal">
-        <h2 id="hero-title" class="display-title">CyberPortfolio de Mohamed</h2>
-        <h3 class="subtitle">Sombre. Fluide. Intelligent.</h3>
-        <p class="lead">Étudiant en BTS SIO — cybersécurité, développement web & systèmes. Parcourez mes projets et mon CV.</p>
-        <div class="hero-cta">
-          <a class="cta ripple" href="projets/index.html" data-link role="button">Découvrir mes projets</a>
+  <main class="page-main">
+    <section class="hero hero--immersive reveal" role="region" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-grid__content">
+          <div class="hero-header">
+            <span class="hero-eyebrow" data-content-key="home.heroEyebrow">CyberPortfolio · BTS SIO SISR</span>
+            <h1 id="hero-title" class="hero-title" data-content-key="home.heroTitle">Une expérience cyber immersive et futuriste</h1>
+            <p class="hero-subtitle" data-content-key="home.heroSubtitle">Pensé pour les environnements numériques critiques, ce portfolio met en lumière mon approche sécurisée, créative et opérationnelle de la cybersécurité.</p>
+          </div>
+          <ul class="hero-highlights" aria-label="Points clés du profil">
+            <li>Architectures Zero Trust, supervision réseau et réponse aux incidents.</li>
+            <li>Développement front & scripting pour automatiser la sécurité opérationnelle.</li>
+            <li>Design immersif en verre numérique pour une expérience claire et rassurante.</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="button button--primary ripple" data-link href="projets/index.html">Découvrir mes projets</a>
+            <a class="button button--ghost" data-link href="competences/index.html">Consulter mon CV</a>
+          </div>
+          <div class="hero-stats" aria-label="Indicateurs clés">
+            <div class="stat">
+              <span class="stat__value">+12</span>
+              <span class="stat__label">Projets et labs cybersécurité</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">24/7</span>
+              <span class="stat__label">Veille & analyse de menaces</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">100%</span>
+              <span class="stat__label">Design responsive & accessible</span>
+            </div>
+          </div>
         </div>
+        <div class="hero-grid__visuals" aria-hidden="true">
+          <figure class="hero-media hero-media--primary">
+            <img src="https://images.unsplash.com/photo-1605902711622-cfb43c44367b?auto=format&fit=crop&w=980&q=80" alt="Visualisation 3D d'une interface cyber sécurisée" loading="lazy">
+          </figure>
+          <div class="hero-media hero-media--secondary">
+            <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=540&q=80" alt="Développeur travaillant sur du code et des interfaces immersives" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=540&q=80" alt="Serveurs et lumière bleutée représentant la cybersécurité" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="vision-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Vision</span>
+        <h2 id="vision-title" class="section-title" data-content-key="home.visionTitle">Sécuriser, automatiser et sublimer chaque interface</h2>
+        <p class="section-text" data-content-key="home.visionText">J'assemble cybersécurité, scripting et design pour créer des solutions robustes, performantes et élégantes, toujours alignées sur les besoins métier.</p>
+      </div>
+      <div class="text-columns">
+        <p>Mon approche privilégie les transitions fluides, les matériaux translucides et une typographie précise. J'analyse les besoins métiers pour proposer des interfaces sur-mesure, avec une défense active contre les risques cyber.</p>
+        <p>De la configuration réseau à l'intégration front-end, j'aime orchestrer l'ensemble de la chaîne technique. Ce portfolio illustre les piliers de mon parcours et mon envie d'évoluer dans la sécurité offensive et la conception de plateformes modernes.</p>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="focus-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Focus</span>
+        <h2 id="focus-title" class="section-title" data-content-key="home.focusTitle">Mes domaines clés</h2>
+      </div>
+      <div class="info-grid">
+        <article class="glass-card">
+          <figure class="glass-card__media">
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Analyste cybersécurité travaillant sur un tableau de surveillance" loading="lazy">
+          </figure>
+          <h3>Cybersécurité défensive & offensive</h3>
+          <p>Tests d'intrusion, analyse de logs, veille CVE et renforcement des accès pour des infrastructures scolaires et personnelles.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">⚡</span><span>Mise en place de lab virtuels & SIEM léger</span></li>
+            <li><span class="feature-icon">🛡️</span><span>Durcissement Linux & pare-feu (iptables / pfSense)</span></li>
+            <li><span class="feature-icon">🧠</span><span>Veille continue sur les menaces émergentes</span></li>
+          </ul>
+        </article>
+        <article class="glass-card">
+          <figure class="glass-card__media">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="Équipe de développement travaillant avec des interfaces futuristes" loading="lazy">
+          </figure>
+          <h3>Développement & automatisation</h3>
+          <p>Création d'outils web et scripts Python / Bash pour accélérer le déploiement et la supervision des services.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">💻</span><span>Front-end moderne en HTML, CSS, JavaScript</span></li>
+            <li><span class="feature-icon">⚙️</span><span>Scripts d'automatisation pour la gestion système</span></li>
+            <li><span class="feature-icon">📡</span><span>Intégration API et monitoring réseau</span></li>
+          </ul>
+        </article>
+        <article class="glass-card">
+          <figure class="glass-card__media">
+            <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=800&q=80" alt="Interface immersive avec reflets lumineux et design futuriste" loading="lazy">
+          </figure>
+          <h3>Expérience & design</h3>
+          <p>Interfaces immersives travaillées autour de la profondeur, des reflets subtils et d'interactions confortables.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🎨</span><span>Systèmes de design cohérents multi-pages</span></li>
+            <li><span class="feature-icon">🌫️</span><span>Effets glassmorphism (blur, refraction, glow)</span></li>
+            <li><span class="feature-icon">♿</span><span>Accessibilité et respect des préférences utilisateur</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--cases reveal" aria-labelledby="cases-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Immersion</span>
+        <h2 id="cases-title" class="section-title">Des environnements visuels et techniques inspirés du réel</h2>
+        <p class="section-text">Chaque projet transpose l'univers cyber dans une ambiance tangible : reflets contrôlés, profondeur maîtrisée et expériences rassurantes pour l'utilisateur.</p>
+      </div>
+      <div class="case-grid" role="list">
+        <article class="case-card" role="listitem">
+          <img class="case-card__image" src="https://images.unsplash.com/photo-1517430816045-df4b7de11d1d?auto=format&fit=crop&w=900&q=80" alt="Tableau de bord cyber avec visualisations de données" loading="lazy">
+          <div class="case-card__body">
+            <h3 class="case-card__title">Dashboards tactiques</h3>
+            <p class="case-card__text">Visualisations en temps réel pour comprendre menaces et performances en un regard, optimisées pour écrans larges et tablettes.</p>
+          </div>
+        </article>
+        <article class="case-card" role="listitem">
+          <img class="case-card__image" src="https://images.unsplash.com/photo-1559136656-1bed2d092c96?auto=format&fit=crop&w=900&q=80" alt="Salle de serveurs moderne éclairée par une lumière bleue" loading="lazy">
+          <div class="case-card__body">
+            <h3 class="case-card__title">Infrastructure résiliente</h3>
+            <p class="case-card__text">Maquettes d'architectures sécurisées avec supervision centralisée, mises en avant par des atmosphères lumineuses contrôlées.</p>
+          </div>
+        </article>
+        <article class="case-card" role="listitem">
+          <img class="case-card__image" src="https://images.unsplash.com/photo-1545239351-4991401a281d?auto=format&fit=crop&w=900&q=80" alt="Interface 3D stylisée avec reflets violets" loading="lazy">
+          <div class="case-card__body">
+            <h3 class="case-card__title">Interfaces émotionnelles</h3>
+            <p class="case-card__text">Expériences dynamiques avec refraction simulée, animations douces et retours utilisateurs lisibles sur mobile comme sur desktop.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="cta-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Prochaine étape</span>
+        <h2 id="cta-title" class="section-title" data-content-key="home.ctaTitle">Prêt à collaborer&nbsp;?</h2>
+        <p class="section-text" data-content-key="home.ctaText">Contactez-moi pour imaginer des solutions sécurisées ou parcourez mon CV pour découvrir mon parcours.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="button button--primary ripple" data-link href="contact/contact.html">Échanger autour d'un projet</a>
+        <a class="button button--ghost" data-link href="competences/index.html">Télécharger mon CV</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>© 2025 Mohamed — Tous droits réservés</p>
+  <footer>
+    <div class="footer-inner">
+      <p data-content-key="footer.text">© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">GitHub</a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">E-mail</a>
+      </div>
     </div>
   </footer>
-
-
-  <!-- SVG Filter for Glass Distortion -->
-<svg style="display: none">
-  <filter id="glass-distortion">
-    <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
-    <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
-  </filter>
-</svg>
-
-<nav class="glass-nav">
-  <div class="glass-filter"></div>
-  <div class="glass-overlay"></div>
-  <div class="glass-specular"></div>
-  <div class="glass-content">
-    <ul class="nav-list">
-      <li><a href="#" class="nav-item active">Home</a></li>
-      <li><a href="#" class="nav-item">About</a></li>
-      <li><a href="#" class="nav-item">Services</a></li>
-      <li><a href="#" class="nav-item">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
-
 </body>
 </html>

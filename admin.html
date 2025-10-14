@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Administration - CyberPortfolio</title>
+  <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <script src="assets/js/content-manager.js" defer></script>
+  <script src="assets/js/liquid-glass-renderer.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/admin.js" defer></script>
+</head>
+<body class="admin-body" data-page="admin">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
+
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+      <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
+    </div>
+    <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <div class="admin-backdrop" aria-hidden="true"></div>
+  <main class="admin-wrapper" role="main">
+    <section class="admin-card" id="loginPanel">
+      <header>
+        <p class="admin-eyebrow">Espace sécurisé</p>
+        <h1>Administration du CyberPortfolio</h1>
+        <p class="admin-subtitle">Saisissez le mot de passe administrateur pour modifier les contenus et la palette.</p>
+      </header>
+      <form id="adminLoginForm" class="admin-form" autocomplete="off">
+        <label for="adminPassword">Mot de passe</label>
+        <div class="admin-input-row">
+          <input id="adminPassword" name="adminPassword" type="password" placeholder="Mot de passe" required>
+          <button type="submit" class="button button--primary">Se connecter</button>
+        </div>
+        <p class="admin-hint">Mot de passe par défaut : <code>admin123</code></p>
+        <p class="admin-error" id="loginError" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="admin-dashboard" id="adminDashboard" hidden>
+      <header class="admin-dashboard__header">
+        <div>
+          <p class="admin-eyebrow">Tableau de bord</p>
+          <h2>Contenus du site</h2>
+        </div>
+        <button type="button" class="button button--ghost" id="adminLogout">Se déconnecter</button>
+      </header>
+
+      <form id="contentForm" class="admin-form-grid" novalidate>
+        <fieldset>
+          <legend>Accueil</legend>
+          <label for="homeHeroEyebrow">Étiquette</label>
+          <input id="homeHeroEyebrow" data-field-key="home.heroEyebrow" type="text">
+
+          <label for="homeHeroTitle">Titre principal</label>
+          <input id="homeHeroTitle" data-field-key="home.heroTitle" type="text" required>
+
+          <label for="homeHeroSubtitle">Introduction</label>
+          <textarea id="homeHeroSubtitle" data-field-key="home.heroSubtitle" rows="3" required></textarea>
+
+          <label for="homeVisionTitle">Titre vision</label>
+          <input id="homeVisionTitle" data-field-key="home.visionTitle" type="text">
+
+          <label for="homeVisionText">Texte vision</label>
+          <textarea id="homeVisionText" data-field-key="home.visionText" rows="3"></textarea>
+
+          <label for="homeFocusTitle">Titre domaines</label>
+          <input id="homeFocusTitle" data-field-key="home.focusTitle" type="text">
+
+          <label for="homeCtaTitle">Titre appel à l'action</label>
+          <input id="homeCtaTitle" data-field-key="home.ctaTitle" type="text">
+
+          <label for="homeCtaText">Bloc appel à l'action</label>
+          <textarea id="homeCtaText" data-field-key="home.ctaText" rows="2"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Compétences</legend>
+          <label for="cvHeroEyebrow">Étiquette</label>
+          <input id="cvHeroEyebrow" data-field-key="cv.heroEyebrow" type="text">
+
+          <label for="cvHeroTitle">Titre principal</label>
+          <input id="cvHeroTitle" data-field-key="cv.heroTitle" type="text" required>
+
+          <label for="cvHeroSubtitle">Sous-titre</label>
+          <textarea id="cvHeroSubtitle" data-field-key="cv.heroSubtitle" rows="3"></textarea>
+
+          <label for="cvProfileTitle">Titre section compétences</label>
+          <input id="cvProfileTitle" data-field-key="cv.profileTitle" type="text">
+
+          <label for="cvProfileText">Introduction section</label>
+          <textarea id="cvProfileText" data-field-key="cv.profileText" rows="3"></textarea>
+
+          <label for="cvGoalsTitle">Titre objectifs</label>
+          <input id="cvGoalsTitle" data-field-key="cv.goalsTitle" type="text">
+
+          <label for="cvGoalsText">Objectifs</label>
+          <textarea id="cvGoalsText" data-field-key="cv.goalsText" rows="2"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Projets</legend>
+          <label for="projectsHeroEyebrow">Étiquette</label>
+          <input id="projectsHeroEyebrow" data-field-key="projects.heroEyebrow" type="text">
+
+          <label for="projectsHeroTitle">Titre principal</label>
+          <input id="projectsHeroTitle" data-field-key="projects.heroTitle" type="text" required>
+
+          <label for="projectsHeroSubtitle">Sous-titre</label>
+          <textarea id="projectsHeroSubtitle" data-field-key="projects.heroSubtitle" rows="3"></textarea>
+
+          <label for="projectsRecentTitle">Titre projets marquants</label>
+          <input id="projectsRecentTitle" data-field-key="projects.recentTitle" type="text">
+
+          <label for="projectsDevTitle">Titre prototypes</label>
+          <input id="projectsDevTitle" data-field-key="projects.devTitle" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Contact</legend>
+          <label for="contactHeroEyebrow">Étiquette</label>
+          <input id="contactHeroEyebrow" data-field-key="contact.heroEyebrow" type="text">
+
+          <label for="contactHeroTitle">Titre principal</label>
+          <input id="contactHeroTitle" data-field-key="contact.heroTitle" type="text" required>
+
+          <label for="contactHeroSubtitle">Sous-titre</label>
+          <textarea id="contactHeroSubtitle" data-field-key="contact.heroSubtitle" rows="3"></textarea>
+
+          <label for="contactFormTitle">Titre formulaire</label>
+          <input id="contactFormTitle" data-field-key="contact.formTitle" type="text">
+
+          <label for="contactFormText">Texte formulaire</label>
+          <textarea id="contactFormText" data-field-key="contact.formText" rows="3"></textarea>
+
+          <label for="contactSuccessMessage">Message de confirmation</label>
+          <input id="contactSuccessMessage" data-field-key="contact.successMessage" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Navigation</legend>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navAccueilLabel">Label Accueil</label>
+              <input id="navAccueilLabel" data-nav-label="accueil" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navAccueilHref">Lien Accueil</label>
+              <input id="navAccueilHref" data-nav-href="accueil" type="text" placeholder="index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navCompetencesLabel">Label Compétences</label>
+              <input id="navCompetencesLabel" data-nav-label="competences" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navCompetencesHref">Lien Compétences</label>
+              <input id="navCompetencesHref" data-nav-href="competences" type="text" placeholder="competences/index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navProjetsLabel">Label Projets</label>
+              <input id="navProjetsLabel" data-nav-label="projets" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navProjetsHref">Lien Projets</label>
+              <input id="navProjetsHref" data-nav-href="projets" type="text" placeholder="projets/index.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navContactLabel">Label Contact</label>
+              <input id="navContactLabel" data-nav-label="contact" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navContactHref">Lien Contact</label>
+              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/contact.html">
+            </div>
+          </div>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navAdminLabel">Label Admin</label>
+              <input id="navAdminLabel" data-nav-label="admin" type="text">
+            </div>
+            <div class="admin-nav-field">
+              <label for="navAdminHref">Lien Admin</label>
+              <input id="navAdminHref" data-nav-href="admin" type="text" placeholder="admin.html">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Réseaux sociaux</legend>
+          <label for="linkGithub">GitHub</label>
+          <input id="linkGithub" data-link-key="github" type="url" placeholder="https://github.com/">
+
+          <label for="linkLinkedin">LinkedIn</label>
+          <input id="linkLinkedin" data-link-key="linkedin" type="url" placeholder="https://www.linkedin.com/in/">
+
+          <label for="linkEmail">E-mail</label>
+          <input id="linkEmail" data-link-key="email" type="email" placeholder="mailto:nom@example.com">
+        </fieldset>
+
+        <fieldset>
+          <legend>Pied de page</legend>
+          <label for="footerText">Texte du footer</label>
+          <input id="footerText" data-field-key="footer.text" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Couleurs</legend>
+          <label for="accentBlue">Accent bleu</label>
+          <input id="accentBlue" data-theme-var="--accent-blue" type="color">
+
+          <label for="accentViolet">Accent violet</label>
+          <input id="accentViolet" data-theme-var="--accent-violet" type="color">
+
+          <label for="accentCyan">Accent cyan</label>
+          <input id="accentCyan" data-theme-var="--accent-cyan" type="color">
+        </fieldset>
+
+        <div class="admin-actions">
+          <button type="submit" class="button button--primary">Enregistrer les modifications</button>
+          <p class="admin-status" id="contentStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <form id="passwordForm" class="admin-form admin-form--password" novalidate>
+        <h3>Changer le mot de passe</h3>
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input id="newPassword" name="newPassword" type="password" required>
+
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" required>
+
+        <div class="admin-actions">
+          <button type="submit" class="button button--ghost">Mettre à jour</button>
+          <p class="admin-status" id="passwordStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
