@@ -244,6 +244,7 @@
     getDefaults: () => ({
       content: clone(DEFAULT_CONTENT),
       theme: clone(DEFAULT_THEME),
+      password: DEFAULT_PASSWORD
       password: DEFAULT_PASSWORD,
       gpu: { ...DEFAULT_GPU_SETTINGS }
     }),

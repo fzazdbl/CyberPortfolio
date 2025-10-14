@@ -62,23 +62,6 @@
     });
   }
 
-  function populateGpuControls(panel, settings) {
-    if (!panel || !settings) return;
-    const preview = panel.querySelector('[data-gpu-color-preview]');
-    panel.querySelectorAll('[data-gpu-setting]').forEach((input) => {
-      const key = input.getAttribute('data-gpu-setting');
-      if (!key || typeof settings[key] === 'undefined') return;
-      if (input.type === 'range' || input.type === 'number') {
-        input.value = settings[key];
-        const display = input.parentElement?.querySelector('[data-gpu-value]');
-        if (display) display.textContent = Number(settings[key]).toFixed(2);
-      } else if (input.type === 'color') {
-        input.value = settings[key];
-        if (preview) preview.style.background = settings[key];
-      }
-    });
-  }
-
   function collectFormData() {
     const fields = {};
     const links = {};
@@ -151,9 +134,7 @@
     const passwordForm = document.getElementById('passwordForm');
     const contentStatus = document.getElementById('contentStatus');
     const passwordStatus = document.getElementById('passwordStatus');
-    const gpuPanel = document.getElementById('gpuPanel');
     const storageEnabled = manager.isStorageEnabled();
-    const gpuSettings = manager.getGpuSettings();
 
     if (loginForm) {
       loginForm.addEventListener('submit', (event) => {

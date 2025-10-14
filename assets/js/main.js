@@ -17,6 +17,7 @@
       manager.applyContent(document);
     }
 
+    const renderer = window.LiquidGlassRenderer;
     const renderer = window.LiquidRenderer;
     if (renderer && typeof renderer.initAll === 'function') {
       renderer.initAll();
