@@ -1,5 +1,4 @@
 ﻿<?php
-<<<<<<< HEAD
 session_start();
 
 // Génération du token CSRF
@@ -123,15 +122,3 @@ echo "</html>";
 // Régénération du token CSRF
 $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 ?>
-=======
-if (["REQUEST_METHOD"] == "POST") {
-  \ = htmlspecialchars(\['nom']);
-  \ = htmlspecialchars(\['email']);
-  \ = htmlspecialchars(\['message']);
-  echo "<h1>Merci \ !</h1>";
-  echo "<p>Votre message a bien été reçu :</p>";
-  echo "<p><b>Email :</b> \</p>";
-  echo "<p><b>Message :</b> \</p>";
-}
-?>
->>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1

@@ -18,10 +18,6 @@
     }
 
     const renderer = window.LiquidGlassRenderer;
-<<<<<<< HEAD
-=======
-    const renderer = window.LiquidRenderer;
->>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
     if (renderer && typeof renderer.initAll === 'function') {
       renderer.initAll();
     }
@@ -301,12 +297,6 @@
         form.reset();
         submitButton.classList.add('button--success');
         submitButton.textContent = 'Envoyé';
-<<<<<<< HEAD
-=======
-        if (window.LiquidRenderer && typeof window.LiquidRenderer.triggerWave === 'function') {
-          window.LiquidRenderer.triggerWave(1.4);
-        }
->>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
         if (statusNode) {
           statusNode.textContent = statusNode.dataset.successText || successText;
           statusNode.classList.add('is-visible');
@@ -328,12 +318,6 @@
         }
         submitButton.disabled = false;
         submitButton.textContent = defaultButtonLabel;
-<<<<<<< HEAD
-=======
-        if (window.LiquidRenderer && typeof window.LiquidRenderer.triggerWave === 'function') {
-          window.LiquidRenderer.triggerWave(0.6);
-        }
->>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
 
         const fallbackMail = manager?.getContent().links.email || form.dataset.mailto;
         if (fallbackMail) {
