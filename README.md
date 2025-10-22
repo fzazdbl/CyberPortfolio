@@ -74,7 +74,7 @@ CyberPortfolio/
 │   ├── js/
 │   │   ├── main.js                     # Scripts principaux
 │   │   ├── form-validation.js          # Validation formulaires
-│   │   ├── dark-mode.js                # Gestion thèmes
+│   │   ├── ui-toggles.js               # Bascule thème & navigation mobile
 │   │   ├── scroll-animations.js        # Animations scroll
 │   │   ├── terminal-hacker.js          # Terminal interactif
 │   │   ├── admin-enhanced.js           # Administration

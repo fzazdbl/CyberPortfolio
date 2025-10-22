@@ -60,71 +60,20 @@
   }
 
   const nav = document.querySelector('.liquid-nav');
-  if (nav) {
-    const toggle = nav.querySelector('.liquid-nav__toggle');
-    const menu = nav.querySelector('.liquid-nav__menu');
-    const overlay = nav.querySelector('.liquid-nav__overlay');
-    const closeMenu = () => {
-      if (!menu) return;
-      menu.classList.remove('is-open');
-      nav.classList.remove('is-expanded');
-      if (toggle) {
-        toggle.setAttribute('aria-expanded', 'false');
-      }
+  if (nav && !reducedMotion) {
+    const updatePointer = (event) => {
+      const rect = nav.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      nav.style.setProperty('--nav-pointer-x', `${x}%`);
+      nav.style.setProperty('--nav-pointer-y', `${y}%`);
     };
 
-    const openMenu = () => {
-      if (!menu) return;
-      menu.classList.add('is-open');
-      nav.classList.add('is-expanded');
-      if (toggle) {
-        toggle.setAttribute('aria-expanded', 'true');
-      }
-    };
-
-    if (toggle && menu) {
-      toggle.addEventListener('click', () => {
-        if (menu.classList.contains('is-open')) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      });
-    }
-
-    if (overlay) {
-      overlay.addEventListener('click', closeMenu);
-    }
-
-    menu?.querySelectorAll('a').forEach((anchor) => {
-      anchor.addEventListener('click', () => {
-        if (window.matchMedia('(max-width: 960px)').matches) {
-          closeMenu();
-        }
-      });
+    nav.addEventListener('pointermove', updatePointer);
+    nav.addEventListener('pointerleave', () => {
+      nav.style.setProperty('--nav-pointer-x', '50%');
+      nav.style.setProperty('--nav-pointer-y', '50%');
     });
-
-    document.addEventListener('keyup', (event) => {
-      if (event.key === 'Escape') {
-        closeMenu();
-      }
-    });
-
-    if (!reducedMotion) {
-      const updatePointer = (event) => {
-        const rect = nav.getBoundingClientRect();
-        const x = ((event.clientX - rect.left) / rect.width) * 100;
-        const y = ((event.clientY - rect.top) / rect.height) * 100;
-        nav.style.setProperty('--nav-pointer-x', `${x}%`);
-        nav.style.setProperty('--nav-pointer-y', `${y}%`);
-      };
-
-      nav.addEventListener('pointermove', updatePointer);
-      nav.addEventListener('pointerleave', () => {
-        nav.style.setProperty('--nav-pointer-x', '50%');
-        nav.style.setProperty('--nav-pointer-y', '50%');
-      });
-    }
   }
 
   // Animation reveal pour les sections
