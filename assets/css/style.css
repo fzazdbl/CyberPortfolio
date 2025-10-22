@@ -192,6 +192,7 @@ a:focus-visible {
   backdrop-filter: blur(0.625rem);
   -webkit-backdrop-filter: blur(0.625rem);
   z-index: 40;
+  pointer-events: none;
 }
 
 .liquid-nav__link {
@@ -254,8 +255,10 @@ a:focus-visible {
   z-index: 1;
 }
 
-.liquid-nav.is-expanded .liquid-nav__overlay {
+.liquid-nav.is-expanded .liquid-nav__overlay,
+.liquid-nav__overlay.is-open {
   display: block;
+  pointer-events: auto;
 }
 
 .liquid-nav.is-expanded::before {
@@ -264,6 +267,10 @@ a:focus-visible {
 
 .liquid-nav__menu.is-open {
   display: flex;
+}
+
+body.is-locked {
+  overflow: hidden;
 }
 
 .page-main {
