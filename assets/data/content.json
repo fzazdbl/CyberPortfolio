@@ -1,0 +1,71 @@
+{
+  "home": {
+    "heroEyebrow": "CyberPortfolio",
+    "heroTitle": "Sécurité et design au service de vos projets",
+    "heroSubtitle": "Mohamed, étudiant BTS SIO (SISR), conçoit des environnements fiables, sécurisés et lumineux pour vos plateformes digitales.",
+    "visionTitle": "Sécuriser, automatiser et sublimer chaque interface",
+    "visionText": "J'assemble cybersécurité, scripting et design pour créer des solutions robustes, performantes et élégantes, toujours alignées sur les besoins métier.",
+    "focusTitle": "Mes domaines clés",
+    "ctaTitle": "Prêt à collaborer ?",
+    "ctaText": "Contactez-moi pour imaginer des solutions sécurisées ou parcourez mon CV pour découvrir mon parcours."
+  },
+  "competences": {
+    "heroEyebrow": "Compétences",
+    "heroTitle": "Expertise technique et vision cyber",
+    "heroSubtitle": "Étudiant BTS SIO (SISR), je consolide les bases en développement web, systèmes/réseaux et cybersécurité pour créer des environnements fiables et sécurisés.",
+    "skillsTitle": "Domaines de compétences",
+    "toolsTitle": "Stack technique actuel",
+    "learningTitle": "En cours d'acquisition",
+    "projectsTitle": "Mini-projets et preuves"
+  },
+  "projects": {
+    "heroEyebrow": "Mes réalisations",
+    "heroTitle": "Des projets qui fusionnent sécurité et esthétique",
+    "heroSubtitle": "Chaque mission combine méthodes cyber, automatisation et interfaces raffinées pour délivrer une expérience cohérente.",
+    "recentTitle": "Projets marquants",
+    "devTitle": "Prototypes & idées en cours"
+  },
+  "contact": {
+    "heroEyebrow": "Contact",
+    "heroTitle": "Échangeons autour de vos besoins numériques",
+    "heroSubtitle": "Décrivez votre projet, votre contexte ou vos contraintes : je vous réponds rapidement avec des pistes concrètes.",
+    "formTitle": "Laissez-moi un message",
+    "formText": "Expliquez votre situation, vos objectifs et les échéances clés. Je reviens vers vous pour définir la suite.",
+    "successMessage": "✅ Message envoyé !"
+  },
+  "navigation": {
+    "accueil": {
+      "label": "Accueil",
+      "href": "index.html"
+    },
+    "competences": {
+      "label": "Compétences",
+      "href": "competences/index.html"
+    },
+    "projets": {
+      "label": "Mes projets",
+      "href": "projets/index.html"
+    },
+    "contact": {
+      "label": "Contact",
+      "href": "contact/contact.html"
+    },
+    "admin": {
+      "label": "Admin",
+      "href": "admin.html"
+    }
+  },
+  "social": {
+    "github": "https://github.com/fzazdbl",
+    "linkedin": "https://www.linkedin.com/in/",
+    "email": "mailto:chahidm126@gmail.com"
+  },
+  "footer": {
+    "text": "© 2025 Mohamed — Tous droits réservés."
+  },
+  "theme": {
+    "accentBlue": "#00b4d8",
+    "accentViolet": "#7f5af0",
+    "accentCyan": "#5de4ff"
+  }
+}

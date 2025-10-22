@@ -1,0 +1,38 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b4d8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7f5af0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5de4ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Hexagone principal -->
+  <polygon points="32,8 48,20 48,44 32,56 16,44 16,20" 
+           fill="url(#cyberGradient)" 
+           filter="url(#glow)"
+           opacity="0.9"/>
+  
+  <!-- Hexagone intérieur -->
+  <polygon points="32,16 42,24 42,40 32,48 22,40 22,24" 
+           fill="none" 
+           stroke="rgba(255,255,255,0.8)" 
+           stroke-width="1.5"/>
+  
+  <!-- Centre avec symbole cyber -->
+  <circle cx="32" cy="32" r="8" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+  <circle cx="32" cy="32" r="3" fill="rgba(255,255,255,0.9)"/>
+  
+  <!-- Lignes de connexion -->
+  <line x1="32" y1="8" x2="32" y2="16" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="32" y1="48" x2="32" y2="56" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="16" y1="32" x2="22" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+  <line x1="42" y1="32" x2="48" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+</svg>

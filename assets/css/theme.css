@@ -1,0 +1,121 @@
+/* Configuration des thèmes et couleurs */
+:root {
+  /* Palette cyber principale */
+  --cyber-primary: #00b4d8;
+  --cyber-secondary: #7f5af0;
+  --cyber-accent: #5de4ff;
+  --cyber-warning: #ffd166;
+  --cyber-success: #06d6a0;
+  --cyber-danger: #f72585;
+  
+  /* Dégradés */
+  --gradient-primary: linear-gradient(135deg, var(--cyber-primary), var(--cyber-secondary));
+  --gradient-accent: linear-gradient(135deg, var(--cyber-accent), var(--cyber-primary));
+  --gradient-glass: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(127, 90, 240, 0.1));
+  
+  /* Ombres cyber */
+  --shadow-cyber: 0 0 20px rgba(0, 180, 216, 0.3);
+  --shadow-cyber-strong: 0 0 40px rgba(0, 180, 216, 0.5);
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  /* Bordures */
+  --border-cyber: 1px solid rgba(0, 180, 216, 0.3);
+  --border-cyber-strong: 2px solid rgba(0, 180, 216, 0.6);
+  
+  /* Animations */
+  --transition-smooth: all 280ms cubic-bezier(0.2, 0.9, 0.3, 1);
+  --transition-bounce: all 320ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Classes utilitaires pour la cohérence */
+.cyber-glow {
+  box-shadow: var(--shadow-cyber);
+}
+
+.cyber-glow-strong {
+  box-shadow: var(--shadow-cyber-strong);
+}
+
+.cyber-border {
+  border: var(--border-cyber);
+}
+
+.cyber-border-strong {
+  border: var(--border-cyber-strong);
+}
+
+.gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-effect {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Animations cohérentes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-cyber {
+  animation: pulseCyber 2s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulseCyber {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 180, 216, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 180, 216, 0.6);
+  }
+}
+
+@keyframes glow {
+  0% {
+    filter: brightness(1);
+  }
+  100% {
+    filter: brightness(1.2);
+  }
+}
+
+/* Responsive breakpoints cohérents */
+@media (max-width: 1200px) {
+  :root {
+    --max-width: 960px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --max-width: 100%;
+    --nav-height: 72px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --radius-lg: 20px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+  }
+}

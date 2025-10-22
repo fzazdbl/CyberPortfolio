@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Compétences - Mohamed</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/content-manager.js" defer></script>
+  <script src="../assets/js/liquid-glass-renderer.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/form-validation.js" defer></script>
+  <script src="../assets/js/dark-mode.js" defer></script>
+  <script src="../assets/js/scroll-animations.js" defer></script>
+  <script src="../assets/js/admin-enhanced.js" defer></script>
+</head>
+<body data-page="competences">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.05" data-liquid-speed="0.34"></div>
+  
+  <!-- Éléments décoratifs -->
+  <div class="decorative-elements" aria-hidden="true">
+    <div class="cyber-grid"></div>
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+  </div>
+
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <div class="brand-logo">
+        <img src="../assets/images/logo-cyber.svg" alt="Logo CyberPortfolio" class="brand-logo__img">
+        <div class="brand-text">
+          <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+          <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
+        </div>
+      </div>
+    </div>
+    <div class="liquid-nav__controls">
+      <button class="theme-toggle" type="button" aria-label="Basculer le thème" title="Basculer entre mode sombre et clair">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+      </button>
+      <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    </div>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="index.html">
+        <i class="fas fa-code"></i> Compétences
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">
+        <i class="fas fa-project-diagram"></i> Mes projets
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="../projets-interactifs/index.html">
+        <i class="fas fa-terminal"></i> Projets interactifs
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">
+        <i class="fas fa-cog"></i> Admin
+      </a>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="hero reveal" aria-labelledby="competences-title">
+      <span class="hero-eyebrow" data-content-key="competences.heroEyebrow">Compétences</span>
+      <h1 id="competences-title" class="hero-title" data-content-key="competences.heroTitle">Expertise technique et vision cyber</h1>
+      <p class="hero-subtitle" data-content-key="competences.heroSubtitle">Étudiant BTS SIO (SISR), je consolide les bases en développement web, systèmes/réseaux et cybersécurité pour créer des environnements fiables et sécurisés.</p>
+      <div class="hero-actions">
+        <a class="button button--primary ripple" data-link href="../projets/index.html">Voir mes projets</a>
+        <a class="button button--ghost" data-link href="../contact/contact.html">Me contacter</a>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="skills-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Expertise</span>
+        <h2 id="skills-title" class="section-title" data-content-key="competences.skillsTitle">Domaines de compétences</h2>
+      </div>
+      <div class="info-grid">
+        <article class="glass-card">
+          <div class="skill-icon">💻</div>
+          <h3>Développement (Débutant)</h3>
+          <p>Apprentissage des bases du développement web et de la programmation dans le cadre du BTS SIO.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">📝</span><span>HTML5 - Bases de la structure web</span></li>
+            <li><span class="feature-icon">🎨</span><span>CSS3 - Stylisation et mise en page</span></li>
+            <li><span class="feature-icon">🐍</span><span>Python - Premiers scripts et logique</span></li>
+            <li><span class="feature-icon">🔷</span><span>C# - Découverte de la programmation orientée objet</span></li>
+          </ul>
+        </article>
+
+        <article class="glass-card">
+          <div class="skill-icon">🗄️</div>
+          <h3>Bases de données (Débutant)</h3>
+          <p>Apprentissage des concepts fondamentaux des bases de données relationnelles avec SQL.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🔍</span><span>SQL - Requêtes SELECT basiques</span></li>
+            <li><span class="feature-icon">🏗️</span><span>Conception de tables simples</span></li>
+            <li><span class="feature-icon">🛠️</span><span>phpMyAdmin - Interface graphique</span></li>
+            <li><span class="feature-icon">🔐</span><span>Clés primaires et relations</span></li>
+          </ul>
+        </article>
+
+        <article class="glass-card">
+          <div class="skill-icon">🌐</div>
+          <h3>Systèmes & Réseaux (Plus à l'aise)</h3>
+          <p>Compétences plus développées en administration système et configuration réseau.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🪟</span><span>Windows - Administration de base</span></li>
+            <li><span class="feature-icon">🐧</span><span>Debian/Kali Linux - Commandes et navigation</span></li>
+            <li><span class="feature-icon">🌍</span><span>Configuration réseau - IP, routage</span></li>
+            <li><span class="feature-icon">💻</span><span>Virtualisation - VMware, VirtualBox</span></li>
+          </ul>
+        </article>
+
+        <article class="glass-card">
+          <div class="skill-icon">🛡️</div>
+          <h3>Cybersécurité (Débutant)</h3>
+          <p>Découverte des concepts de sécurité informatique et bonnes pratiques de base.</p>
+          <ul class="feature-list">
+            <li><span class="feature-icon">🔒</span><span>Bonnes pratiques de sécurité</span></li>
+            <li><span class="feature-icon">🔥</span><span>Configuration pare-feu basique</span></li>
+            <li><span class="feature-icon">⚠️</span><span>Sensibilisation aux menaces</span></li>
+            <li><span class="feature-icon">🔍</span><span>Outils Kali Linux</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="tools-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Outils</span>
+        <h2 id="tools-title" class="section-title" data-content-key="competences.toolsTitle">Stack technique actuel</h2>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-category">
+          <h3>Développement</h3>
+          <div class="chip-list">
+            <span class="chip">HTML5</span>
+            <span class="chip">CSS3</span>
+            <span class="chip">Python</span>
+            <span class="chip">C#</span>
+            <span class="chip">SQL</span>
+          </div>
+        </div>
+        <div class="tool-category">
+          <h3>Systèmes & Réseaux</h3>
+          <div class="chip-list">
+            <span class="chip">Windows</span>
+            <span class="chip">Debian</span>
+            <span class="chip">Kali Linux</span>
+            <span class="chip">Apache2</span>
+            <span class="chip">Matomo</span>
+          </div>
+        </div>
+        <div class="tool-category">
+          <h3>Outils & Logiciels</h3>
+          <div class="chip-list">
+            <span class="chip">VS Code</span>
+            <span class="chip">Visual Studio</span>
+            <span class="chip">Notepad++</span>
+            <span class="chip">VMware</span>
+            <span class="chip">VirtualBox</span>
+            <span class="chip">FileZilla</span>
+            <span class="chip">Canva</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="learning-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Apprentissage</span>
+        <h2 id="learning-title" class="section-title" data-content-key="competences.learningTitle">En cours d'acquisition</h2>
+      </div>
+      <div class="learning-grid">
+        <div class="learning-item">
+          <div class="learning-icon">🌐</div>
+          <h4>Développement Web</h4>
+          <p>JavaScript, PHP, frameworks modernes</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🗄️</div>
+          <h4>Bases de données</h4>
+          <p>MySQL avancé, requêtes complexes</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🐧</div>
+          <h4>Administration Linux</h4>
+          <p>Scripts bash, gestion des services</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🌍</div>
+          <h4>Réseaux</h4>
+          <p>DHCP, DNS, routage, VLAN</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🔒</div>
+          <h4>Cybersécurité</h4>
+          <p>Tests d'intrusion, durcissement</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">☁️</div>
+          <h4>Cloud & DevOps</h4>
+          <p>Docker, CI/CD, monitoring</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">📱</div>
+          <h4>Mobile</h4>
+          <p>Développement d'applications mobiles</p>
+        </div>
+        <div class="learning-item">
+          <div class="learning-icon">🔧</div>
+          <h4>Automatisation</h4>
+          <p>Scripts PowerShell, Python avancé</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="timeline-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Parcours</span>
+        <h2 id="timeline-title" class="section-title">Timeline de mes compétences</h2>
+        <p class="section-text">L'évolution de mes compétences techniques au fil de mon apprentissage en BTS SIO.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">2024 - Début</div>
+            <h3>Début du BTS SIO</h3>
+            <p>Découverte des bases de l'informatique et des systèmes d'information.</p>
+            <div class="timeline-skills">
+              <span class="skill-badge">HTML/CSS</span>
+              <span class="skill-badge">Python</span>
+              <span class="skill-badge">Windows</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fas fa-server"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">2024 - Q2</div>
+            <h3>Administration système</h3>
+            <p>Apprentissage de l'administration Linux et configuration de serveurs.</p>
+            <div class="timeline-skills">
+              <span class="skill-badge">Debian</span>
+              <span class="skill-badge">Apache2</span>
+              <span class="skill-badge">MySQL</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">2024 - Q3</div>
+            <h3>Cybersécurité</h3>
+            <p>Introduction à la sécurité informatique et aux bonnes pratiques.</p>
+            <div class="timeline-skills">
+              <span class="skill-badge">Kali Linux</span>
+              <span class="skill-badge">Sécurité</span>
+              <span class="skill-badge">Réseaux</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fas fa-code"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">2024 - Q4</div>
+            <h3>Développement avancé</h3>
+            <p>Approfondissement des langages de programmation et création de projets.</p>
+            <div class="timeline-skills">
+              <span class="skill-badge">C#</span>
+              <span class="skill-badge">JavaScript</span>
+              <span class="skill-badge">SQL</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-marker">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <div class="timeline-content">
+            <div class="timeline-date">2025 - Joute</div>
+            <h3>Projets concrets</h3>
+            <p>Réalisation de projets pratiques : Apache2, Matomo, environnements virtuels.</p>
+            <div class="timeline-skills">
+              <span class="skill-badge">Apache2</span>
+              <span class="skill-badge">Matomo</span>
+              <span class="skill-badge">VMware</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="projects-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Réalisations</span>
+        <h2 id="projects-title" class="section-title" data-content-key="competences.projectsTitle">Mini-projets et preuves</h2>
+      </div>
+      <div class="project-grid">
+        <article class="glass-card">
+          <div class="project-icon">🌐</div>
+          <h3>Configuration Apache2</h3>
+          <p>Installation et configuration d'un serveur web Apache2 sur Debian avec gestion des virtual hosts.</p>
+          <div class="project-tags">
+            <span class="project-tag">Apache2</span>
+            <span class="project-tag">Debian</span>
+            <span class="project-tag">Serveur Web</span>
+          </div>
+        </article>
+        <article class="glass-card">
+          <div class="project-icon">📊</div>
+          <h3>Déploiement Matomo</h3>
+          <p>Installation et configuration de Matomo pour l'analyse de trafic web avec base de données MySQL.</p>
+          <div class="project-tags">
+            <span class="project-tag">Matomo</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Analytics</span>
+          </div>
+        </article>
+        <article class="glass-card">
+          <div class="project-icon">🖥️</div>
+          <h3>Environnement VM</h3>
+          <p>Création et configuration de machines virtuelles avec VMware/VirtualBox, Debian et Kali Linux.</p>
+          <div class="project-tags">
+            <span class="project-tag">VMware</span>
+            <span class="project-tag">Kali Linux</span>
+            <span class="project-tag">Virtualisation</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p data-content-key="footer.text">© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/mohamed-chahid" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">
+          <i class="fas fa-envelope"></i> E-mail
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

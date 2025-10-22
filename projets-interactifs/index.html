@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projets interactifs - Mohamed</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/dark-mode.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/content-manager.js" defer></script>
+  <script src="../assets/js/liquid-glass-renderer.js" defer></script>
+  <script src="../assets/js/main.js" defer></script>
+  <script src="../assets/js/form-validation.js" defer></script>
+  <script src="../assets/js/dark-mode.js" defer></script>
+  <script src="../assets/js/scroll-animations.js" defer></script>
+  <script src="../assets/js/terminal-hacker.js" defer></script>
+  <script src="../assets/js/admin-enhanced.js" defer></script>
+</head>
+<body data-page="projets-interactifs">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.36"></div>
+  
+  <!-- Éléments décoratifs -->
+  <div class="decorative-elements" aria-hidden="true">
+    <div class="cyber-grid"></div>
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+  </div>
+
+  <header class="liquid-nav" role="banner">
+    <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="liquid-glass-distortion">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" seed="6" result="noise"></feTurbulence>
+          <feGaussianBlur in="noise" stdDeviation="0.6" result="blurred"></feGaussianBlur>
+          <feDisplacementMap in="SourceGraphic" in2="blurred" scale="5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
+    <div class="liquid-nav__overlay" aria-hidden="true"></div>
+    <div class="liquid-nav__halo" aria-hidden="true"></div>
+    <div class="liquid-nav__brand">
+      <div class="brand-logo">
+        <img src="../assets/images/logo-cyber.svg" alt="Logo CyberPortfolio" class="brand-logo__img">
+        <div class="brand-text">
+          <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+          <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
+        </div>
+      </div>
+    </div>
+    <div class="liquid-nav__controls">
+      <button class="theme-toggle" type="button" aria-label="Basculer le thème" title="Basculer entre mode sombre et clair">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+      </button>
+      <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    </div>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">
+        <i class="fas fa-home"></i> Accueil
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">
+        <i class="fas fa-code"></i> Compétences
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">
+        <i class="fas fa-project-diagram"></i> Mes projets
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="index.html">
+        <i class="fas fa-terminal"></i> Projets interactifs
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">
+        <i class="fas fa-cog"></i> Admin
+      </a>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <section class="hero reveal" aria-labelledby="interactive-title">
+      <span class="hero-eyebrow">Projets interactifs</span>
+      <h1 id="interactive-title" class="hero-title">Terminal de hacker et démos live</h1>
+      <p class="hero-subtitle">Explorez mes projets techniques à travers des interfaces interactives et des démonstrations en temps réel.</p>
+      <div class="hero-actions">
+        <a class="button button--primary ripple" href="#terminal-demo">Lancer le terminal</a>
+        <a class="button button--ghost" data-link href="../projets/index.html">Voir tous les projets</a>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="terminal-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Démo interactive</span>
+        <h2 id="terminal-title" class="section-title">Terminal de hacker</h2>
+        <p class="section-text">Simulation d'un terminal Linux avec mes projets et compétences. Tapez des commandes pour explorer !</p>
+      </div>
+      
+      <div class="terminal-container">
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-buttons">
+              <span class="terminal-button terminal-button--close"></span>
+              <span class="terminal-button terminal-button--minimize"></span>
+              <span class="terminal-button terminal-button--maximize"></span>
+            </div>
+            <div class="terminal-title">
+              <i class="fas fa-terminal"></i>
+              cyber@portfolio:~$
+            </div>
+          </div>
+          <div class="terminal-body">
+            <div class="terminal-output" id="terminal-output">
+              <div class="terminal-line">
+                <span class="terminal-prompt">cyber@portfolio:~$</span>
+                <span class="terminal-text">Bienvenue dans le terminal de Mohamed !</span>
+              </div>
+              <div class="terminal-line">
+                <span class="terminal-prompt">cyber@portfolio:~$</span>
+                <span class="terminal-text">Tapez 'help' pour voir les commandes disponibles</span>
+              </div>
+              <div class="terminal-line">
+                <span class="terminal-prompt">cyber@portfolio:~$</span>
+                <span class="terminal-text">Tapez 'ls' pour lister mes projets</span>
+              </div>
+            </div>
+            <div class="terminal-input-line">
+              <span class="terminal-prompt">cyber@portfolio:~$</span>
+              <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="Tapez une commande...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="demos-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Démonstrations</span>
+        <h2 id="demos-title" class="section-title">Projets en action</h2>
+        <p class="section-text">Voyez mes réalisations techniques en fonctionnement.</p>
+      </div>
+      
+      <div class="demo-grid">
+        <article class="glass-card demo-card">
+          <div class="demo-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>Configuration Apache2</h3>
+          <p>Démonstration de la configuration d'un serveur web Apache2 sur Debian.</p>
+          <div class="demo-actions">
+            <button class="button button--primary" onclick="showApacheDemo()">
+              <i class="fas fa-play"></i> Lancer la démo
+            </button>
+          </div>
+        </article>
+
+        <article class="glass-card demo-card">
+          <div class="demo-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Déploiement Matomo</h3>
+          <p>Interface d'administration Matomo avec tableaux de bord personnalisés.</p>
+          <div class="demo-actions">
+            <button class="button button--primary" onclick="showMatomoDemo()">
+              <i class="fas fa-play"></i> Lancer la démo
+            </button>
+          </div>
+        </article>
+
+        <article class="glass-card demo-card">
+          <div class="demo-icon">
+            <i class="fas fa-desktop"></i>
+          </div>
+          <h3>Environnement VM</h3>
+          <p>Gestion de machines virtuelles avec VMware et VirtualBox.</p>
+          <div class="demo-actions">
+            <button class="button button--primary" onclick="showVMDemo()">
+              <i class="fas fa-play"></i> Lancer la démo
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="skills-demo-title">
+      <div class="section-header">
+        <span class="section-eyebrow">Compétences</span>
+        <h2 id="skills-demo-title" class="section-title">Démonstration de compétences</h2>
+        <p class="section-text">Interfaces interactives pour explorer mes compétences techniques.</p>
+      </div>
+      
+      <div class="skills-demo-container">
+        <div class="skills-selector">
+          <button class="skill-tab active" data-skill="dev">
+            <i class="fas fa-code"></i> Développement
+          </button>
+          <button class="skill-tab" data-skill="sys">
+            <i class="fas fa-server"></i> Systèmes
+          </button>
+          <button class="skill-tab" data-skill="sec">
+            <i class="fas fa-shield-alt"></i> Sécurité
+          </button>
+        </div>
+        
+        <div class="skill-content">
+          <div class="skill-panel active" id="dev-panel">
+            <h3>Développement Web</h3>
+            <div class="skill-progress">
+              <div class="skill-item">
+                <span class="skill-name">HTML5</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="75"></div>
+                </div>
+                <span class="skill-percent">75%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">CSS3</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="80"></div>
+                </div>
+                <span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">JavaScript</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="60"></div>
+                </div>
+                <span class="skill-percent">60%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Python</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="70"></div>
+                </div>
+                <span class="skill-percent">70%</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-panel" id="sys-panel">
+            <h3>Systèmes & Réseaux</h3>
+            <div class="skill-progress">
+              <div class="skill-item">
+                <span class="skill-name">Linux (Debian)</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="85"></div>
+                </div>
+                <span class="skill-percent">85%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Apache2</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="80"></div>
+                </div>
+                <span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Virtualisation</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="90"></div>
+                </div>
+                <span class="skill-percent">90%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Réseaux</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="75"></div>
+                </div>
+                <span class="skill-percent">75%</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-panel" id="sec-panel">
+            <h3>Cybersécurité</h3>
+            <div class="skill-progress">
+              <div class="skill-item">
+                <span class="skill-name">Kali Linux</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="70"></div>
+                </div>
+                <span class="skill-percent">70%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Bonnes pratiques</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="80"></div>
+                </div>
+                <span class="skill-percent">80%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Analyse de logs</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="65"></div>
+                </div>
+                <span class="skill-percent">65%</span>
+              </div>
+              <div class="skill-item">
+                <span class="skill-name">Outils de test</span>
+                <div class="progress-bar">
+                  <div class="progress-fill" data-progress="60"></div>
+                </div>
+                <span class="skill-percent">60%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <p data-content-key="footer.text">© 2025 Mohamed — Tous droits réservés.</p>
+      <div class="footer-social">
+        <a data-social-link="github" href="https://github.com/fzazdbl" target="_blank" rel="noopener">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+        <a data-social-link="linkedin" href="https://www.linkedin.com/in/mohamed-chahid" target="_blank" rel="noopener">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a data-social-link="email" href="mailto:chahidm126@gmail.com">
+          <i class="fas fa-envelope"></i> E-mail
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
