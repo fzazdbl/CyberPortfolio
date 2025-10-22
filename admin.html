@@ -4,15 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Administration - CyberPortfolio</title>
+<<<<<<< HEAD
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/dark-mode.css">
+=======
+  <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/admin.css">
   <script src="assets/js/content-manager.js" defer></script>
   <script src="assets/js/liquid-glass-renderer.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+<<<<<<< HEAD
   <script src="assets/js/form-validation.js" defer></script>
   <script src="assets/js/dark-mode.js" defer></script>
   <script src="assets/js/scroll-animations.js" defer></script>
@@ -33,6 +38,18 @@
       <div class="particle"></div>
     </div>
   </div>
+=======
+  <script src="assets/js/admin.js" defer></script>
+  <link rel="stylesheet" href="assets/css/gpu-style.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <script type="module" src="assets/js/content-manager.js"></script>
+  <script type="module" src="assets/js/liquid-renderer.js"></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/admin.js"></script>
+</head>
+<body class="admin-body" data-page="admin">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
 
   <header class="liquid-nav" role="banner">
     <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
@@ -47,6 +64,7 @@
     <div class="liquid-nav__overlay" aria-hidden="true"></div>
     <div class="liquid-nav__halo" aria-hidden="true"></div>
     <div class="liquid-nav__brand">
+<<<<<<< HEAD
       <div class="brand-logo">
         <img src="assets/images/logo-cyber.svg" alt="Logo CyberPortfolio" class="brand-logo__img">
         <div class="brand-text">
@@ -81,6 +99,23 @@
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">
         <i class="fas fa-cog"></i> Admin
       </a>
+=======
+      <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
+      <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
+    </div>
+    <button class="liquid-nav__toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="accueil" data-target="accueil" data-link href="index.html">Accueil</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="competences" data-target="competences" data-link href="competences/index.html">Compétences</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="projets" data-target="projets" data-link href="projets/index.html">Mes projets</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">Contact</a>
+      <a class="liquid-nav__link nav-link liquid-glass" data-nav-key="admin" data-target="admin" data-link href="admin.html">Admin</a>
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
     </nav>
   </header>
 
@@ -114,6 +149,7 @@
 
       <form id="contentForm" class="admin-form-grid" novalidate>
         <fieldset>
+<<<<<<< HEAD
           <legend>🏠 Page d'accueil</legend>
           <label for="homeHeroEyebrow">Étiquette hero</label>
           <input id="homeHeroEyebrow" data-field-key="home.heroEyebrow" type="text" placeholder="CyberPortfolio">
@@ -209,6 +245,103 @@
             <div class="admin-nav-field">
               <label for="navAccueilLabel">Label Accueil</label>
               <input id="navAccueilLabel" data-nav-label="accueil" type="text" placeholder="Accueil">
+=======
+          <legend>Accueil</legend>
+          <label for="homeHeroEyebrow">Étiquette</label>
+          <input id="homeHeroEyebrow" data-field-key="home.heroEyebrow" type="text">
+
+          <label for="homeHeroTitle">Titre principal</label>
+          <input id="homeHeroTitle" data-field-key="home.heroTitle" type="text" required>
+
+          <label for="homeHeroSubtitle">Introduction</label>
+          <textarea id="homeHeroSubtitle" data-field-key="home.heroSubtitle" rows="3" required></textarea>
+
+          <label for="homeVisionTitle">Titre vision</label>
+          <input id="homeVisionTitle" data-field-key="home.visionTitle" type="text">
+
+          <label for="homeVisionText">Texte vision</label>
+          <textarea id="homeVisionText" data-field-key="home.visionText" rows="3"></textarea>
+
+          <label for="homeFocusTitle">Titre domaines</label>
+          <input id="homeFocusTitle" data-field-key="home.focusTitle" type="text">
+
+          <label for="homeCtaTitle">Titre appel à l'action</label>
+          <input id="homeCtaTitle" data-field-key="home.ctaTitle" type="text">
+
+          <label for="homeCtaText">Bloc appel à l'action</label>
+          <textarea id="homeCtaText" data-field-key="home.ctaText" rows="2"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Compétences</legend>
+          <label for="cvHeroEyebrow">Étiquette</label>
+          <input id="cvHeroEyebrow" data-field-key="cv.heroEyebrow" type="text">
+
+          <label for="cvHeroTitle">Titre principal</label>
+          <input id="cvHeroTitle" data-field-key="cv.heroTitle" type="text" required>
+
+          <label for="cvHeroSubtitle">Sous-titre</label>
+          <textarea id="cvHeroSubtitle" data-field-key="cv.heroSubtitle" rows="3"></textarea>
+
+          <label for="cvProfileTitle">Titre section compétences</label>
+          <input id="cvProfileTitle" data-field-key="cv.profileTitle" type="text">
+
+          <label for="cvProfileText">Introduction section</label>
+          <textarea id="cvProfileText" data-field-key="cv.profileText" rows="3"></textarea>
+
+          <label for="cvGoalsTitle">Titre objectifs</label>
+          <input id="cvGoalsTitle" data-field-key="cv.goalsTitle" type="text">
+
+          <label for="cvGoalsText">Objectifs</label>
+          <textarea id="cvGoalsText" data-field-key="cv.goalsText" rows="2"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>Projets</legend>
+          <label for="projectsHeroEyebrow">Étiquette</label>
+          <input id="projectsHeroEyebrow" data-field-key="projects.heroEyebrow" type="text">
+
+          <label for="projectsHeroTitle">Titre principal</label>
+          <input id="projectsHeroTitle" data-field-key="projects.heroTitle" type="text" required>
+
+          <label for="projectsHeroSubtitle">Sous-titre</label>
+          <textarea id="projectsHeroSubtitle" data-field-key="projects.heroSubtitle" rows="3"></textarea>
+
+          <label for="projectsRecentTitle">Titre projets marquants</label>
+          <input id="projectsRecentTitle" data-field-key="projects.recentTitle" type="text">
+
+          <label for="projectsDevTitle">Titre prototypes</label>
+          <input id="projectsDevTitle" data-field-key="projects.devTitle" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Contact</legend>
+          <label for="contactHeroEyebrow">Étiquette</label>
+          <input id="contactHeroEyebrow" data-field-key="contact.heroEyebrow" type="text">
+
+          <label for="contactHeroTitle">Titre principal</label>
+          <input id="contactHeroTitle" data-field-key="contact.heroTitle" type="text" required>
+
+          <label for="contactHeroSubtitle">Sous-titre</label>
+          <textarea id="contactHeroSubtitle" data-field-key="contact.heroSubtitle" rows="3"></textarea>
+
+          <label for="contactFormTitle">Titre formulaire</label>
+          <input id="contactFormTitle" data-field-key="contact.formTitle" type="text">
+
+          <label for="contactFormText">Texte formulaire</label>
+          <textarea id="contactFormText" data-field-key="contact.formText" rows="3"></textarea>
+
+          <label for="contactSuccessMessage">Message de confirmation</label>
+          <input id="contactSuccessMessage" data-field-key="contact.successMessage" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Navigation</legend>
+          <div class="admin-nav-row">
+            <div class="admin-nav-field">
+              <label for="navAccueilLabel">Label Accueil</label>
+              <input id="navAccueilLabel" data-nav-label="accueil" type="text">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
             </div>
             <div class="admin-nav-field">
               <label for="navAccueilHref">Lien Accueil</label>
@@ -218,7 +351,11 @@
           <div class="admin-nav-row">
             <div class="admin-nav-field">
               <label for="navCompetencesLabel">Label Compétences</label>
+<<<<<<< HEAD
               <input id="navCompetencesLabel" data-nav-label="competences" type="text" placeholder="Compétences">
+=======
+              <input id="navCompetencesLabel" data-nav-label="competences" type="text">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
             </div>
             <div class="admin-nav-field">
               <label for="navCompetencesHref">Lien Compétences</label>
@@ -228,7 +365,11 @@
           <div class="admin-nav-row">
             <div class="admin-nav-field">
               <label for="navProjetsLabel">Label Projets</label>
+<<<<<<< HEAD
               <input id="navProjetsLabel" data-nav-label="projets" type="text" placeholder="Mes projets">
+=======
+              <input id="navProjetsLabel" data-nav-label="projets" type="text">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
             </div>
             <div class="admin-nav-field">
               <label for="navProjetsHref">Lien Projets</label>
@@ -238,7 +379,11 @@
           <div class="admin-nav-row">
             <div class="admin-nav-field">
               <label for="navContactLabel">Label Contact</label>
+<<<<<<< HEAD
               <input id="navContactLabel" data-nav-label="contact" type="text" placeholder="Contact">
+=======
+              <input id="navContactLabel" data-nav-label="contact" type="text">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
             </div>
             <div class="admin-nav-field">
               <label for="navContactHref">Lien Contact</label>
@@ -248,7 +393,11 @@
           <div class="admin-nav-row">
             <div class="admin-nav-field">
               <label for="navAdminLabel">Label Admin</label>
+<<<<<<< HEAD
               <input id="navAdminLabel" data-nav-label="admin" type="text" placeholder="Admin">
+=======
+              <input id="navAdminLabel" data-nav-label="admin" type="text">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
             </div>
             <div class="admin-nav-field">
               <label for="navAdminHref">Lien Admin</label>
@@ -258,6 +407,7 @@
         </fieldset>
 
         <fieldset>
+<<<<<<< HEAD
           <legend>🔗 Réseaux sociaux</legend>
           <label for="linkGithub">GitHub</label>
           <input id="linkGithub" data-link-key="github" type="url" placeholder="https://github.com/votre-profil">
@@ -285,6 +435,35 @@
 
           <label for="accentCyan">Accent cyan</label>
           <input id="accentCyan" data-theme-var="--accent-cyan" type="color" value="#5de4ff">
+=======
+          <legend>Réseaux sociaux</legend>
+          <label for="linkGithub">GitHub</label>
+          <input id="linkGithub" data-link-key="github" type="url" placeholder="https://github.com/">
+
+          <label for="linkLinkedin">LinkedIn</label>
+          <input id="linkLinkedin" data-link-key="linkedin" type="url" placeholder="https://www.linkedin.com/in/">
+
+          <label for="linkEmail">E-mail</label>
+          <input id="linkEmail" data-link-key="email" type="email" placeholder="mailto:nom@example.com">
+        </fieldset>
+
+        <fieldset>
+          <legend>Pied de page</legend>
+          <label for="footerText">Texte du footer</label>
+          <input id="footerText" data-field-key="footer.text" type="text">
+        </fieldset>
+
+        <fieldset>
+          <legend>Couleurs</legend>
+          <label for="accentBlue">Accent bleu</label>
+          <input id="accentBlue" data-theme-var="--accent-blue" type="color">
+
+          <label for="accentViolet">Accent violet</label>
+          <input id="accentViolet" data-theme-var="--accent-violet" type="color">
+
+          <label for="accentCyan">Accent cyan</label>
+          <input id="accentCyan" data-theme-var="--accent-cyan" type="color">
+>>>>>>> 94d93fcf53c33038c5750ebee58bddab46bf0ff1
         </fieldset>
 
         <div class="admin-actions">
