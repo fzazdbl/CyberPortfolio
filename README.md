@@ -68,8 +68,7 @@ CyberPortfolio/
 ├── assets/
 │   ├── css/
 │   │   ├── style.css                   # Styles principaux
-│   │   ├── theme.css                   # Variables de thème
-│   │   ├── dark-mode.css               # Mode sombre/clair
+│   │   ├── theme.css                   # Variables de thème et bascule
 │   │   ├── admin.css                   # Styles admin
 │   │   └── liquid-glass-renderer.css   # Effets glassmorphism
 │   ├── js/
