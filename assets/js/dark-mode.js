@@ -1,86 +1,63 @@
-// Gestion du mode sombre/clair
-class DarkModeManager {
+const THEME_STORAGE_KEY = 'theme';
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+const prefersDark = mediaQuery.matches;
+const initialTheme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : prefersDark ? 'dark' : 'light';
+
+document.documentElement.setAttribute('data-theme', initialTheme);
+
+class ThemeController {
   constructor() {
-    this.theme = localStorage.getItem('theme') || 'dark';
-    this.init();
+    this.currentTheme = initialTheme;
+    this.toggleButton = null;
   }
 
   init() {
-    this.applyTheme();
-    this.setupToggle();
-    this.setupSystemPreference();
-  }
-
-  applyTheme() {
-    document.documentElement.setAttribute('data-theme', this.theme);
-    localStorage.setItem('theme', this.theme);
-  }
-
-  setupToggle() {
-    const toggle = document.querySelector('.theme-toggle');
-    if (!toggle) return;
-
-    toggle.addEventListener('click', () => {
-      this.theme = this.theme === 'dark' ? 'light' : 'dark';
-      this.applyTheme();
-      this.updateToggleIcon();
-    });
-
-    this.updateToggleIcon();
-  }
-
-  updateToggleIcon() {
-    const toggle = document.querySelector('.theme-toggle');
-    if (!toggle) return;
-
-    const moon = toggle.querySelector('.fa-moon');
-    const sun = toggle.querySelector('.fa-sun');
-
-    if (this.theme === 'light') {
-      moon?.style.setProperty('opacity', '0');
-      sun?.style.setProperty('opacity', '1');
-    } else {
-      moon?.style.setProperty('opacity', '1');
-      sun?.style.setProperty('opacity', '0');
+    this.toggleButton = document.querySelector('.theme-toggle');
+    if (!this.toggleButton) {
+      return;
     }
+
+    this.updateToggleState();
+    this.toggleButton.addEventListener('click', () => this.handleToggle());
+    mediaQuery.addEventListener('change', (event) => this.handleSystemPreference(event));
   }
 
-  setupSystemPreference() {
-    // Détecter le changement de préférence système
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
-    const handleChange = (e) => {
-      if (localStorage.getItem('theme') === null) {
-        this.theme = e.matches ? 'dark' : 'light';
-        this.applyTheme();
-        this.updateToggleIcon();
-      }
-    };
+  handleToggle() {
+    const newTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    this.applyTheme(newTheme, true);
+  }
 
-    mediaQuery.addEventListener('change', handleChange);
-    
-    // Appliquer la préférence système si aucun thème n'est sauvegardé
-    if (localStorage.getItem('theme') === null) {
-      this.theme = mediaQuery.matches ? 'dark' : 'light';
-      this.applyTheme();
-      this.updateToggleIcon();
+  handleSystemPreference(event) {
+    const hasStoredPreference = localStorage.getItem(THEME_STORAGE_KEY) !== null;
+    if (hasStoredPreference) {
+      return;
     }
+    this.applyTheme(event.matches ? 'dark' : 'light', false);
   }
 
-  getCurrentTheme() {
-    return this.theme;
-  }
-
-  setTheme(theme) {
-    if (['dark', 'light'].includes(theme)) {
-      this.theme = theme;
-      this.applyTheme();
-      this.updateToggleIcon();
+  applyTheme(theme, persist) {
+    this.currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    if (persist) {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
     }
+    this.updateToggleState();
+  }
+
+  updateToggleState() {
+    if (!this.toggleButton) {
+      return;
+    }
+    const label = this.currentTheme === 'dark' ? 'Activer le mode clair' : 'Activer le mode sombre';
+    this.toggleButton.setAttribute('aria-label', label);
+    this.toggleButton.setAttribute('title', label);
+    this.toggleButton.setAttribute('aria-pressed', this.currentTheme === 'dark');
   }
 }
 
-// Initialisation
 document.addEventListener('DOMContentLoaded', () => {
-  window.darkModeManager = new DarkModeManager();
+  const controller = new ThemeController();
+  controller.init();
+  window.themeController = controller;
 });
