@@ -323,7 +323,9 @@ class GlassScene {
     });
 
     if (!context) {
+      console.warn('[LiquidRenderer] WebGL2 not supported. Displaying fallback.');
       this.renderer = null;
+      this.showWebGLFallback();
       return;
     }
 
@@ -688,6 +690,12 @@ class GlassScene {
     const halo = document.createElement('div');
     halo.className = 'fake-glass-halo';
     this.element.appendChild(halo);
+  }
+
+  showWebGLFallback() {
+    // Display user-friendly message for WebGL not supported
+    this.fallback('webgl-unsupported');
+    console.info('[LiquidRenderer] WebGL2 is not supported on this device. Using fallback rendering.');
   }
 }
 
