@@ -1,9 +1,14 @@
+<?php
+session_start();
+require_once '../includes/security.php';
+$csrfToken = generateCSRFToken();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Mes projets - Mohamed</title>
+  <title>Contact - Mohamed</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="../assets/css/theme.css">
@@ -16,8 +21,8 @@
   <script src="../assets/js/scroll-animations.js" defer></script>
   <script src="../assets/js/admin-enhanced.js" defer></script>
 </head>
-<body data-page="projets">
-  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.36"></div>
+<body data-page="contact">
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
   
   <!-- Éléments décoratifs -->
   <div class="decorative-elements" aria-hidden="true">
@@ -68,13 +73,13 @@
       <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">
         <i class="fas fa-code"></i> Compétences
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="index.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">
         <i class="fas fa-project-diagram"></i> Mes projets
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="../projets-interactifs/index.html">
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="./">
         <i class="fas fa-envelope"></i> Contact
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.php">
@@ -84,73 +89,64 @@
   </header>
 
   <main class="page-main">
-    <section class="hero reveal" aria-labelledby="projects-title">
-      <span class="hero-eyebrow" data-content-key="projects.heroEyebrow">Mes réalisations</span>
-      <h1 id="projects-title" class="hero-title" data-content-key="projects.heroTitle">Des projets qui fusionnent sécurité et esthétique</h1>
-      <p class="hero-subtitle" data-content-key="projects.heroSubtitle">Chaque mission combine méthodes cyber, automatisation et interfaces raffinées pour délivrer une expérience cohérente.</p>
+    <div class="contact-backdrop" aria-hidden="true">
+      <div class="contact-backdrop__gradient"></div>
+      <div class="contact-backdrop__particles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <section class="hero reveal" aria-labelledby="contact-title">
+      <span class="hero-eyebrow" data-content-key="contact.heroEyebrow">Contact</span>
+      <h1 id="contact-title" class="hero-title" data-content-key="contact.heroTitle">Échangeons autour de vos besoins numériques</h1>
+      <p class="hero-subtitle" data-content-key="contact.heroSubtitle">Décrivez votre projet, votre contexte ou vos contraintes : je vous réponds rapidement avec des pistes concrètes.</p>
       <div class="hero-actions">
-        <a class="button button--primary ripple" data-link href="../contact/">Proposer un projet</a>
-        <a class="button button--ghost" data-link href="../competences/index.html">Consulter mes compétences</a>
+        <a class="button button--primary ripple" href="#contactForm">Remplir le formulaire</a>
+        <a class="button button--ghost" data-link href="../projets/index.html">Voir mes réalisations</a>
       </div>
     </section>
 
-    <section class="section reveal" aria-labelledby="recent-title">
+    <section class="section reveal" aria-labelledby="form-title">
       <div class="section-header">
-        <span class="section-eyebrow">Récent</span>
-        <h2 id="recent-title" class="section-title" data-content-key="projects.recentTitle">Projets marquants</h2>
+        <span class="section-eyebrow">Formulaire</span>
+        <h2 id="form-title" class="section-title" data-content-key="contact.formTitle">Laissez-moi un message</h2>
+        <p class="section-text" data-content-key="contact.formText">Expliquez votre situation, vos objectifs et les échéances clés. Je reviens vers vous pour définir la suite.</p>
       </div>
-      <div class="project-grid">
-        <article class="glass-card">
-          <div class="project-icon">🌐</div>
-          <h3 class="project-title">Configuration Apache2</h3>
-          <p>Installation et configuration d'un serveur web Apache2 sur Debian, gestion des virtual hosts et sécurisation des accès.</p>
-          <div class="project-tags">
-            <span class="project-tag">Apache2</span>
-            <span class="project-tag">Debian</span>
-            <span class="project-tag">Serveur Web</span>
+      <div class="glass-card form-card">
+        <form id="contactForm" class="contact-form" action="traitement.php" method="post" data-mailto="mailto:chahidm126@gmail.com">
+          <!-- Token CSRF -->
+          <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
+          
+          <!-- Honeypot field (hidden from users) -->
+          <input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+          
+          <div class="form-row">
+            <label for="nom">Nom *</label>
+            <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50" aria-describedby="nom-error">
+            <span class="field-error" id="nom-error"></span>
           </div>
-        </article>
-        <article class="glass-card">
-          <div class="project-icon">📊</div>
-          <h3 class="project-title">Déploiement Matomo</h3>
-          <p>Installation et configuration de Matomo pour l'analyse de trafic web, création de tableaux de bord et rapports personnalisés.</p>
-          <div class="project-tags">
-            <span class="project-tag">Matomo</span>
-            <span class="project-tag">Analytics</span>
-            <span class="project-tag">MySQL</span>
+          <div class="form-row">
+            <label for="email">Adresse e-mail *</label>
+            <input id="email" class="input-glow" type="email" name="email" autocomplete="email" required aria-describedby="email-error">
+            <span class="field-error" id="email-error"></span>
           </div>
-        </article>
-        <article class="glass-card">
-          <div class="project-icon">🖥️</div>
-          <h3 class="project-title">Laboratoire VM</h3>
-          <p>Création d'un environnement virtuel avec VMware/VirtualBox, configuration de machines Debian et Kali Linux pour les tests.</p>
-          <div class="project-tags">
-            <span class="project-tag">Virtualisation</span>
-            <span class="project-tag">Kali Linux</span>
-            <span class="project-tag">VMware</span>
+          <div class="form-row">
+            <label for="message">Message *</label>
+            <textarea id="message" class="input-glow" name="message" rows="5" required minlength="10" maxlength="1000" placeholder="Décrivez votre projet, vos besoins ou posez vos questions..." aria-describedby="message-error"></textarea>
+            <span class="field-error" id="message-error"></span>
+            <div class="char-counter">
+              <span id="char-count">0</span>/1000 caractères
+            </div>
           </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section reveal" aria-labelledby="dev-title">
-      <div class="section-header">
-        <span class="section-eyebrow">En développement</span>
-        <h2 id="dev-title" class="section-title" data-content-key="projects.devTitle">Prototypes & idées en cours</h2>
-      </div>
-      <div class="project-grid">
-        <article class="glass-card">
-          <h3 class="project-title">Outil interne</h3>
-          <p>Tableau de bord cyber pour centraliser alertes, patchs et documentation opérationnelle.</p>
-        </article>
-        <article class="glass-card">
-          <h3 class="project-title">Extension navigateur</h3>
-          <p>Extension Chrome visant à accélérer la collecte d'informations lors des analyses réseau.</p>
-        </article>
-        <article class="glass-card">
-          <h3 class="project-title">App mobile de suivi</h3>
-          <p>Prototype d'application mobile pour suivre l'évolution des projets, incidents et priorités cybersécurité.</p>
-        </article>
+          <p class="form-status" role="status" aria-live="polite" data-content-key="contact.successMessage" hidden>✅ Message envoyé !</p>
+          <div class="form-actions">
+            <button class="button button--primary ripple" type="submit">Envoyer</button>
+          </div>
+        </form>
       </div>
     </section>
   </main>
