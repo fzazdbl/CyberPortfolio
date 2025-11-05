@@ -11,6 +11,9 @@
   <script src="../assets/js/main.js" defer></script>
 </head>
 <body data-page="competences">
+  <!-- Lien d'évitement pour l'accessibilité -->
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1.05" data-liquid-speed="0.34"></div>
 
   <header class="liquid-nav" role="banner">
@@ -34,12 +37,12 @@
       <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">Accueil</a>
       <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="index.html">Compétences</a>
       <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">Mes projets</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/contact.html">Contact</a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.html">Admin</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/index.php">Contact</a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.php">Admin</a>
     </nav>
   </header>
 
-  <main class="page-main">
+  <main id="main-content" class="page-main">
     <section class="hero reveal" aria-labelledby="cv-title">
       <span class="hero-eyebrow" data-content-key="cv.heroEyebrow">Curriculum Vitae</span>
       <h1 id="cv-title" class="hero-title" data-content-key="cv.heroTitle">Un parcours orienté sécurité et fiabilité</h1>
