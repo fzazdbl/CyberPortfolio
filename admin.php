@@ -7,6 +7,10 @@ session_start();
 
 // Vérifier l'authentification
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+session_start();
+
+// Check if user is authenticated
+if (!isset($_SESSION['admin_authenticated']) || $_SESSION['admin_authenticated'] !== true) {
     header('Location: login.php');
     exit;
 }
@@ -30,6 +34,16 @@ require_once 'includes/security.php';
 setSecurityHeaders();
 
 $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
+// Optional: Check session timeout (e.g., 1 hour)
+$sessionTimeout = 3600; // 1 hour in seconds
+if (isset($_SESSION['admin_login_time']) && (time() - $_SESSION['admin_login_time'] > $sessionTimeout)) {
+    session_destroy();
+    header('Location: login.php');
+    exit;
+}
+
+// Update last activity time
+$_SESSION['admin_login_time'] = time();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -53,6 +67,7 @@ $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QU
   <script src="assets/js/admin-enhanced.js" defer></script>
 </head>
 <body class="admin-body" data-page="admin">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
   
   <!-- Éléments décoratifs -->
@@ -114,6 +129,10 @@ $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QU
         <i class="fas fa-envelope"></i> Contact
       </a>
       <a class="liquid-nav__link nav-link active" data-nav-key="admin" data-target="admin" data-link href="admin.php">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.php">
         <i class="fas fa-cog"></i> Admin
       </a>
     </nav>
@@ -130,6 +149,14 @@ $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QU
         <a href="logout.php" class="button button--ghost">
           <i class="fas fa-sign-out-alt"></i> Se déconnecter
         </a>
+  <main id="main-content" class="admin-wrapper" role="main">
+    <section class="admin-dashboard" id="adminDashboard">
+      <header class="admin-dashboard__header">
+        <div>
+          <p class="admin-eyebrow">Tableau de bord</p>
+          <h2>Contenus du site</h2>
+        </div>
+        <a href="logout.php" class="button button--ghost">Se déconnecter</a>
       </header>
 
       <form id="contentForm" class="admin-form-grid" novalidate>
@@ -263,6 +290,7 @@ $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QU
             <div class="admin-nav-field">
               <label for="navContactHref">Lien Contact</label>
               <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/index.php">
+              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/">
             </div>
           </div>
           <div class="admin-nav-row">
@@ -310,6 +338,20 @@ $adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QU
         <div class="admin-actions">
           <button type="submit" class="button button--primary">Enregistrer les modifications</button>
           <p class="admin-status" id="contentStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <form id="passwordForm" class="admin-form admin-form--password" novalidate>
+        <h3>Changer le mot de passe</h3>
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input id="newPassword" name="newPassword" type="password" required>
+
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" required>
+
+        <div class="admin-actions">
+          <button type="submit" class="button button--ghost">Mettre à jour</button>
+          <p class="admin-status" id="passwordStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
     </section>

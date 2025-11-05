@@ -23,3 +23,35 @@ Thumbs.db
 # Build
 dist/
 build/
+# Sensitive files
+includes/credentials.php
+
+# Environment files
+.env
+.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+error_log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if ever used)
+node_modules/
+
+# Backup files
+*.bak
+*.backup

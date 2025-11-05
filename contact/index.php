@@ -6,6 +6,9 @@ require_once '../includes/security.php';
 
 // Générer le token CSRF
 $csrfToken = generateCsrfToken();
+session_start();
+require_once '../includes/security.php';
+$csrfToken = generateCSRFToken();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -44,6 +47,7 @@ $csrfToken = generateCsrfToken();
   <!-- Skip link for accessibility -->
   <a href="#main" class="skip-link">Aller au contenu principal</a>
   
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
   
   <!-- Éléments décoratifs -->
@@ -102,6 +106,7 @@ $csrfToken = generateCsrfToken();
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
       <a class="liquid-nav__link nav-link active" data-nav-key="contact" data-target="contact" data-link href="index.php">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="./">
         <i class="fas fa-envelope"></i> Contact
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.php">
@@ -111,6 +116,7 @@ $csrfToken = generateCsrfToken();
   </header>
 
   <main id="main" class="page-main">
+  <main id="main-content" class="page-main">
     <div class="contact-backdrop" aria-hidden="true">
       <div class="contact-backdrop__gradient"></div>
       <div class="contact-backdrop__particles">
@@ -149,16 +155,26 @@ $csrfToken = generateCsrfToken();
           <div class="form-row">
             <label for="nom">Nom *</label>
             <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50">
+          <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
+          
+          <!-- Honeypot field (hidden from users) -->
+          <input type="text" name="website" style="position:absolute;left:-9999px;width:1px;height:1px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+          
+          <div class="form-row">
+            <label for="nom">Nom *</label>
+            <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50" aria-describedby="nom-error">
             <span class="field-error" id="nom-error"></span>
           </div>
           <div class="form-row">
             <label for="email">Adresse e-mail *</label>
             <input id="email" class="input-glow" type="email" name="email" autocomplete="email" required>
+            <input id="email" class="input-glow" type="email" name="email" autocomplete="email" required aria-describedby="email-error">
             <span class="field-error" id="email-error"></span>
           </div>
           <div class="form-row">
             <label for="message">Message *</label>
             <textarea id="message" class="input-glow" name="message" rows="5" required minlength="10" maxlength="1000" placeholder="Décrivez votre projet, vos besoins ou posez vos questions..."></textarea>
+            <textarea id="message" class="input-glow" name="message" rows="5" required minlength="10" maxlength="1000" placeholder="Décrivez votre projet, vos besoins ou posez vos questions..." aria-describedby="message-error"></textarea>
             <span class="field-error" id="message-error"></span>
             <div class="char-counter">
               <span id="char-count">0</span>/1000 caractères

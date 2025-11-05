@@ -12,4 +12,15 @@ Disallow: /test-performance.html
 Disallow: /includes/
 
 # Sitemap
+# robots.txt for CyberPortfolio
+
+User-agent: *
+Allow: /
+Disallow: /test-performance.html
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /includes/
+Disallow: /assets/data/
+
+# Sitemap location
 Sitemap: https://cyberportfolio-mohamed.fr/sitemap.xml
