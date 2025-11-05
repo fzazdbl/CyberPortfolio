@@ -1,0 +1,26 @@
+# Fichiers de configuration sensibles
+includes/credentials.php
+
+# Fichiers temporaires
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# Dossiers IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Dossiers de dépendances
+node_modules/
+vendor/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
