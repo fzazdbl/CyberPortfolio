@@ -1,10 +1,25 @@
+<?php
+/**
+ * Page d'administration sécurisée - CyberPortfolio
+ */
+require_once __DIR__ . '/includes/security.php';
+
+// Vérifier l'authentification
+if (!isAuthenticated()) {
+    header('Location: login.php');
+    exit;
+}
+
+// Générer token CSRF pour les formulaires
+$csrfToken = generateCsrfToken();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
   <title>Administration - CyberPortfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -76,10 +91,10 @@
       <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="projets-interactifs/index.html">
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/contact.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/index.php">
         <i class="fas fa-envelope"></i> Contact
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.php">
         <i class="fas fa-cog"></i> Admin
       </a>
     </nav>
@@ -87,28 +102,13 @@
 
   <div class="admin-backdrop" aria-hidden="true"></div>
   <main class="admin-wrapper" role="main">
-    <section class="admin-card" id="loginPanel">
-      <header>
-        <p class="admin-eyebrow">⚠️ Page dépréciée</p>
-        <h1>Cette page a été déplacée</h1>
-        <p class="admin-subtitle">L'administration a été déplacée vers une version sécurisée.</p>
-      </header>
-      <div style="text-align: center; padding: 20px;">
-        <p style="margin-bottom: 20px;">Veuillez utiliser la nouvelle page d'administration sécurisée.</p>
-        <a href="login.php" class="button button--primary">Aller à la connexion sécurisée</a>
-        <br><br>
-        <a href="index.html" class="button button--ghost">Retour au site</a>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+    <section class="admin-dashboard">
       <header class="admin-dashboard__header">
         <div>
           <p class="admin-eyebrow">Tableau de bord</p>
           <h2>Contenus du site</h2>
         </div>
-        <button type="button" class="button button--ghost" id="adminLogout">Se déconnecter</button>
+        <a href="logout.php" class="button button--ghost">Se déconnecter</a>
       </header>
 
       <form id="contentForm" class="admin-form-grid" novalidate>
@@ -241,7 +241,7 @@
             </div>
             <div class="admin-nav-field">
               <label for="navContactHref">Lien Contact</label>
-              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/contact.html">
+              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/index.php">
             </div>
           </div>
           <div class="admin-nav-row">
@@ -251,7 +251,7 @@
             </div>
             <div class="admin-nav-field">
               <label for="navAdminHref">Lien Admin</label>
-              <input id="navAdminHref" data-nav-href="admin" type="text" placeholder="admin.html">
+              <input id="navAdminHref" data-nav-href="admin" type="text" placeholder="admin.php">
             </div>
           </div>
         </fieldset>
@@ -289,20 +289,6 @@
         <div class="admin-actions">
           <button type="submit" class="button button--primary">Enregistrer les modifications</button>
           <p class="admin-status" id="contentStatus" role="status" aria-live="polite"></p>
-        </div>
-      </form>
-
-      <form id="passwordForm" class="admin-form admin-form--password" novalidate>
-        <h3>Changer le mot de passe</h3>
-        <label for="newPassword">Nouveau mot de passe</label>
-        <input id="newPassword" name="newPassword" type="password" required>
-
-        <label for="confirmPassword">Confirmer le mot de passe</label>
-        <input id="confirmPassword" name="confirmPassword" type="password" required>
-
-        <div class="admin-actions">
-          <button type="submit" class="button button--ghost">Mettre à jour</button>
-          <p class="admin-status" id="passwordStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
     </section>
