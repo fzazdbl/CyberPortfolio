@@ -4,6 +4,9 @@
  * Génère un token CSRF côté serveur pour sécuriser le formulaire
  */
 require_once __DIR__ . '/../includes/security.php';
+ * Page de contact avec formulaire sécurisé
+ */
+require_once '../includes/security.php';
 
 // Générer le token CSRF
 $csrfToken = generateCsrfToken();
@@ -21,6 +24,11 @@ $csrfToken = generateCSRFToken();
   <!-- Open Graph -->
   <meta property="og:title" content="Contact - CyberPortfolio Mohamed">
   <meta property="og:description" content="Contactez Mohamed pour échanger autour de vos besoins numériques en cybersécurité et développement web.">
+  <meta name="description" content="Contactez Mohamed Chahid pour discuter de vos projets en cybersécurité et développement web.">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact - Mohamed Chahid">
+  <meta property="og:description" content="Échangeons autour de vos besoins numériques en cybersécurité et développement.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cyberportfolio-mohamed.fr/contact/">
   <meta property="og:image" content="https://cyberportfolio-mohamed.fr/assets/images/og-image.jpg">
@@ -29,6 +37,10 @@ $csrfToken = generateCSRFToken();
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact - CyberPortfolio Mohamed">
   <meta name="twitter:description" content="Contactez Mohamed pour échanger autour de vos besoins numériques en cybersécurité et développement web.">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact - Mohamed Chahid">
+  <meta name="twitter:description" content="Échangeons autour de vos besoins numériques en cybersécurité et développement.">
   <meta name="twitter:image" content="https://cyberportfolio-mohamed.fr/assets/images/og-image.jpg">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -46,6 +58,8 @@ $csrfToken = generateCSRFToken();
 <body data-page="contact">
   <!-- Lien d'évitement pour l'accessibilité -->
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Aller au contenu principal</a>
   
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
@@ -106,6 +120,7 @@ $csrfToken = generateCSRFToken();
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="index.php">
+      <a class="liquid-nav__link nav-link active" data-nav-key="contact" data-target="contact" data-link href="index.php">
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="./">
         <i class="fas fa-envelope"></i> Contact
       </a>
@@ -115,6 +130,7 @@ $csrfToken = generateCSRFToken();
     </nav>
   </header>
 
+  <main id="main" class="page-main">
   <main id="main-content" class="page-main">
     <div class="contact-backdrop" aria-hidden="true">
       <div class="contact-backdrop__gradient"></div>
@@ -156,6 +172,14 @@ $csrfToken = generateCSRFToken();
             <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50">
         <form id="contactForm" class="contact-form" action="traitement.php" method="post" data-mailto="mailto:chahidm126@gmail.com">
           <!-- Token CSRF -->
+          <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
+          
+          <!-- Honeypot (anti-spam) - must be hidden -->
+          <input type="text" name="website" id="website" style="position: absolute; left: -9999px;" tabindex="-1" autocomplete="off" aria-hidden="true">
+          
+          <div class="form-row">
+            <label for="nom">Nom *</label>
+            <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50">
           <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
           
           <!-- Honeypot field (hidden from users) -->

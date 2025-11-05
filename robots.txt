@@ -6,6 +6,13 @@ Allow: /
 
 # Pages à exclure
 Disallow: /admin.html
+# robots.txt pour CyberPortfolio
+
+# Autoriser tous les robots pour les pages publiques
+User-agent: *
+Allow: /
+
+# Bloquer les pages de test et d'administration
 Disallow: /admin.php
 Disallow: /login.php
 Disallow: /logout.php

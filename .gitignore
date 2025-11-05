@@ -22,6 +22,28 @@ vendor/
 Thumbs.db
 
 # Fichiers de sauvegarde
+# Fichiers de développement
+.vscode/
+.idea/
+*.log
+
+# Dépendances
+node_modules/
+vendor/
+
+# Fichiers temporaires
+*.tmp
+*.swp
+*.bak
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
 # Sensitive files
 includes/credentials.php
 

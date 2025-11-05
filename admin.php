@@ -6,6 +6,13 @@ require_once __DIR__ . '/includes/security.php';
 
 // Vérifier l'authentification
 if (!isAuthenticated()) {
+ * Page d'administration sécurisée
+ * Nécessite une authentification valide
+ */
+session_start();
+
+// Vérifier l'authentification
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
 session_start();
 
 // Check if user is authenticated
@@ -16,6 +23,25 @@ if (!isset($_SESSION['admin_authenticated']) || $_SESSION['admin_authenticated']
 
 // Générer token CSRF pour les formulaires
 $csrfToken = generateCsrfToken();
+// Vérifier la durée de session
+if (file_exists('includes/credentials.php')) {
+    require_once 'includes/credentials.php';
+    if (isset($_SESSION['login_time'])) {
+        $sessionAge = time() - $_SESSION['login_time'];
+        if ($sessionAge > SESSION_LIFETIME) {
+            // Session expirée
+            session_destroy();
+            header('Location: login.php');
+            exit;
+        }
+    }
+}
+
+// Charger les fonctions de sécurité
+require_once 'includes/security.php';
+setSecurityHeaders();
+
+$adminUsername = htmlspecialchars($_SESSION['admin_username'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
 // Optional: Check session timeout (e.g., 1 hour)
 $sessionTimeout = 3600; // 1 hour in seconds
 if (isset($_SESSION['admin_login_time']) && (time() - $_SESSION['admin_login_time'] > $sessionTimeout)) {
@@ -34,6 +60,7 @@ $_SESSION['admin_login_time'] = time();
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Administration - CyberPortfolio</title>
+  <meta name="robots" content="noindex, nofollow">
   <title>Administration - CyberPortfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
@@ -109,6 +136,9 @@ $_SESSION['admin_login_time'] = time();
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/index.php">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
+      <a class="liquid-nav__link nav-link active" data-nav-key="admin" data-target="admin" data-link href="admin.php">
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/">
         <i class="fas fa-envelope"></i> Contact
       </a>
@@ -121,6 +151,15 @@ $_SESSION['admin_login_time'] = time();
   <div class="admin-backdrop" aria-hidden="true"></div>
   <main class="admin-wrapper" role="main">
     <section class="admin-dashboard">
+    <section class="admin-dashboard" id="adminDashboard">
+      <header class="admin-dashboard__header">
+        <div>
+          <p class="admin-eyebrow">Connecté en tant que <?php echo $adminUsername; ?></p>
+          <h1>Tableau de bord d'administration</h1>
+        </div>
+        <a href="logout.php" class="button button--ghost">
+          <i class="fas fa-sign-out-alt"></i> Se déconnecter
+        </a>
   <main id="main-content" class="admin-wrapper" role="main">
     <section class="admin-dashboard" id="adminDashboard">
       <header class="admin-dashboard__header">
