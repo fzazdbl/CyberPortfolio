@@ -1,0 +1,15 @@
+# robots.txt pour CyberPortfolio
+
+# Autoriser tous les robots pour les pages publiques
+User-agent: *
+Allow: /
+
+# Bloquer les pages de test et d'administration
+Disallow: /admin.php
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /test-performance.html
+Disallow: /includes/
+
+# Sitemap
+Sitemap: https://cyberportfolio-mohamed.fr/sitemap.xml
