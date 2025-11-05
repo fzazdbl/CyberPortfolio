@@ -3,6 +3,12 @@
  * Traitement sécurisé du formulaire de contact - CyberPortfolio
  */
 require_once __DIR__ . '/../includes/security.php';
+<?php
+session_start();
+require_once '../includes/security.php';
+
+// Set security headers
+setSecurityHeaders();
 
 // Vérification de la méthode
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -13,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 // Vérification du token CSRF
 $token = $_POST['csrf_token'] ?? '';
 if (!verifyCsrfToken($token)) {
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
     http_response_code(403);
     die("Token CSRF invalide.");
 }
@@ -33,6 +40,22 @@ if (!checkRateLimit('contact_form', 3, 600)) {
 $nom = sanitizeText($_POST['nom'] ?? '', 50);
 $email = sanitizeEmail($_POST['email'] ?? '');
 $message = sanitizeText($_POST['message'] ?? '', 1000);
+// Vérification honeypot
+if (!checkHoneypot('website')) {
+    http_response_code(403);
+    die("Formulaire invalide.");
+}
+
+// Vérification rate limiting
+if (!checkRateLimit(60)) {
+    http_response_code(429);
+    die("Trop de tentatives. Veuillez patienter avant de soumettre à nouveau.");
+}
+
+// Validation et nettoyage des données
+$nom = trim(filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+$message = trim(filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
 // Validation des champs
 $errors = [];
@@ -80,13 +103,20 @@ if (!empty($errors)) {
 
 // Les données sont déjà nettoyées par les fonctions sanitize*
 
+// Validation supplémentaire de l'email pour prévenir l'injection d'en-têtes
+if (preg_match('/[\r\n]/', $email)) {
+    http_response_code(422);
+    die("Email invalide détecté.");
+}
+
 // Envoi de l'email (optionnel - pour serveur avec mail())
 $to = 'chahidm126@gmail.com';
 $subject = 'Nouveau message - CyberPortfolio';
 $body = "Nom : $nom\nEmail : $email\n\nMessage :\n$message";
+// Note: Email is validated and sanitized above, safe to use in Reply-To
 $headers = [
-    'From' => $email,
-    'Reply-To' => $email,
+    'From' => 'noreply@cyberportfolio.fr',
+    'Reply-To' => $email,  // Already validated for format and header injection
     'Content-Type' => 'text/plain; charset=UTF-8',
     'X-Mailer' => 'PHP/' . phpversion()
 ];
@@ -144,3 +174,12 @@ echo "</html>";
 // Régénération du token CSRF
 regenerateCsrfToken();
 ?>
+// Update rate limit timestamp after successful processing
+updateRateLimitTimestamp();
+
+// Régénération du token CSRF
+regenerateCSRFToken();
+
+// Rediriger vers la page de confirmation
+header('Location: confirmation.html?status=' . ($sent ? 'sent' : 'received'));
+exit;

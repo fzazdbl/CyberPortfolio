@@ -28,6 +28,14 @@
   <!-- Page CV -->
   <url>
     <loc>https://cyberportfolio-mohamed.fr/competences/cv.html</loc>
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/competences/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/competences/index.html</loc>
     <lastmod>2025-01-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -42,6 +50,12 @@
   </url>
   
   <!-- Page Projets -->
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/projets/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://cyberportfolio-mohamed.fr/projets/index.html</loc>
     <lastmod>2025-01-01</lastmod>
@@ -65,4 +79,24 @@
     <priority>0.8</priority>
   </url>
 
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/projets-interactifs/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/projets-interactifs/index.html</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://cyberportfolio-mohamed.fr/contact/</loc>
+    <lastmod>2025-01-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

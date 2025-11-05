@@ -6,12 +6,26 @@ require_once __DIR__ . '/includes/security.php';
 
 // Vérifier l'authentification
 if (!isAuthenticated()) {
+session_start();
+
+// Check if user is authenticated
+if (!isset($_SESSION['admin_authenticated']) || $_SESSION['admin_authenticated'] !== true) {
     header('Location: login.php');
     exit;
 }
 
 // Générer token CSRF pour les formulaires
 $csrfToken = generateCsrfToken();
+// Optional: Check session timeout (e.g., 1 hour)
+$sessionTimeout = 3600; // 1 hour in seconds
+if (isset($_SESSION['admin_login_time']) && (time() - $_SESSION['admin_login_time'] > $sessionTimeout)) {
+    session_destroy();
+    header('Location: login.php');
+    exit;
+}
+
+// Update last activity time
+$_SESSION['admin_login_time'] = time();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,6 +34,8 @@ $csrfToken = generateCsrfToken();
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Administration - CyberPortfolio</title>
+  <title>Administration - CyberPortfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
   <link rel="stylesheet" href="assets/css/theme.css">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -34,6 +50,7 @@ $csrfToken = generateCsrfToken();
   <script src="assets/js/admin-enhanced.js" defer></script>
 </head>
 <body class="admin-body" data-page="admin">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
   
   <!-- Éléments décoratifs -->
@@ -92,6 +109,7 @@ $csrfToken = generateCsrfToken();
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/index.php">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="contact/">
         <i class="fas fa-envelope"></i> Contact
       </a>
       <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="admin.php">
@@ -103,6 +121,8 @@ $csrfToken = generateCsrfToken();
   <div class="admin-backdrop" aria-hidden="true"></div>
   <main class="admin-wrapper" role="main">
     <section class="admin-dashboard">
+  <main id="main-content" class="admin-wrapper" role="main">
+    <section class="admin-dashboard" id="adminDashboard">
       <header class="admin-dashboard__header">
         <div>
           <p class="admin-eyebrow">Tableau de bord</p>
@@ -242,6 +262,7 @@ $csrfToken = generateCsrfToken();
             <div class="admin-nav-field">
               <label for="navContactHref">Lien Contact</label>
               <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/index.php">
+              <input id="navContactHref" data-nav-href="contact" type="text" placeholder="contact/">
             </div>
           </div>
           <div class="admin-nav-row">
@@ -289,6 +310,20 @@ $csrfToken = generateCsrfToken();
         <div class="admin-actions">
           <button type="submit" class="button button--primary">Enregistrer les modifications</button>
           <p class="admin-status" id="contentStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <form id="passwordForm" class="admin-form admin-form--password" novalidate>
+        <h3>Changer le mot de passe</h3>
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input id="newPassword" name="newPassword" type="password" required>
+
+        <label for="confirmPassword">Confirmer le mot de passe</label>
+        <input id="confirmPassword" name="confirmPassword" type="password" required>
+
+        <div class="admin-actions">
+          <button type="submit" class="button button--ghost">Mettre à jour</button>
+          <p class="admin-status" id="passwordStatus" role="status" aria-live="polite"></p>
         </div>
       </form>
     </section>
