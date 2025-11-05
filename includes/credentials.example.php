@@ -9,9 +9,9 @@
  * php -r "echo password_hash('your_password', PASSWORD_DEFAULT);"
  */
 
-// Example password hash for 'SecurePassword123!'
-// CHANGE THIS IN PRODUCTION by copying to credentials.php
-$ADMIN_PASSWORD_HASH = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+// Example password hash for 'SecurePassword123!' (example only - DO NOT USE IN PRODUCTION)
+// CHANGE THIS IN PRODUCTION by copying to credentials.php and generating a new hash
+$ADMIN_PASSWORD_HASH = '$2y$10$.HrQ2Jq.4gHTdMwgiNCaY.9QnksWCQlWf.FgPePt2r8W0cTkDOlp2';
 
 // Optional: Admin username (can be used for future enhancements)
 $ADMIN_USERNAME = 'admin';

@@ -62,10 +62,15 @@ function checkRateLimit($minSeconds = 60) {
         }
     }
     
-    // Update last submission time
-    $_SESSION['last_submission_time'] = $currentTime;
-    
+    // Only update timestamp if rate limit check passes
     return true;
+}
+
+/**
+ * Update rate limit timestamp (call after successful submission)
+ */
+function updateRateLimitTimestamp() {
+    $_SESSION['last_submission_time'] = time();
 }
 
 /**

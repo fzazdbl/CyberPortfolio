@@ -79,9 +79,10 @@ if (preg_match('/[\r\n]/', $email)) {
 $to = 'chahidm126@gmail.com';
 $subject = 'Nouveau message - CyberPortfolio';
 $body = "Nom : $nom\nEmail : $email\n\nMessage :\n$message";
+// Note: Email is validated and sanitized above, safe to use in Reply-To
 $headers = [
     'From' => 'noreply@cyberportfolio.fr',
-    'Reply-To' => $email,
+    'Reply-To' => $email,  // Already validated for format and header injection
     'Content-Type' => 'text/plain; charset=UTF-8',
     'X-Mailer' => 'PHP/' . phpversion()
 ];
@@ -96,6 +97,9 @@ $sent = false;
 if (function_exists('mail')) {
     $sent = @mail($to, $subject, $body, $formattedHeaders);
 }
+
+// Update rate limit timestamp after successful processing
+updateRateLimitTimestamp();
 
 // Régénération du token CSRF
 regenerateCSRFToken();

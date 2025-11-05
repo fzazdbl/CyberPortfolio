@@ -2,6 +2,8 @@
 <IfModule mod_headers.c>
     # Content Security Policy
     # Note: Adjust if using external resources. Currently allows Font Awesome CDN.
+    # WARNING: 'unsafe-inline' is used for script-src and style-src due to inline code.
+    # For better security, consider moving inline scripts/styles to external files and using nonces.
     Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data:; connect-src 'self';"
     
     # Prevent clickjacking attacks
