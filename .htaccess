@@ -1,0 +1,56 @@
+# Security Headers for CyberPortfolio
+<IfModule mod_headers.c>
+    # Content Security Policy
+    # Note: Adjust if using external resources. Currently allows Font Awesome CDN.
+    # WARNING: 'unsafe-inline' is used for script-src and style-src due to inline code.
+    # For better security, consider moving inline scripts/styles to external files and using nonces.
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data:; connect-src 'self';"
+    
+    # Prevent clickjacking attacks
+    Header set X-Frame-Options "DENY"
+    
+    # Prevent MIME type sniffing
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Strict Transport Security (HSTS) - Force HTTPS
+    # Remove this line if not using HTTPS
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    
+    # X-XSS-Protection (legacy browsers)
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Force HTTPS redirect (uncomment if using HTTPS)
+# <IfModule mod_rewrite.c>
+#     RewriteEngine On
+#     RewriteCond %{HTTPS} off
+#     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# Custom Error Pages
+ErrorDocument 404 /404.html
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^(credentials\.php|\.htaccess|\.gitignore|\.env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# PHP security settings
+<IfModule mod_php7.c>
+    php_flag display_errors Off
+    php_flag log_errors On
+    php_value error_log /var/log/php_errors.log
+</IfModule>
+
+# Prevent access to includes directory from web
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^includes/ - [F,L]
+</IfModule>

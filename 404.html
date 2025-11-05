@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Message envoyé - CyberPortfolio</title>
+  <title>404 - Page non trouvée</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="../assets/css/liquid-glass-renderer.css">
-  <link rel="stylesheet" href="../assets/css/theme.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/js/liquid-glass-renderer.js" defer></script>
-  <script src="../assets/js/main.js" defer></script>
-  <script src="../assets/js/ui-toggles.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/ui-toggles.js" defer></script>
 </head>
-<body data-page="confirmation">
+<body data-page="404">
   <a href="#main-content" class="skip-link">Aller au contenu principal</a>
-  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
-  
   <!-- Éléments décoratifs -->
   <div class="decorative-elements" aria-hidden="true">
     <div class="cyber-grid"></div>
@@ -42,7 +38,7 @@
     <div class="liquid-nav__halo" aria-hidden="true"></div>
     <div class="liquid-nav__brand">
       <div class="brand-logo">
-        <img src="../assets/images/logo-cyber.svg" alt="Logo CyberPortfolio" class="brand-logo__img">
+        <img src="/assets/images/logo-cyber.svg" alt="Logo CyberPortfolio" class="brand-logo__img">
         <div class="brand-text">
           <span class="liquid-nav__brand-badge">BTS SIO · SISR</span>
           <p class="liquid-nav__brand-title">CyberPortfolio de Mohamed</p>
@@ -58,43 +54,50 @@
       </button>
       <button class="liquid-nav__toggle nav-toggle" type="button" aria-expanded="false" aria-controls="primaryNav">Menu</button>
     </div>
-    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="../">
-      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="../index.html">
+    <nav id="primaryNav" class="liquid-nav__menu" aria-label="Navigation principale" data-nav-root="">
+      <a class="liquid-nav__link nav-link" data-nav-key="accueil" data-target="accueil" data-link href="/index.html">
         <i class="fas fa-home"></i> Accueil
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="../competences/index.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="competences" data-target="competences" data-link href="/competences/index.html">
         <i class="fas fa-code"></i> Compétences
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="../projets/index.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="projets" data-target="projets" data-link href="/projets/index.html">
         <i class="fas fa-project-diagram"></i> Mes projets
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="../projets-interactifs/index.html">
+      <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="/projets-interactifs/index.html">
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="../contact/">
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="/contact/">
         <i class="fas fa-envelope"></i> Contact
-      </a>
-      <a class="liquid-nav__link nav-link" data-nav-key="admin" data-target="admin" data-link href="../admin.php">
-        <i class="fas fa-cog"></i> Admin
       </a>
     </nav>
   </header>
 
   <main id="main-content" class="page-main">
-    <section class="hero reveal" aria-labelledby="confirmation-title" style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-      <div style="max-width: 700px; padding: 2rem;">
-        <span class="hero-eyebrow" style="font-size: 4rem; display: block; margin-bottom: 1rem;">✅</span>
-        <h1 id="confirmation-title" class="hero-title">Message envoyé avec succès !</h1>
+    <section class="hero reveal" aria-labelledby="error-title" style="min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+      <div style="max-width: 800px; padding: 2rem;">
+        <span class="hero-eyebrow" style="font-size: 6rem; display: block; margin-bottom: 1rem; font-weight: bold; color: var(--accent-cyan);">404</span>
+        <h1 id="error-title" class="hero-title">Page non trouvée</h1>
         <p class="hero-subtitle" style="margin-top: 1.5rem;">
-          Merci pour votre message. Je vous répondrai dans les plus brefs délais.
+          Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
         </p>
         <div class="hero-actions" style="margin-top: 2rem;">
-          <a class="button button--primary ripple" href="../index.html">
+          <a class="button button--primary ripple" href="/index.html">
             <i class="fas fa-home"></i> Retour à l'accueil
           </a>
-          <a class="button button--ghost" href="../projets/index.html">
-            <i class="fas fa-project-diagram"></i> Voir mes projets
+          <a class="button button--ghost" href="/contact/">
+            <i class="fas fa-envelope"></i> Me contacter
           </a>
+        </div>
+        <div style="margin-top: 3rem; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
+          <h2 style="font-size: 1.25rem; margin-bottom: 1rem; color: var(--accent-blue);">Pages principales :</h2>
+          <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li><a href="/index.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="/competences/index.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-code"></i> Compétences</a></li>
+            <li><a href="/projets/index.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-project-diagram"></i> Mes projets</a></li>
+            <li><a href="/projets-interactifs/index.html" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-terminal"></i> Projets interactifs</a></li>
+            <li><a href="/contact/" style="color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-envelope"></i> Contact</a></li>
+          </ul>
         </div>
       </div>
     </section>
