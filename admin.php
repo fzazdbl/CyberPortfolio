@@ -39,6 +39,7 @@ $_SESSION['admin_login_time'] = time();
   <script src="assets/js/admin-enhanced.js" defer></script>
 </head>
 <body class="admin-body" data-page="admin">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
   
   <!-- Éléments décoratifs -->
@@ -106,7 +107,7 @@ $_SESSION['admin_login_time'] = time();
   </header>
 
   <div class="admin-backdrop" aria-hidden="true"></div>
-  <main class="admin-wrapper" role="main">
+  <main id="main-content" class="admin-wrapper" role="main">
     <section class="admin-dashboard" id="adminDashboard">
       <header class="admin-dashboard__header">
         <div>

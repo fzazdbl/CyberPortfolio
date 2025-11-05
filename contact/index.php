@@ -22,6 +22,7 @@ $csrfToken = generateCSRFToken();
   <script src="../assets/js/admin-enhanced.js" defer></script>
 </head>
 <body data-page="contact">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.32"></div>
   
   <!-- Éléments décoratifs -->
@@ -88,7 +89,7 @@ $csrfToken = generateCSRFToken();
     </nav>
   </header>
 
-  <main class="page-main">
+  <main id="main-content" class="page-main">
     <div class="contact-backdrop" aria-hidden="true">
       <div class="contact-backdrop__gradient"></div>
       <div class="contact-backdrop__particles">

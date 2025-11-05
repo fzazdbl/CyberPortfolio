@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <script src="assets/js/ui-toggles.js" defer></script>
 </head>
 <body class="admin-body" data-page="login">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <div class="liquid-background" data-liquid-renderer data-liquid-intensity="0.9" data-liquid-speed="0.28"></div>
   
   <!-- Éléments décoratifs -->
@@ -135,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </header>
 
   <div class="admin-backdrop" aria-hidden="true"></div>
-  <main class="admin-wrapper" role="main">
+  <main id="main-content" class="admin-wrapper" role="main">
     <section class="admin-card" id="loginPanel">
       <header>
         <p class="admin-eyebrow">Espace sécurisé</p>
