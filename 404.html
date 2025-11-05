@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>404 - Page non trouvée | CyberPortfolio</title>
+  <link rel="stylesheet" href="/assets/css/liquid-glass-renderer.css">
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/liquid-glass-renderer.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/ui-toggles.js" defer></script>
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 10;
+    }
+    .error-code {
+      font-size: clamp(4rem, 15vw, 10rem);
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+    .error-title {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+    .error-text {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .error-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body data-page="error">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+  
+  <div class="liquid-background" data-liquid-renderer data-liquid-intensity="1" data-liquid-speed="0.3"></div>
+  
+  <div class="decorative-elements" aria-hidden="true">
+    <div class="cyber-grid"></div>
+    <div class="floating-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+  </div>
+
+  <main id="main-content" class="error-page" role="main">
+    <div class="error-code" aria-hidden="true">404</div>
+    <h1 class="error-title">Page non trouvée</h1>
+    <p class="error-text">
+      Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+      Utilisez le menu de navigation ou retournez à l'accueil.
+    </p>
+    <div class="error-actions">
+      <a href="/index.html" class="button button--primary ripple">Retour à l'accueil</a>
+      <a href="/contact/index.php" class="button button--ghost">Nous contacter</a>
+    </div>
+  </main>
+</body>
+</html>
