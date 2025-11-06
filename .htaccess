@@ -1,3 +1,120 @@
+# CyberPortfolio - Configuration de sécurité Apache
+# En-têtes de sécurité et redirections HTTPS
+
+# ==========================================
+# Redirection HTTPS (décommenter si HTTPS activé)
+# ==========================================
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# ==========================================
+# En-têtes de sécurité
+# ==========================================
+
+<IfModule mod_headers.c>
+  # Content Security Policy (CSP) stricte
+  # Autorise uniquement les ressources du même domaine (self)
+  # CDN Font Awesome autorisé pour les icônes
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+
+  # HTTP Strict Transport Security (HSTS)
+  # Force HTTPS pendant 1 an (31536000 secondes)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # X-Frame-Options - Empêche le clickjacking
+  Header always set X-Frame-Options "DENY"
+
+  # X-Content-Type-Options - Empêche le MIME sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Referrer-Policy - Contrôle les informations envoyées dans le referrer
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # X-XSS-Protection - Protection contre XSS (pour anciens navigateurs)
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Permissions-Policy - Restreint l'accès aux APIs du navigateur
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+</IfModule>
+
+# ==========================================
+# Protection des fichiers sensibles
+# ==========================================
+
+# Bloquer l'accès aux fichiers de configuration
+<FilesMatch "^(credentials\.php|\.env|\.git.*|composer\.(json|lock)|package(-lock)?\.json)$">
+  Require all denied
+</FilesMatch>
+
+# Bloquer l'accès au dossier .git
+<DirectoryMatch "\.git">
+  Require all denied
+</DirectoryMatch>
+
+# ==========================================
+# Configuration PHP (si disponible)
+# ==========================================
+
+<IfModule mod_php.c>
+  # Désactiver l'affichage des erreurs en production
+  php_flag display_errors Off
+  php_flag log_errors On
+  
+  # Limiter les uploads
+  php_value upload_max_filesize 5M
+  php_value post_max_size 6M
+  
+  # Session sécurisée
+  php_flag session.cookie_httponly On
+  php_flag session.cookie_secure On
+  php_value session.cookie_samesite Strict
+</IfModule>
+
+# ==========================================
+# Pages d'erreur personnalisées
+# ==========================================
+
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 500 /404.html
+
+# ==========================================
+# Désactivation du listing des répertoires
+# ==========================================
+
+Options -Indexes
+
+# ==========================================
+# Compression GZIP pour les performances
+# ==========================================
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ==========================================
+# Cache des ressources statiques
+# ==========================================
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  
+  # CSS et JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
 # Security and Performance Configuration for CyberPortfolio
 
 # Enable RewriteEngine for HTTPS redirection

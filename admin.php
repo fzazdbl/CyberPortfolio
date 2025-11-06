@@ -1,5 +1,11 @@
 <?php
 /**
+ * Page d'administration sécurisée - CyberPortfolio
+ */
+require_once __DIR__ . '/includes/security.php';
+
+// Vérifier l'authentification
+if (!isAuthenticated()) {
  * Page d'administration sécurisée
  * Nécessite une authentification valide
  */
@@ -15,6 +21,8 @@ if (!isset($_SESSION['admin_authenticated']) || $_SESSION['admin_authenticated']
     exit;
 }
 
+// Générer token CSRF pour les formulaires
+$csrfToken = generateCsrfToken();
 // Vérifier la durée de session
 if (file_exists('includes/credentials.php')) {
     require_once 'includes/credentials.php';
@@ -50,6 +58,8 @@ $_SESSION['admin_login_time'] = time();
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Administration - CyberPortfolio</title>
   <meta name="robots" content="noindex, nofollow">
   <title>Administration - CyberPortfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -140,6 +150,7 @@ $_SESSION['admin_login_time'] = time();
 
   <div class="admin-backdrop" aria-hidden="true"></div>
   <main class="admin-wrapper" role="main">
+    <section class="admin-dashboard">
     <section class="admin-dashboard" id="adminDashboard">
       <header class="admin-dashboard__header">
         <div>

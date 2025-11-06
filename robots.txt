@@ -1,3 +1,11 @@
+# robots.txt - CyberPortfolio Mohamed
+# https://cyberportfolio-mohamed.fr/robots.txt
+
+User-agent: *
+Allow: /
+
+# Pages à exclure
+Disallow: /admin.html
 # robots.txt pour CyberPortfolio
 
 # Autoriser tous les robots pour les pages publiques
@@ -10,6 +18,7 @@ Disallow: /login.php
 Disallow: /logout.php
 Disallow: /test-performance.html
 Disallow: /includes/
+Disallow: /contact/traitement.php
 
 # Sitemap
 # robots.txt for CyberPortfolio

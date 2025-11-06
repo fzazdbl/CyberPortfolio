@@ -3,6 +3,24 @@
   const supportsBackdrop = typeof CSS !== 'undefined' && CSS.supports('backdrop-filter: blur(1px)');
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  // Vérifier le support WebGL
+  function checkWebGLSupport() {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      return !!gl;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const supportsWebGL = checkWebGLSupport();
+
+  // Afficher un message si WebGL n'est pas supporté
+  if (!supportsWebGL) {
+    console.warn('WebGL non supporté. Les effets de rendu avancés seront désactivés.');
+  }
+
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
   }

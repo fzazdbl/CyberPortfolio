@@ -257,3 +257,65 @@
     --radius-sm: 0.625rem;
   }
 }
+
+/* ==========================================
+   Accessibilité - Skip Link
+   ========================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--accent-blue);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-sm) 0;
+  z-index: 10000;
+  transition: top var(--transition-soft);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ==========================================
+   Accessibilité - Focus visible
+   ========================================== */
+
+/* Focus visible pour tous les éléments interactifs */
+:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Focus pour les liens */
+a:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 4px;
+}
+
+/* Focus pour les boutons */
+button:focus-visible,
+.button:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(46, 168, 255, 0.2);
+}
+
+/* Focus pour les champs de formulaire */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-color: var(--accent-blue);
+}
+
+/* Supprimer l'outline par défaut pour :focus (garder uniquement :focus-visible) */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+

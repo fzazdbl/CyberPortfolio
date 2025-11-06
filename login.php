@@ -1,5 +1,11 @@
 <?php
 /**
+ * Page de connexion administrateur - CyberPortfolio
+ */
+require_once __DIR__ . '/includes/security.php';
+
+// Si déjà authentifié, rediriger vers admin
+if (isAuthenticated()) {
  * Page de connexion administrateur
  */
 session_start();
@@ -14,6 +20,7 @@ if (isset($_SESSION['admin_authenticated']) && $_SESSION['admin_authenticated'] 
     exit;
 }
 
+// Générer token CSRF
 // Charger les fonctions de sécurité
 require_once 'includes/security.php';
 
@@ -23,6 +30,38 @@ $csrfToken = generateCsrfToken();
 // Traitement du formulaire de connexion
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Vérifier le rate limiting
+    if (!checkRateLimit('admin_login', 5, 300)) {
+        $error = 'Trop de tentatives de connexion. Veuillez réessayer dans 5 minutes.';
+    } else {
+        // Vérifier le token CSRF
+        $token = $_POST['csrf_token'] ?? '';
+        if (!verifyCsrfToken($token)) {
+            $error = 'Token de sécurité invalide. Veuillez réessayer.';
+        } else {
+            $password = $_POST['password'] ?? '';
+            
+            // Charger les credentials
+            if (file_exists(__DIR__ . '/includes/credentials.php')) {
+                require_once __DIR__ . '/includes/credentials.php';
+                
+                if (verifyAdminPassword($password, ADMIN_PASSWORD_HASH)) {
+                    // Authentification réussie
+                    setAuthenticated();
+                    regenerateCsrfToken(); // Régénérer le token après connexion
+                    header('Location: admin.php');
+                    exit;
+                } else {
+                    $error = 'Mot de passe incorrect.';
+                }
+            } else {
+                $error = 'Configuration manquante. Veuillez créer le fichier credentials.php.';
+            }
+        }
+    }
+    
+    // Régénérer le token après une tentative échouée
+    $csrfToken = regenerateCsrfToken();
     // Vérifier le token CSRF
     if (!isset($_POST['csrf_token']) || !verifyCsrfToken($_POST['csrf_token'])) {
         $error = 'Token de sécurité invalide.';
@@ -273,6 +312,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="assets/js/main.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Connexion Administration - CyberPortfolio</title>
   <title>Connexion - CyberPortfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="assets/css/liquid-glass-renderer.css">
@@ -299,6 +340,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 
+  <div class="admin-backdrop" aria-hidden="true"></div>
+  <main class="admin-wrapper" role="main">
+    <section class="admin-card">
+      <header>
+        <p class="admin-eyebrow">Espace sécurisé</p>
+        <h1>Connexion Administration</h1>
+        <p class="admin-subtitle">Authentifiez-vous pour accéder au panneau d'administration.</p>
+      </header>
+      <form method="POST" class="admin-form" autocomplete="off">
+        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
+        
+        <label for="password">Mot de passe</label>
+        <div class="admin-input-row">
+          <input 
+            id="password" 
+            name="password" 
+            type="password" 
+            placeholder="Mot de passe administrateur" 
+            required 
+            autofocus
+            autocomplete="current-password"
+          >
+          <button type="submit" class="button button--primary">Se connecter</button>
+        </div>
+        
+        <?php if ($error): ?>
+        <p class="admin-error" role="alert"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+        <?php endif; ?>
+      </form>
+      
+      <div style="margin-top: 20px; text-align: center;">
+        <a href="index.html" class="button button--ghost">Retour au site</a>
+      </div>
   <header class="liquid-nav" role="banner">
     <svg class="liquid-nav__filters" aria-hidden="true" focusable="false">
       <defs>

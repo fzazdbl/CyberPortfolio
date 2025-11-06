@@ -66,16 +66,9 @@ class AdminManager {
 
   handleLogin(e) {
     e.preventDefault();
-    const password = document.getElementById('adminPassword').value;
-    
-    if (password === 'admin123') {
-      this.isAuthenticated = true;
-      localStorage.setItem('adminAuthenticated', 'true');
-      this.showDashboard();
-      this.showStatus('Connexion réussie !', 'success');
-    } else {
-      this.showStatus('Mot de passe incorrect', 'error');
-    }
+    // Note: This method is deprecated - authentication is now handled server-side
+    // Redirect to PHP login page
+    window.location.href = '/login.php';
   }
 
   handleContentSave(e) {

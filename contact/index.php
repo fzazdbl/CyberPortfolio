@@ -1,5 +1,9 @@
 <?php
 /**
+ * Page de contact - CyberPortfolio
+ * Génère un token CSRF côté serveur pour sécuriser le formulaire
+ */
+require_once __DIR__ . '/../includes/security.php';
  * Page de contact avec formulaire sécurisé
  */
 require_once '../includes/security.php';
@@ -16,6 +20,10 @@ $csrfToken = generateCSRFToken();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Contact - Mohamed</title>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Contact - CyberPortfolio Mohamed">
+  <meta property="og:description" content="Contactez Mohamed pour échanger autour de vos besoins numériques en cybersécurité et développement web.">
   <meta name="description" content="Contactez Mohamed Chahid pour discuter de vos projets en cybersécurité et développement web.">
   
   <!-- Open Graph -->
@@ -25,6 +33,10 @@ $csrfToken = generateCSRFToken();
   <meta property="og:url" content="https://cyberportfolio-mohamed.fr/contact/">
   <meta property="og:image" content="https://cyberportfolio-mohamed.fr/assets/images/og-image.jpg">
   
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact - CyberPortfolio Mohamed">
+  <meta name="twitter:description" content="Contactez Mohamed pour échanger autour de vos besoins numériques en cybersécurité et développement web.">
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact - Mohamed Chahid">
@@ -44,6 +56,8 @@ $csrfToken = generateCSRFToken();
   <script src="../assets/js/admin-enhanced.js" defer></script>
 </head>
 <body data-page="contact">
+  <!-- Lien d'évitement pour l'accessibilité -->
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
   <!-- Skip link for accessibility -->
   <a href="#main" class="skip-link">Aller au contenu principal</a>
   
@@ -105,6 +119,7 @@ $csrfToken = generateCSRFToken();
       <a class="liquid-nav__link nav-link" data-nav-key="projets-interactifs" data-target="projets-interactifs" data-link href="../projets-interactifs/index.html">
         <i class="fas fa-terminal"></i> Projets interactifs
       </a>
+      <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="index.php">
       <a class="liquid-nav__link nav-link active" data-nav-key="contact" data-target="contact" data-link href="index.php">
       <a class="liquid-nav__link nav-link" data-nav-key="contact" data-target="contact" data-link href="./">
         <i class="fas fa-envelope"></i> Contact
@@ -145,6 +160,16 @@ $csrfToken = generateCSRFToken();
         <p class="section-text" data-content-key="contact.formText">Expliquez votre situation, vos objectifs et les échéances clés. Je reviens vers vous pour définir la suite.</p>
       </div>
       <div class="glass-card form-card">
+        <form id="contactForm" class="contact-form" action="traitement.php" method="post">
+          <!-- Token CSRF généré côté serveur -->
+          <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">
+          
+          <!-- Champ honeypot (caché, anti-bot) -->
+          <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+          
+          <div class="form-row">
+            <label for="nom">Nom *</label>
+            <input id="nom" class="input-glow" type="text" name="nom" autocomplete="name" required minlength="2" maxlength="50">
         <form id="contactForm" class="contact-form" action="traitement.php" method="post" data-mailto="mailto:chahidm126@gmail.com">
           <!-- Token CSRF -->
           <input type="hidden" name="csrf_token" id="csrf_token" value="<?php echo htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8'); ?>">

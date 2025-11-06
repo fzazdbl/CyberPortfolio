@@ -2,7 +2,7 @@
   const STORAGE_KEY = 'portfolioContent';
   const THEME_KEY = 'portfolioTheme';
   const PASSWORD_KEY = 'portfolioAdminPassword';
-  const DEFAULT_PASSWORD = 'admin123';
+  // Note: Admin authentication is now handled server-side via PHP
 
   function mergeNavigation(base = {}, override = {}) {
     const result = { ...base };
@@ -134,8 +134,8 @@
   }
 
   function getPassword() {
-    if (!storageEnabled) return DEFAULT_PASSWORD;
-    return window.localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
+    if (!storageEnabled) return '';
+    return window.localStorage.getItem(PASSWORD_KEY) || '';
   }
 
   function setPassword(newPassword) {
@@ -211,7 +211,8 @@
     getDefaults: () => ({
       content: clone(DEFAULT_CONTENT),
       theme: clone(DEFAULT_THEME),
-      password: DEFAULT_PASSWORD
+      // Password removed - authentication is now server-side
+      password: ''
     }),
     getContent,
     saveContent,

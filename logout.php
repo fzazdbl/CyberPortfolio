@@ -1,5 +1,11 @@
 <?php
 /**
+ * Page de déconnexion administrateur - CyberPortfolio
+ */
+require_once __DIR__ . '/includes/security.php';
+
+// Déconnexion
+logout();
  * Page de déconnexion administrateur
  */
 session_start();
