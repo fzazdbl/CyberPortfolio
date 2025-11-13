@@ -1,4 +1,5 @@
 (function () {
+  // Recreated controllers to keep theme and navigation toggles aligned across breakpoints.
   const STORAGE_KEY = 'theme';
   const THEME_DARK = 'dark';
   const THEME_LIGHT = 'light';
