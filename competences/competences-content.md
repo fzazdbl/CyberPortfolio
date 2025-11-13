@@ -2,33 +2,31 @@
 # Compétences — Mohamed Chahid, BTS SIO (SISR)
 
 ## Compétences clés
-### Développement Web
-- HTML5 sémantique pour structurer pages, formulaires et tableaux accessibles.
-- Intégration simple avec liens, images et bases CSS sans surenchère.
-- Scripts Python (bases) utilisant variables, conditions et boucles.
-- Code clair : indentation suivie, commentaires, respect HTML5.
+### Design & storytelling
+- Création d'identités visuelles lumineuses inspirées des joutes languedociennes.
+- Organisation des contenus autour des parcours visiteurs : participants, spectateurs, partenaires.
+- Rédaction de messages clairs pour promouvoir les temps forts et informations pratiques.
 
-### Systèmes & Réseaux
-- Windows : installation, paramètres essentiels, comptes locaux.
-- Debian (découverte) : navigation et gestion de paquets de base.
-- Notions IP : adressage, ping, configuration réseau simple.
-- VirtualBox : création de VM de test et scénarios isolés.
+### Intégration front-end
+- HTML5/CSS3 sémantiques avec composants modulaires et animations glassmorphism.
+- Responsive design mobile-first testé sur smartphones et écrans larges.
+- Optimisation des médias (compression, formats adaptés) et des performances.
 
-### Cybersécurité (débutant)
-- Bonnes pratiques : mots de passe robustes, mises à jour, sauvegardes.
-- Premières règles pfSense/Ipfire en VM pour filtrer le trafic.
-- Sensibilisation phishing/malwares auprès de l'entourage.
-- Snapshots réguliers pour revenir à un état sain de labo.
+### Développement d'API Deezer
+- Implémentation d'une application Windows Forms en C#/.NET connectée à l'API Deezer.
+- Requêtes REST sécurisées pour rechercher un artiste, afficher sa discographie et ses top titres.
+- Lecture des extraits audio et accès direct à la radio officielle de chaque artiste.
 
-### Bases de données
-- SQL (notions) : SELECT simples avec filtres et tri.
-- Compréhension des tables, champs et clé primaire.
-- Manipulation via outil graphique type phpMyAdmin en cours.
+### Optimisation SEO & analytics
+- Balises méta complètes, données structurées et gestion du maillage interne.
+- Analyse des requêtes locales liées aux Joutes 2025 et préparation du suivi Analytics.
+- Mise en place de formulaires accessibles et incitatifs pour les inscriptions.
 
 ### Outils du quotidien
-- Notepad++ et FileZilla pour éditer et transférer les fichiers.
-- Word/LibreOffice et Canva pour supports rapides.
-- Organisation : notes claires, checklists et sauvegardes régulières.
+- Figma, Canva et Color Hunt pour prototyper rapidement les interfaces.
+- VS Code, Git et GitHub pour versionner le code du site.
+- Visual Studio, Postman et l'explorateur Deezer pour tester les endpoints.
+- Notion et Google Workspace pour coordonner contenus, planning et communication.
 
 ## Assurance
-Je progresse chaque semaine et je documente mes tests pour gagner en fiabilité et en sécurité.
+Chaque itération du site officiel des Joutes 2025 et du moteur Deezer est documentée : cahier de contenu, checklist SEO, feuille de route fonctionnelle et plan d'amélioration continue.

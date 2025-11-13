@@ -17,13 +17,14 @@ Portfolio professionnel interactif développé avec des technologies modernes et
 
 ## 🎯 Aperçu
 
-CyberPortfolio est un portfolio professionnel développé pour Mohamed Chahid, étudiant en BTS SIO (Services Informatiques aux Organisations) option SISR. Le site présente ses compétences en cybersécurité, développement web et administration système à travers une interface moderne et interactive.
+CyberPortfolio est un portfolio professionnel développé pour Mohamed Chahid, étudiant en BTS SIO (Services Informatiques aux Organisations) option SISR. Le site met désormais en avant la conception et l'intégration du site officiel des **Joutes 2025** ainsi que le développement d'une **application Deezer** connectée à l'API officielle, en détaillant le travail de design UX, d'intégration front-end, d'optimisation SEO et de développement applicatif.
 
 ### Caractéristiques principales
 
-- **Design cyber futuriste** avec effets glassmorphism
+- **Design glassmorphism lumineux** inspiré des joutes languedociennes
 - **Mode sombre/clair** avec toggle dynamique
-- **Terminal de hacker interactif** pour explorer les projets
+- **Terminal interactif** pour explorer les études de cas Joutes 2025 & Deezer
+- **Application Deezer Windows** : recherche d'artistes, discographie et extraits audio via l'API officielle
 - **Timeline de compétences** animée
 - **Système d'administration** complet
 - **Validation de formulaires** côté client et serveur
@@ -41,7 +42,7 @@ CyberPortfolio est un portfolio professionnel développé pour Mohamed Chahid, �
 
 ### Backend
 - **PHP 8.0+** - Traitement des formulaires et sécurité
-- **MySQL** - Base de données (pour Matomo)
+- **MySQL** - Stockage optionnel des demandes de contact
 
 ### Outils et bibliothèques
 - **Liquid Glass Renderer** - Effets de transparence

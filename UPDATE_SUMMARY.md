@@ -2,32 +2,27 @@
 
 ## ✅ Contenu mis à jour avec vos vraies compétences
 
-### 🚀 Projets réels (Joute 2025)
-- **Configuration Apache2** : Installation et configuration serveur web sur Debian
-- **Déploiement Matomo** : Installation et configuration analytics avec MySQL
-- **Laboratoire VM** : Création d'environnements virtuels avec VMware/VirtualBox
+### 🚀 Projets phares
+- **Site officiel des Joutes 2025** : design UX/UI, intégration HTML/CSS/JS, SEO local et formulaires interactifs
+- **Application Deezer** : moteur de recherche d'artistes, discographie, extraits audio et radio via l'API officielle
 
 ### 💻 Compétences actualisées
-- **Développement (Débutant)** : HTML5, CSS3, Python, C#
-- **Bases de données (Débutant)** : SQL basique, phpMyAdmin
-- **Systèmes & Réseaux (Plus à l'aise)** : Windows, Debian/Kali Linux, VMware, VirtualBox
-- **Cybersécurité (Débutant)** : Bonnes pratiques, outils Kali Linux
+- **Design & storytelling** : moodboards, maquettes Figma, direction artistique inspirée des joutes
+- **Intégration front-end** : HTML5/CSS3 sémantiques, animations glassmorphism, responsive design
+- **API & applicatif** : C#/.NET, Windows Forms, requêtes Deezer, lecteur audio intégré
+- **SEO & contenu** : balises méta, données structurées Event, rédaction orientée événements
 
 ### 🛠️ Outils réels utilisés
-- **Développement** : VS Code, Visual Studio, Notepad++
-- **Systèmes** : VMware, VirtualBox, FileZilla
-- **Design** : Canva
-- **Systèmes** : Debian, Kali Linux, Apache2, Matomo
+- **Design** : Figma, Canva, Color Hunt
+- **Intégration** : VS Code, Git, Live Server
+- **Applicatif** : Visual Studio, Postman, API Explorer Deezer
+- **Analyse** : Google Analytics, Search Console, Lighthouse
 
 ### 📚 En cours d'acquisition (BTS SIO)
-- Développement Web (JavaScript, PHP, frameworks)
-- Bases de données (MySQL avancé)
-- Administration Linux (scripts bash)
-- Réseaux (DHCP, DNS, routage, VLAN)
-- Cybersécurité (tests d'intrusion, durcissement)
-- Cloud & DevOps (Docker, CI/CD)
-- Mobile (développement d'applications)
-- Automatisation (PowerShell, Python avancé)
+- Motion design et micro-interactions
+- Accessibilité avancée (audit Lighthouse)
+- UX research pour événements locaux
+- Stratégie éditoriale et newsletters
 
 ## 🔧 Système d'administration complet
 

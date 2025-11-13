@@ -219,6 +219,8 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  position: relative;
+  z-index: 2;
 }
 
 .liquid-nav__menu {

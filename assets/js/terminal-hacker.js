@@ -40,7 +40,7 @@ class TerminalHacker {
     terminalInput.focus();
     
     // Animation de frappe
-    this.typeWriter('Bienvenue dans le terminal de Mohamed !', 50);
+    this.typeWriter('Bienvenue dans le terminal de Mohamed — Joutes 2025 & Deezer !', 50);
   }
 
   handleKeyDown(e) {
@@ -154,13 +154,10 @@ Commandes disponibles:
   listProjects() {
     const projects = `
 Projets disponibles:
-  apache-config/     - Configuration Apache2
-  matomo-deploy/     - Déploiement Matomo
-  vm-lab/           - Laboratoire de virtualisation
-  cyber-portfolio/  - Ce portfolio
-  bts-sio-notes/    - Notes de cours BTS SIO
+  joutes2025/       - Site officiel des Joutes 2025
+  deezer-app/       - Application Windows connectée à l'API Deezer
     `.trim();
-    
+
     this.addLine(projects);
   }
 
@@ -169,70 +166,43 @@ Projets disponibles:
       this.addLine('Usage: cat [fichier]', 'error');
       return;
     }
-    
+
     const files = {
-      'apache-config/README.md': `
-# Configuration Apache2
+      'joutes2025/README.md': `
+# Site officiel des Joutes 2025
 
-## Description
-Installation et configuration d'un serveur web Apache2 sur Debian.
+## Objectif
+Présenter l'édition 2025, faciliter les inscriptions et partager l'ambiance des joutes languedociennes.
 
-## Commandes utilisées
-- sudo apt update && sudo apt install apache2
-- sudo systemctl enable apache2
-- sudo systemctl start apache2
-- sudo a2enmod rewrite
-- sudo systemctl reload apache2
+## Pages clés
+- Accueil immersif avec compte à rebours
+- Programme détaillé des épreuves
+- Espace partenaires et médias
+- Formulaire d'inscription simplifié
 
-## Virtual Hosts
-Configuration de virtual hosts pour héberger plusieurs sites.
-
-## Sécurité
-- Configuration des permissions
-- Activation du module de sécurité
-- Configuration du pare-feu
+## Tech & design
+- HTML5/CSS3, animations CSS & JavaScript
+- Design system glassmorphism
+- Optimisation SEO (données structurées, Open Graph)
       `.trim(),
-      
-      'matomo-deploy/setup.sh': `
-#!/bin/bash
-# Script de déploiement Matomo
 
-# Installation des dépendances
-sudo apt update
-sudo apt install -y apache2 mysql-server php php-mysql php-gd php-xml
+      'deezer-app/README.md': `
+# Application Deezer — Recherche artistique
 
-# Téléchargement de Matomo
-cd /var/www/html
-sudo wget https://builds.matomo.org/matomo.zip
-sudo unzip matomo.zip
-sudo chown -R www-data:www-data matomo/
+## Objectif
+Permettre de rechercher un artiste, découvrir sa discographie et écouter des extraits directement depuis l'API Deezer.
 
-# Configuration de la base de données
-mysql -u root -p -e "CREATE DATABASE matomo;"
-mysql -u root -p -e "CREATE USER 'matomo'@'localhost' IDENTIFIED BY 'password';"
-mysql -u root -p -e "GRANT ALL PRIVILEGES ON matomo.* TO 'matomo'@'localhost';"
+## Modules principaux
+- Champ de recherche avec suggestions et gestion des homonymes
+- Fiches artistes avec biographie, top titres et lien Deezer
+- Liste d'albums et lecture des extraits 30 secondes
+- Accès direct à la radio officielle de l'artiste
 
-echo "Matomo installé avec succès !"
-      `.trim(),
-      
-      'vm-lab/README.md': `
-# Laboratoire de Virtualisation
-
-## Environnements créés
-- Debian 11 (serveur web)
-- Kali Linux (tests de sécurité)
-- Windows Server 2019 (AD)
-- Ubuntu 20.04 (développement)
-
-## Outils utilisés
-- VMware Workstation Pro
-- VirtualBox
-- Vagrant (automatisation)
-
-## Configuration réseau
-- Réseau isolé pour les tests
-- Configuration NAT et bridge
-- Tests de connectivité inter-VM
+## Tech & design
+- C#/.NET (Windows Forms)
+- Requêtes REST Deezer (axios/.NET HttpClient)
+- Parsing JSON et affichage structuré
+- Lecteur audio intégré et ouverture du lien Deezer
       `.trim()
     };
     
@@ -249,25 +219,24 @@ echo "Matomo installé avec succès !"
 Utilisateur: cyber
 Nom: Mohamed Chahid
 Rôle: Étudiant BTS SIO (SISR)
-Spécialité: Cybersécurité et systèmes
+Spécialité: Design UX, intégration web & API Deezer
 Localisation: France
-Statut: En formation active
+Statut: Disponible pour projets vitrines & applications connectées
     `.trim();
-    
+
     this.addLine(whoami);
   }
 
   showSkills() {
     const skills = `
-Compétences techniques:
-  Développement: HTML5, CSS3, JavaScript, Python, C#
-  Systèmes: Debian, Windows, Apache2, MySQL
-  Réseaux: Configuration, routage, VLAN
-  Sécurité: Kali Linux, bonnes pratiques
-  Outils: VS Code, VMware, VirtualBox, FileZilla
-  Langues: Français (natif), Anglais (technique)
+Compétences clés:
+  Design: storytelling événementiel, moodboards, maquettes Figma
+  Intégration: HTML5, CSS3, animations glassmorphism, JavaScript
+  API: C#/.NET, requêtes Deezer, parsing JSON, lecteur audio intégré
+  SEO: métadonnées, données structurées, optimisation des performances
+  Outils: Figma, VS Code, Visual Studio, Git, Postman, Notion
     `.trim();
-    
+
     this.addLine(skills);
   }
 
@@ -276,22 +245,14 @@ Compétences techniques:
 À propos de Mohamed Chahid
 ========================
 
-Étudiant passionné en BTS SIO (Services Informatiques aux Organisations)
-option SISR (Solutions d'Infrastructure, Systèmes et Réseaux).
+Étudiant BTS SIO (SISR) spécialisé dans les expériences web et applicatives.
 
-Objectif: Devenir expert en cybersécurité et administration système.
+Objectif: Concevoir des interfaces immersives et des outils connectés aux données réelles.
 
-Passions: 
-- Sécurité informatique
-- Automatisation des tâches
-- Développement web
-- Veille technologique
-
-Projets en cours:
-- Portfolio interactif (ce site)
-- Laboratoire de cybersécurité
-- Scripts d'automatisation
-- Études approfondies en sécurité
+Focus 2025:
+- Site officiel des Joutes 2025 (design, intégration, SEO)
+- Application Deezer Windows (API, audio, UX desktop)
+- Préparation des prochaines éditions et évolutions fonctionnelles
     `.trim();
     
     this.addLine(about);
@@ -303,12 +264,15 @@ Informations de contact:
   Email: chahidm126@gmail.com
   GitHub: github.com/fzazdbl
   LinkedIn: linkedin.com/in/mohamed-chahid
-  Téléphone: [Disponible sur demande]
-  
-Disponibilité: 
-  Stage: À partir de juin 2025
-  Projets: En continu
-  Collaboration: Ouverte
+  Site Joutes: https://joremy34.com/
+
+Démo Deezer:
+  Disponible sur rendez-vous (capture + application Windows)
+
+Disponibilité:
+  Sites vitrines & SEO: OUI
+  Applications connectées: OUI
+  Support communication: sur demande
     `.trim();
     
     this.addLine(contact);
@@ -336,7 +300,7 @@ Disponibilité:
   }
 
   showPwd() {
-    this.addLine('/home/cyber/portfolio');
+    this.addLine('/home/cyber/projets');
   }
 
   showDate() {
@@ -373,12 +337,12 @@ Disponibilité:
   }
 
   startMatrix() {
-    this.addLine('Initialisation de l\'effet Matrix...');
-    this.addLine('Système de sécurité activé.');
-    this.addLine('Surveillance en cours...');
-    
-    // Créer un effet Matrix simple
-    const matrixChars = '01';
+    this.addLine('Initialisation du rideau lumineux des Joutes & de la scène Deezer...');
+    this.addLine('Animation des reflets glassmorphism.');
+    this.addLine('Ambiance festive et musicale en cours...');
+
+    // Effet lumineux simplifié
+    const matrixChars = '✦✧✺✹';
     let matrixText = '';
     for (let i = 0; i < 10; i++) {
       let line = '';
@@ -387,22 +351,18 @@ Disponibilité:
       }
       matrixText += line + '\n';
     }
-    
+
     this.addLine(matrixText);
-    this.addLine('Effet Matrix terminé.');
+    this.addLine('Effet lumineux terminé.');
   }
 
   startHack() {
-    this.addLine('Mode hacker activé...');
-    this.addLine('Connexion au serveur cible...');
-    this.addLine('Scanning des ports...');
-    this.addLine('Port 22 (SSH): Ouvert');
-    this.addLine('Port 80 (HTTP): Ouvert');
-    this.addLine('Port 443 (HTTPS): Ouvert');
-    this.addLine('Tentative de connexion...');
-    this.addLine('Authentification réussie !');
-    this.addLine('Accès root obtenu.');
-    this.addLine('Mission accomplie ! 🎯');
+    this.addLine('Mode créatif activé...');
+    this.addLine('Chargement des palettes colorées...');
+    this.addLine('Insertion des textures glassmorphism...');
+    this.addLine('Connexion à l\'API Deezer...');
+    this.addLine('Optimisation des performances...');
+    this.addLine('Site des Joutes 2025 et app Deezer prêts à être présentés ! 🎉');
   }
 
   clearTerminal() {
@@ -460,16 +420,16 @@ Disponibilité:
 }
 
 // Fonctions pour les démonstrations
-function showApacheDemo() {
-  alert('Démonstration Apache2\n\nCette démo montrerait:\n- Configuration des virtual hosts\n- Gestion des modules\n- Sécurisation du serveur\n- Monitoring des logs');
+function showHeroDemo() {
+  alert('Hero animé\n\nCette démo montrerait:\n- Halo lumineux et reflets glassmorphism\n- Compte à rebours dynamique\n- CTA mis en avant pour les inscriptions\n- Adaptation mobile instantanée');
 }
 
-function showMatomoDemo() {
-  alert('Démonstration Matomo\n\nCette démo montrerait:\n- Interface d\'administration\n- Configuration des sites\n- Tableaux de bord personnalisés\n- Rapports d\'analytics');
+function showScheduleDemo() {
+  alert('Programme interactif\n\nCette démo montrerait:\n- Chronologie filtrable par journée\n- Mise en avant des temps forts\n- Badges pour différencier les catégories\n- Effets de survol pour plus d\'infos');
 }
 
-function showVMDemo() {
-  alert('Démonstration VM\n\nCette démo montrerait:\n- Gestion des machines virtuelles\n- Configuration réseau\n- Snapshots et sauvegardes\n- Monitoring des ressources');
+function showDeezerDemo() {
+  alert('Recherche Deezer\n\nCette démo montrerait:\n- Saisie du nom d\'un artiste et suggestions immédiates\n- Affichage de la discographie (albums, top titres)\n- Lecture de courts extraits audio et accès à la radio Deezer\n- Lien direct vers la page officielle Deezer');
 }
 
 // Initialisation
